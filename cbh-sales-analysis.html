@@ -166,12 +166,15 @@
 
 <!-- ASP Analysis -->
 <div class="section">
-  <h2>💰 品牌平均單價（ASP）月度比較</h2>
-  <div class="desc">各品牌每月平均成交單價（銷售金額 ÷ 銷售數量），可觀察定價走勢與是否有折扣帶動效應。「–」表示該月未進入前10名，缺乏月度數據。</div>
-  <table class="data-table">
+  <h2>💰 熱銷商品平均單價（ASP）月度比較 Top 20</h2>
+  <div class="desc">依銷售金額前20名商品，分開品牌與產品名稱，觀察各月平均成交單價走勢。「–」表示該月無銷售記錄。</div>
+  <div style="overflow-x:auto">
+  <table class="data-table" style="min-width:820px">
     <thead>
       <tr>
-        <th>品牌</th>
+        <th style="width:32px">#</th>
+        <th style="width:155px">品牌</th>
+        <th>產品名稱</th>
         <th>2月 ASP</th>
         <th>3月 ASP</th>
         <th>4月 ASP</th>
@@ -182,6 +185,7 @@
     </thead>
     <tbody id="aspTableBody"></tbody>
   </table>
+  </div>
   <p class="note">⚠ ASP 降低可能反映折扣活動拉動，ASP 升高則反映高單價品項熱銷。建議對照每日銷售高峰日交叉確認。</p>
 </div>
 
@@ -440,10 +444,28 @@ document.getElementById('dailyTabs').addEventListener('click', e => {
 });
 
 // ── ASP Table ─────────────────────────────────────────────────
-function calcAsp(amounts, qtys, idx) {
-  if (idx < 0 || !qtys[idx] || qtys[idx] === 0) return null;
-  return Math.round(amounts[idx] / qtys[idx]);
-}
+const aspProducts = [
+  {"brand":"SHISEIDO 資生堂","product":"百優精純乳霜 75ml 2入組(航空版)","asp":2399,"asp_2月":2419,"asp_3月":2385,"asp_4月":2404},
+  {"brand":"SHISEIDO 資生堂","product":"百優精純乳霜 75ml(航空版)","asp":1144,"asp_2月":1180,"asp_3月":1126,"asp_4月":1155},
+  {"brand":"ESTEE LAUDER 雅詩蘭黛","product":"特潤超導全方位修護露 100ml 小棕瓶 2入組(航空版)","asp":4467,"asp_2月":4526,"asp_3月":4424,"asp_4月":4487},
+  {"brand":"cle de peau BEAUTE 肌膚之鑰","product":"光采無瑕妝前凝霜 37ml(航空版)","asp":1017,"asp_2月":1074,"asp_3月":991,"asp_4月":1022},
+  {"brand":"LA ROCHE-POSAY 理膚寶水","product":"B5+全面修復霜100ml 2入組(航空版)","asp":850,"asp_2月":890,"asp_3月":843,"asp_4月":839},
+  {"brand":"SHISEIDO 資生堂","product":"百優精純乳霜 75ml 4入組(航空版)","asp":4731,"asp_2月":4584,"asp_3月":4698,"asp_4月":4845},
+  {"brand":"SISLEY 希思黎","product":"全能乳液125ml 新版(航空版)","asp":2891,"asp_2月":2882,"asp_3月":2837,"asp_4月":3034},
+  {"brand":"Diptyque","product":"淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)","asp":3894,"asp_2月":4005,"asp_3月":3782,"asp_4月":4204},
+  {"brand":"SHISEIDO 資生堂","product":"百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)","asp":2437,"asp_2月":2455,"asp_3月":2424,"asp_4月":2438},
+  {"brand":"Elizabeth Arden","product":"21天霜 75ml 3入組(航空版)","asp":995,"asp_2月":992,"asp_3月":980,"asp_4月":1018},
+  {"brand":"SHISEIDO 資生堂","product":"紅妍山茶花修護精華 75ml 小紅瓶(航空版)","asp":1391,"asp_2月":1383,"asp_3月":1387,"asp_4月":1399},
+  {"brand":"CLINIQUE 倩碧","product":"水磁場100H活水循環保濕凝膠 200ml(航空版)","asp":1165,"asp_2月":1189,"asp_3月":1158,"asp_4月":1157},
+  {"brand":"LANCOME 蘭蔻","product":"超極限肌因賦活露 115ml 2入組(航空版)","asp":5662,"asp_2月":5796,"asp_3月":5527,"asp_4月":5753},
+  {"brand":"AVEDA 肯夢","product":"純香/迷迭薄荷洗髮精 1000ml(多款任選 航空版)","asp":1055,"asp_2月":1092,"asp_3月":1015,"asp_4月":1137},
+  {"brand":"Avene 雅漾","product":"舒護活泉水 300ml 6入組(航空版)","asp":1187,"asp_2月":1128,"asp_3月":1208,"asp_4月":1212},
+  {"brand":"Kiehl's 契爾氏","product":"激光極淨白淡斑精華 115ml(航空版)","asp":2018,"asp_2月":2130,"asp_3月":1979,"asp_4月":2009},
+  {"brand":"LA MER 海洋拉娜","product":"經典乳霜 60ml 加贈7ml*5入(航空版)","asp":7530,"asp_2月":7611,"asp_3月":7407,"asp_4月":7590},
+  {"brand":"Diptyque","product":"淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)","asp":4435,"asp_2月":4549,"asp_3月":4395,"asp_4月":4440},
+  {"brand":"CHANEL 香奈兒","product":"超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)","asp":1432,"asp_2月":1498,"asp_3月":1373,"asp_4月":1452},
+  {"brand":"ESTEE LAUDER 雅詩蘭黛","product":"粉持久完美持妝粉底 30ml(多款任選 航空版)","asp":1007,"asp_2月":1166,"asp_3月":1006,"asp_4月":963}
+];
 
 function aspArrow(curr, prev) {
   if (curr === null || prev === null) return '';
@@ -454,25 +476,18 @@ function aspArrow(curr, prev) {
 }
 
 const aspTbody = document.getElementById('aspTableBody');
-brandAllTime.labels.forEach((brand, i) => {
-  const overallAsp = calcAsp(brandAllTime.amounts, brandAllTime.qtys, i);
-
-  const monthAsps = ['2月', '3月', '4月'].map(m => {
-    const idx = brandByMonth[m].labels.indexOf(brand);
-    return calcAsp(brandByMonth[m].amounts, brandByMonth[m].qtys, idx);
-  });
-
-  const [asp2, asp3, asp4] = monthAsps;
-  const fmt = v => v !== null ? '$' + v.toLocaleString() : '–';
-
+aspProducts.forEach((p, i) => {
+  const fmt = v => v !== null && v !== undefined ? '$' + v.toLocaleString() : '–';
   aspTbody.innerHTML += `<tr>
-    <td class="brand-name">${brand}</td>
-    <td>${fmt(asp2)}</td>
-    <td>${fmt(asp3)}</td>
-    <td>${fmt(asp4)}</td>
-    <td>${aspArrow(asp3, asp2)}</td>
-    <td>${aspArrow(asp4, asp3)}</td>
-    <td class="asp-overall">${fmt(overallAsp)}</td>
+    <td class="rank-num">${i + 1}</td>
+    <td style="font-weight:600;font-size:12px">${p.brand}</td>
+    <td style="color:#475569;font-size:12px">${p.product}</td>
+    <td>${fmt(p['asp_2月'])}</td>
+    <td>${fmt(p['asp_3月'])}</td>
+    <td>${fmt(p['asp_4月'])}</td>
+    <td>${aspArrow(p['asp_3月'], p['asp_2月'])}</td>
+    <td>${aspArrow(p['asp_4月'], p['asp_3月'])}</td>
+    <td class="asp-overall">${fmt(p.asp)}</td>
   </tr>`;
 });
 
