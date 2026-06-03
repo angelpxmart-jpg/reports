@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JBP 外投廣告策略報表 2026-06-03</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f7f8fc;color:#1a1a1a;font-size:14px}
+a{color:#13227f}
+.page{max-width:1160px;margin:0 auto;padding:24px 16px}
+
+/* Header */
+.report-header{background:#13227f;color:#fff;border-radius:12px;padding:28px 36px;margin-bottom:24px}
+.report-header h1{font-size:22px;font-weight:700;margin-bottom:6px}
+.report-header .meta{font-size:12px;opacity:.75;display:flex;gap:24px;flex-wrap:wrap;margin-top:8px}
+.nav-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.nav-pill{padding:6px 16px;border-radius:20px;background:#fff;border:1px solid #e0e0e0;font-size:12px;color:#444;cursor:pointer;text-decoration:none}
+.nav-pill:hover{background:#eef0fa;border-color:#13227f;color:#13227f}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+@media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi-card{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.kpi-label{font-size:11px;color:#757575;margin-bottom:4px}
+.kpi-val{font-size:24px;font-weight:700;line-height:1.2}
+.kpi-sub{font-size:11px;color:#bdbdbd;margin-top:4px}
+
+/* Section */
+.section-title{font-size:18px;font-weight:700;color:#13227f;margin:28px 0 14px;padding-bottom:8px;border-bottom:2px solid #e0e0e0;display:flex;align-items:center;gap:8px}
+.card{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.card-title{font-size:13px;font-weight:700;color:#13227f;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #eeeeee}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+.chart-wrap{height:240px;position:relative}
+
+/* Supplier block */
+.supplier-block{margin-bottom:40px}
+.supplier-header{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:18px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.07);flex-wrap:wrap;gap:12px}
+.sup-cat{font-size:11px;font-weight:700;color:#757575;text-transform:uppercase;letter-spacing:.5px}
+.sup-name{font-size:20px;font-weight:700;color:#1a1a1a;margin-top:2px}
+.sup-kpi-row{display:flex;gap:20px;flex-wrap:wrap}
+.sup-kpi{text-align:right}
+.sup-kpi-label{font-size:11px;color:#757575}
+.sup-kpi-val{font-size:20px;font-weight:700}
+
+/* Table */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{background:#f7f8fc;color:#444;font-weight:600;padding:9px 12px;text-align:left;border-bottom:1px solid #e0e0e0;white-space:nowrap}
+.data-table td{padding:9px 12px;border-bottom:1px solid #f5f5f5;vertical-align:middle}
+.data-table tr:hover td{background:#fafafa}
+.rank{font-weight:700;color:#bdbdbd;width:28px}
+.r1{color:#f59e0b} .r2{color:#9ca3af} .r3{color:#cd7f32}
+.sku-name{color:#1a1a1a;max-width:360px}
+.num{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.note-cell{font-size:12px;color:#757575}
+.bar-wrap{display:flex;align-items:center;gap:8px;min-width:100px}
+.bar-fill{height:8px;border-radius:2px;min-width:4px}
+.bar-pct{font-size:12px;color:#757575;white-space:nowrap}
+
+/* Definition tip */
+.def-tip{font-size:11px;font-weight:400;color:#757575;margin-left:10px;background:#f7f8fc;padding:2px 8px;border-radius:10px;border:1px solid #e0e0e0}
+
+/* Badge */
+.badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px;white-space:nowrap}
+.badge.win{background:#e8f5e9;color:#2e7d32}
+.badge.ok{background:#e3f2fd;color:#1565c0}
+.badge.lose{background:#fff3e0;color:#e65100}
+.badge.neutral{background:#f5f5f5;color:#757575}
+.note{font-size:11px;color:#bdbdbd;margin-top:12px;font-style:italic}
+
+/* Campaign */
+.campaign-card{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.campaign-header{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #eeeeee}
+.campaign-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.campaign-period{font-size:12px;color:#757575;margin-bottom:4px}
+.campaign-key{font-size:12px;color:#444}
+.tag-active{font-size:11px;background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:12px;font-weight:700}
+.tag-upcoming{font-size:11px;background:#e3f2fd;color:#1565c0;padding:2px 8px;border-radius:12px;font-weight:700}
+.campaign-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.campaign-grid{grid-template-columns:1fr}}
+.campaign-col{padding:14px;background:#f7f8fc;border-radius:8px}
+.campaign-sup{font-size:12px;font-weight:700;margin-bottom:8px;color:#1a1a1a}
+.campaign-list{padding-left:16px;font-size:12px;color:#444;line-height:1.8}
+
+/* Footer */
+.footer{text-align:center;font-size:11px;color:#bdbdbd;margin-top:32px;padding-top:16px;border-top:1px solid #eeeeee}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- Header -->
+<div class="report-header">
+  <h1>JBP 供應商 × 外投廣告策略報表</h1>
+  <div class="meta">
+    <span>📊 資料期間：2026年1月 ～ 6月（截至 2026-06-03）</span>
+    <span>🏢 三家 JBP 廠商：跨境豐收・金盛世紙業・壹伍壹拾</span>
+    <span>🎯 用途：內部廣告策略決策</span>
+  </div>
+</div>
+
+<!-- 快速導航 -->
+<div class="nav-pills">
+  <a href="#sec-overview" class="nav-pill">📈 三廠商總覽</a>
+  <a href="#sec-cbh" class="nav-pill">💄 跨境豐收</a>
+  <a href="#sec-gsj" class="nav-pill">🧻 金盛世紙業</a>
+  <a href="#sec-yfl" class="nav-pill">💊 壹伍壹拾</a>
+  <a href="#sec-campaign" class="nav-pill">📅 檔期廣告建議</a>
+</div>
+
+<!-- 三廠商總覽 -->
+<div id="sec-overview">
+  <div class="section-title">📈 三廠商總覽</div>
+  
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">三廠商合計營收</div><div class="kpi-val" style="color:#13227f">NT$28.8M</div><div class="kpi-sub">1月～6月累積</div></div>
+      <div class="kpi-card"><div class="kpi-label">跨境豐收（美妝）</div><div class="kpi-val">NT$14.4M</div><div class="kpi-sub">50% 佔比</div></div>
+      <div class="kpi-card"><div class="kpi-label">金盛世紙業（日用）</div><div class="kpi-val">NT$12.2M</div><div class="kpi-sub">42% 佔比</div></div>
+      <div class="kpi-card"><div class="kpi-label">壹伍壹拾（保健）</div><div class="kpi-val">NT$2.2M</div><div class="kpi-sub">8% 佔比</div></div>
+    </div>
+  <div class="card">
+    <div class="card-title">月度營收趨勢比較（堆疊柱狀圖）</div>
+    <div class="chart-wrap" style="height:280px"><canvas id="chart-overview"></canvas></div>
+    <script>
+    new Chart(document.getElementById('chart-overview'),{
+      type:'bar',
+      data:{
+        labels:['1月', '2月', '3月', '4月', '5月', '6月'],
+        datasets:[
+          {label:'跨境豐收',data:[2744994, 1710703, 3457533, 2964049, 3418847, 132646],backgroundColor:'#13227f',borderRadius:3,stack:'s'},
+          {label:'金盛世紙業',data:[1954035, 1521395, 3894310, 2764906, 2004293, 88179],backgroundColor:'#e40011',borderRadius:3,stack:'s'},
+          {label:'壹伍壹拾',data:[426454, 153356, 332314, 479212, 751105, 41142],backgroundColor:'#f57c00',borderRadius:3,stack:'s'}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'top'}},
+        scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}
+      }
+    });</script>
+  </div>
+</div>
+
+<!-- 各廠商區塊 -->
+<div class="section-title">💡 各廠商深度分析</div>
+
+    <div class="supplier-block" id="sec-cbh">
+      <div class="supplier-header" style="border-left:5px solid #13227f">
+        <div>
+          <span class="sup-cat">💄 美妝</span>
+          <h2 class="sup-name">跨境豐收</h2>
+        </div>
+        <div class="sup-kpi-row">
+          <div class="sup-kpi"><div class="sup-kpi-label">總營收</div><div class="sup-kpi-val" style="color:#13227f">NT$14.4M</div></div>
+          <div class="sup-kpi"><div class="sup-kpi-label">總訂單數</div><div class="sup-kpi-val">9,163</div></div>
+          <div class="sup-kpi"><div class="sup-kpi-label">均客單</div><div class="sup-kpi-val">NT$1,574</div></div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">月度營收趨勢</div>
+          <div class="chart-wrap"><canvas id="chart-cbh"></canvas></div>
+          <script>
+            new Chart(document.getElementById('chart-cbh'),{
+              type:'bar',
+              data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[2744994, 1710703, 3457533, 2964049, 3418847, 132646],backgroundColor:'#13227f22',borderColor:'#13227f',borderWidth:2,borderRadius:4}]},
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+            });
+          </script>
+        </div>
+        <div class="card">
+          <div class="card-title">品牌營收佔比</div>
+          <div class="chart-wrap"><canvas id="chart-brand-cbh"></canvas></div>
+          <script>
+            new Chart(document.getElementById('chart-brand-cbh'),{
+              type:'doughnut',
+              data:{labels:['SHISEIDO 資生堂', 'ESTEE LAUDER 雅詩蘭黛', 'cle de peau BEAUTE 肌膚之鑰', 'LA ROCHE-POSAY 理膚寶水', 'LANCOME 蘭蔻', 'SISLEY 希思黎'],datasets:[{data:[4637402, 1036713, 724942, 671385, 616234, 522851],backgroundColor:['#13227f','#e40011','#3d4fa0','#f57c00','#388e3c','#757575'],borderWidth:2,borderColor:'#fff'}]},
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},boxWidth:12}}}}
+            });
+          </script>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Top 30 SKU 排行（依總營收，1月～6月）
+          <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>月度趨勢 / 佔比</th></tr></thead>
+        <tbody><tr>
+              <td class="rank r1">1</td>
+              <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml 2入組(航空版)</td>
+              <td class="num">NT$2,474,830</td>
+              <td class="num">1,028</td>
+              <td class="num">NT$2,407</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="48" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">17.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r2">2</td>
+              <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml(航空版)</td>
+              <td class="num">NT$740,859</td>
+              <td class="num">638</td>
+              <td class="num">NT$1,161</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">5.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">3</td>
+              <td class="sku-name">【ESTEE LAUDER 雅詩蘭黛】特潤超導全方位修護露 100ml 小棕瓶 2入組(航空版)</td>
+              <td class="num">NT$690,241</td>
+              <td class="num">154</td>
+              <td class="num">NT$4,482</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">4.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">4</td>
+              <td class="sku-name">【cle de peau BEAUTE 肌膚之鑰】光采無瑕妝前凝霜 37ml(航空版)</td>
+              <td class="num">NT$609,389</td>
+              <td class="num">592</td>
+              <td class="num">NT$1,029</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="12" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">4.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">5</td>
+              <td class="sku-name">【LA ROCHE-POSAY 理膚寶水】B5+全面修復霜100ml 2入組(航空版)</td>
+              <td class="num">NT$487,189</td>
+              <td class="num">561</td>
+              <td class="num">NT$868</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">3.4%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">6</td>
+              <td class="sku-name">【SISLEY 希思黎】全能乳液125ml 新版(航空版)</td>
+              <td class="num">NT$454,078</td>
+              <td class="num">156</td>
+              <td class="num">NT$2,910</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">3.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">7</td>
+              <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml 4入組(航空版)</td>
+              <td class="num">NT$416,678</td>
+              <td class="num">87</td>
+              <td class="num">NT$4,789</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">8</td>
+              <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td>
+              <td class="num">NT$325,902</td>
+              <td class="num">133</td>
+              <td class="num">NT$2,450</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="12" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="48" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">9</td>
+              <td class="sku-name">【LANCOME 蘭蔻】超極限肌因賦活露 115ml 2入組(航空版)</td>
+              <td class="num">NT$305,540</td>
+              <td class="num">54</td>
+              <td class="num">NT$5,658</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"/><rect x="24" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">10</td>
+              <td class="sku-name">【Diptyque】淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)</td>
+              <td class="num">NT$295,222</td>
+              <td class="num">75</td>
+              <td class="num">NT$3,936</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="12" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">11</td>
+              <td class="sku-name">【Elizabeth Arden】21天霜 75ml 3入組(航空版)</td>
+              <td class="num">NT$289,896</td>
+              <td class="num">288</td>
+              <td class="num">NT$1,006</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="24" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">12</td>
+              <td class="sku-name">【CLINIQUE 倩碧】水磁場100H活水循環保濕凝膠 200ml(航空版)</td>
+              <td class="num">NT$223,716</td>
+              <td class="num">191</td>
+              <td class="num">NT$1,171</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.6%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">13</td>
+              <td class="sku-name">【SHISEIDO 資生堂】紅妍山茶花修護精華 75ml 小紅瓶(航空版)</td>
+              <td class="num">NT$217,949</td>
+              <td class="num">157</td>
+              <td class="num">NT$1,388</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="48" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.5%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">14</td>
+              <td class="sku-name">【Kiehl's 契爾氏】激光極淨白淡斑精華 115ml(航空版)</td>
+              <td class="num">NT$190,086</td>
+              <td class="num">93</td>
+              <td class="num">NT$2,043</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="17" width="11" height="3" fill="#13227fbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">15</td>
+              <td class="sku-name">【AVEDA 肯夢】純香/迷迭薄荷洗髮精 1000ml(多款任選 航空版)</td>
+              <td class="num">NT$180,789</td>
+              <td class="num">169</td>
+              <td class="num">NT$1,069</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="48" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">16</td>
+              <td class="sku-name">【Avene 雅漾】舒護活泉水 300ml 6入組(航空版)</td>
+              <td class="num">NT$166,289</td>
+              <td class="num">137</td>
+              <td class="num">NT$1,213</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="24" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">17</td>
+              <td class="sku-name">【LA MER 海洋拉娜】經典乳霜 60ml 加贈7ml*5入(航空版)</td>
+              <td class="num">NT$143,542</td>
+              <td class="num">19</td>
+              <td class="num">NT$7,554</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="36" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">18</td>
+              <td class="sku-name">【Avene 雅漾】舒護活泉水 300ml 四入組(航空版)</td>
+              <td class="num">NT$132,602</td>
+              <td class="num">157</td>
+              <td class="num">NT$844</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"/><rect x="24" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="36" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">19</td>
+              <td class="sku-name">【GIORGIO ARMANI 亞曼尼】高級訂製淡香水花園 100ml (香格里拉茶園/東洋茉莉/蘇州牡丹)(…</td>
+              <td class="num">NT$130,851</td>
+              <td class="num">34</td>
+              <td class="num">NT$3,848</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#13227fbb" rx="1"/><rect x="24" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">20</td>
+              <td class="sku-name">【ESTEE LAUDER 雅詩蘭黛】粉持久完美持妝粉底 30ml(多款任選 航空版)</td>
+              <td class="num">NT$123,176</td>
+              <td class="num">119</td>
+              <td class="num">NT$1,035</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">21</td>
+              <td class="sku-name">【SHISEIDO 資生堂】紅妍山茶花修護精華 75ml 2入組 小紅瓶(航空版)</td>
+              <td class="num">NT$122,574</td>
+              <td class="num">44</td>
+              <td class="num">NT$2,785</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">22</td>
+              <td class="sku-name">【LANCOME 蘭蔻】零粉感超持久粉底 30ml 新版(航空版)</td>
+              <td class="num">NT$121,061</td>
+              <td class="num">111</td>
+              <td class="num">NT$1,090</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="36" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">23</td>
+              <td class="sku-name">【LA ROCHE-POSAY 理膚寶水】B5+全面修復霜100ml 6入組(航空版)</td>
+              <td class="num">NT$117,816</td>
+              <td class="num">45</td>
+              <td class="num">NT$2,618</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="12" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">24</td>
+              <td class="sku-name">【Diptyque】淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td>
+              <td class="num">NT$111,189</td>
+              <td class="num">25</td>
+              <td class="num">NT$4,447</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">25</td>
+              <td class="sku-name">【YSL】超模光感精華水氣墊 12g(多款任選 航空版)</td>
+              <td class="num">NT$102,933</td>
+              <td class="num">59</td>
+              <td class="num">NT$1,744</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="12" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">26</td>
+              <td class="sku-name">【CHANEL 香奈兒】超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td>
+              <td class="num">NT$101,919</td>
+              <td class="num">71</td>
+              <td class="num">NT$1,435</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="12" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">27</td>
+              <td class="sku-name">【AVEDA 肯夢】蘊活煥欣洗髮精 1000ml(航空版)</td>
+              <td class="num">NT$100,960</td>
+              <td class="num">40</td>
+              <td class="num">NT$2,524</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="48" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">28</td>
+              <td class="sku-name">【Elizabeth Arden】 21天霜 75ml 2入組(航空版)</td>
+              <td class="num">NT$100,328</td>
+              <td class="num">139</td>
+              <td class="num">NT$721</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">29</td>
+              <td class="sku-name">【AVEDA 肯夢】蘊活煥欣豐盈菁華 150ml(航空版)</td>
+              <td class="num">NT$98,495</td>
+              <td class="num">73</td>
+              <td class="num">NT$1,349</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="12" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="24" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">30</td>
+              <td class="sku-name">【Guerlain 嬌蘭】皇家蜂王乳平衡油精華 50ml(航空版)</td>
+              <td class="num">NT$92,106</td>
+              <td class="num">42</td>
+              <td class="num">NT$2,193</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.6%</span></div></td>
+            </tr></tbody></table>
+        </div>
+        <p class="note">月度趨勢：每格代表一個月（1月→6月），高度代表當月相對銷售量</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">競品比價分析（momo / 蝦皮，2026-06-03 搜尋）</div>
+        <table class="data-table"><thead><tr><th>商品</th><th>全電商均價</th><th>競品參考價</th><th>價差</th><th>說明</th></tr></thead>
+        <tbody><tr>
+              <td class="sku-name">資生堂百優精純乳霜 75ml（單入）</td>
+              <td class="num">NT$1,161</td>
+              <td>蝦皮 NT$1,789</td>
+              <td><span class="badge win">全電商低35%</span></td>
+              <td class="note-cell">平行輸入，全電商低35%</td>
+            </tr><tr>
+              <td class="sku-name">雅詩蘭黛小棕瓶 100ml 2入組</td>
+              <td class="num">NT$4,482</td>
+              <td>蝦皮 NT$8,700</td>
+              <td><span class="badge win">全電商低48%</span></td>
+              <td class="note-cell">全電商低48%，廣告強力優勢</td>
+            </tr><tr>
+              <td class="sku-name">肌膚之鑰妝前凝霜 37ml</td>
+              <td class="num">NT$1,031</td>
+              <td>蝦皮各店不一</td>
+              <td><span class="badge neutral">待確認</span></td>
+              <td class="note-cell">難以直接比價</td>
+            </tr><tr>
+              <td class="sku-name">理膚寶水B5+修復霜 100ml 2入</td>
+              <td class="num">NT$868</td>
+              <td>待確認</td>
+              <td><span class="badge neutral">待確認</span></td>
+              <td class="note-cell">-</td>
+            </tr></tbody></table>
+        <p class="note">⚠️ 全電商均價 = 活動促銷後實際成交均價（CSV計算）；競品價格為搜尋當日掛牌價，僅供參考。</p>
+      </div>
+    </div>
+    <div class="supplier-block" id="sec-gsj">
+      <div class="supplier-header" style="border-left:5px solid #e40011">
+        <div>
+          <span class="sup-cat">🧻 日用</span>
+          <h2 class="sup-name">金盛世紙業</h2>
+        </div>
+        <div class="sup-kpi-row">
+          <div class="sup-kpi"><div class="sup-kpi-label">總營收</div><div class="sup-kpi-val" style="color:#e40011">NT$12.2M</div></div>
+          <div class="sup-kpi"><div class="sup-kpi-label">總訂單數</div><div class="sup-kpi-val">18,563</div></div>
+          <div class="sup-kpi"><div class="sup-kpi-label">均客單</div><div class="sup-kpi-val">NT$658</div></div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">月度營收趨勢</div>
+          <div class="chart-wrap"><canvas id="chart-gsj"></canvas></div>
+          <script>
+            new Chart(document.getElementById('chart-gsj'),{
+              type:'bar',
+              data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[1954035, 1521395, 3894310, 2764906, 2004293, 88179],backgroundColor:'#e4001122',borderColor:'#e40011',borderWidth:2,borderRadius:4}]},
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+            });
+          </script>
+        </div>
+        <div class="card">
+          <div class="card-title">品牌營收佔比</div>
+          <div class="chart-wrap"><canvas id="chart-brand-gsj"></canvas></div>
+          <script>
+            new Chart(document.getElementById('chart-brand-gsj'),{
+              type:'doughnut',
+              data:{labels:['CONSOFY', '倍潔雅', '柔芙', '怡柔', '唯潔雅', 'PASEO'],datasets:[{data:[5189814, 2835499, 2244053, 1232405, 444307, 153501],backgroundColor:['#13227f','#e40011','#3d4fa0','#f57c00','#388e3c','#757575'],borderWidth:2,borderColor:'#fff'}]},
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},boxWidth:12}}}}
+            });
+          </script>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Top 30 SKU 排行（依總營收，1月～6月）
+          <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>月度趨勢 / 佔比</th></tr></thead>
+        <tbody><tr>
+              <td class="rank r1">1</td>
+              <td class="sku-name">【CONSOFY】3層抽取衛生紙 (120抽x24包x3串)</td>
+              <td class="num">NT$4,173,912</td>
+              <td class="num">4,577</td>
+              <td class="num">NT$911</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#e40011bb" rx="1"/><rect x="12" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">34.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r2">2</td>
+              <td class="sku-name">【倍潔雅】柔軟舒適抽取式衛生紙(110抽x12包x8串)</td>
+              <td class="num">NT$1,916,631</td>
+              <td class="num">2,926</td>
+              <td class="num">NT$655</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">15.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">3</td>
+              <td class="sku-name">【柔芙】優質抽取式衛生紙(100抽x10包x10串)</td>
+              <td class="num">NT$1,393,670</td>
+              <td class="num">2,104</td>
+              <td class="num">NT$662</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">11.4%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">4</td>
+              <td class="sku-name">【怡柔】3層抽取式衛生紙(100抽x12包x8串)</td>
+              <td class="num">NT$1,213,378</td>
+              <td class="num">1,173</td>
+              <td class="num">NT$1,034</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">9.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">5</td>
+              <td class="sku-name">【柔芙】輕巧包抽取式衛生紙 (120抽x20包x6串)</td>
+              <td class="num">NT$683,393</td>
+              <td class="num">865</td>
+              <td class="num">NT$790</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="12" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="48" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">5.6%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">6</td>
+              <td class="sku-name">【CONSOFY】2層抽取衛生紙(150抽x24包x3串)</td>
+              <td class="num">NT$551,887</td>
+              <td class="num">747</td>
+              <td class="num">NT$738</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="48" y="4" width="11" height="16" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">4.5%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">7</td>
+              <td class="sku-name">【CONSOFY】3層抽取衛生紙(120抽*24包)</td>
+              <td class="num">NT$407,347</td>
+              <td class="num">1,321</td>
+              <td class="num">NT$308</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">3.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">8</td>
+              <td class="sku-name">【倍潔雅】好韌真Pro 3層抽取式衛生紙 (100抽x10包x10串)</td>
+              <td class="num">NT$382,435</td>
+              <td class="num">363</td>
+              <td class="num">NT$1,053</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="48" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">3.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">9</td>
+              <td class="sku-name">【唯潔雅】潔淨柔感抽取式衛生紙(140抽x10包x8串)</td>
+              <td class="num">NT$321,641</td>
+              <td class="num">378</td>
+              <td class="num">NT$850</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="48" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">2.6%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">10</td>
+              <td class="sku-name">【PASEO】3層柔韌舒適抽取式衛生紙 (100抽x10包x6串)</td>
+              <td class="num">NT$113,229</td>
+              <td class="num">148</td>
+              <td class="num">NT$765</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="12" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="48" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">11</td>
+              <td class="sku-name">【倍潔雅】好韌真Pro三層抽取式衛生紙(100抽*24包)</td>
+              <td class="num">NT$93,043</td>
+              <td class="num">352</td>
+              <td class="num">NT$264</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="48" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">12</td>
+              <td class="sku-name">【柔芙】輕巧包抽取式衛生紙(120抽*20包)</td>
+              <td class="num">NT$81,921</td>
+              <td class="num">545</td>
+              <td class="num">NT$150</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#e40011bb" rx="1"/><rect x="48" y="17" width="11" height="3" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">13</td>
+              <td class="sku-name">【倍潔雅】純淨柔感抽取式衛生紙(150抽X10包X6袋)</td>
+              <td class="num">NT$80,902</td>
+              <td class="num">141</td>
+              <td class="num">NT$573</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">14</td>
+              <td class="sku-name">【倍潔雅】蝶舞輕柔抽取式衛生紙(120抽x10包x8串)</td>
+              <td class="num">NT$78,339</td>
+              <td class="num">110</td>
+              <td class="num">NT$712</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.6%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">15</td>
+              <td class="sku-name">【柔芙】便利抽抽取式廚房紙巾 (100抽x3包x10袋)</td>
+              <td class="num">NT$66,702</td>
+              <td class="num">111</td>
+              <td class="num">NT$600</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="24" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="36" y="1" width="11" height="19" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">16</td>
+              <td class="sku-name">【倍潔雅】好韌真3層抽取衛生紙 PEFC (100抽X24包X4袋)</td>
+              <td class="num">NT$65,291</td>
+              <td class="num">68</td>
+              <td class="num">NT$960</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">17</td>
+              <td class="sku-name">【唯潔雅】萬用抽取衛生紙(120抽*30包)</td>
+              <td class="num">NT$63,234</td>
+              <td class="num">261</td>
+              <td class="num">NT$242</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="1" width="11" height="19" fill="#e40011bb" rx="1"/><rect x="12" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">18</td>
+              <td class="sku-name">【CONSOFY】二層抽取衛生紙(150抽*24包)</td>
+              <td class="num">NT$56,668</td>
+              <td class="num">218</td>
+              <td class="num">NT$259</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">19</td>
+              <td class="sku-name">【倍潔雅】抽取式衛生紙(150抽*14包)</td>
+              <td class="num">NT$48,818</td>
+              <td class="num">284</td>
+              <td class="num">NT$171</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="48" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.4%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">20</td>
+              <td class="sku-name">【Livi 優活】抽取式衛生紙 PEFC(150抽X10包X8袋)</td>
+              <td class="num">NT$42,699</td>
+              <td class="num">56</td>
+              <td class="num">NT$762</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">21</td>
+              <td class="sku-name">【唯潔雅】唯潔雅抽取式衛生紙100抽24包(.)</td>
+              <td class="num">NT$39,243</td>
+              <td class="num">204</td>
+              <td class="num">NT$192</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">22</td>
+              <td class="sku-name">【倍潔雅】強效吸油料理捲筒式廚房紙巾-萬用尺寸(120組x6捲x8袋)</td>
+              <td class="num">NT$31,199</td>
+              <td class="num">51</td>
+              <td class="num">NT$611</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">23</td>
+              <td class="sku-name">【倍潔雅】袖珍包面紙 (10抽x36包x24組)</td>
+              <td class="num">NT$30,543</td>
+              <td class="num">26</td>
+              <td class="num">NT$1,174</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">24</td>
+              <td class="sku-name">【PASEO】三層柔韌舒適抽取式衛生紙(100抽*24包)</td>
+              <td class="num">NT$24,973</td>
+              <td class="num">83</td>
+              <td class="num">NT$300</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">25</td>
+              <td class="sku-name">【綺朵】抽取式衛生紙(140抽*28包)</td>
+              <td class="num">NT$23,637</td>
+              <td class="num">96</td>
+              <td class="num">NT$246</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#e40011bb" rx="1"/><rect x="48" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">26</td>
+              <td class="sku-name">【倍潔雅】強效吸油料理廚房紙巾-大尺寸 (90組x4捲x6串)</td>
+              <td class="num">NT$22,270</td>
+              <td class="num">46</td>
+              <td class="num">NT$484</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="12" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">27</td>
+              <td class="sku-name">【怡柔】3層抽取式衛生紙(100抽*12包)</td>
+              <td class="num">NT$19,027</td>
+              <td class="num">129</td>
+              <td class="num">NT$147</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="12" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">28</td>
+              <td class="sku-name">【Hello】日式手感擦臉紙巾 (180張x3包x6袋)</td>
+              <td class="num">NT$16,671</td>
+              <td class="num">27</td>
+              <td class="num">NT$617</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="12" y="4" width="11" height="16" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">29</td>
+              <td class="sku-name">【倍潔雅】柔拭萬用紙巾 PEFC(120抽X20包X4袋)</td>
+              <td class="num">NT$14,884</td>
+              <td class="num">24</td>
+              <td class="num">NT$620</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">30</td>
+              <td class="sku-name">【倍潔雅】倍潔雅抽取式衛生紙100抽24包(.)</td>
+              <td class="num">NT$14,765</td>
+              <td class="num">73</td>
+              <td class="num">NT$202</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.1%</span></div></td>
+            </tr></tbody></table>
+        </div>
+        <p class="note">月度趨勢：每格代表一個月（1月→6月），高度代表當月相對銷售量</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">競品比價分析（momo / 蝦皮，2026-06-03 搜尋）</div>
+        <table class="data-table"><thead><tr><th>商品</th><th>全電商均價</th><th>競品參考價</th><th>價差</th><th>說明</th></tr></thead>
+        <tbody><tr>
+              <td class="sku-name">CONSOFY 3層衛生紙 120抽x24包x3串</td>
+              <td class="num">NT$911</td>
+              <td>momo NT$935</td>
+              <td><span class="badge ok">全電商低3%</span></td>
+              <td class="note-cell">全電商低3%，CP值口碑強</td>
+            </tr><tr>
+              <td class="sku-name">CONSOFY 3層衛生紙 120抽x24包（單串）</td>
+              <td class="num">NT$407</td>
+              <td>momo NT$265（單串）</td>
+              <td><span class="badge lose">競品較低54%</span></td>
+              <td class="note-cell">momo單串較便宜，建議主推3串組</td>
+            </tr><tr>
+              <td class="sku-name">倍潔雅 柔軟舒適 110抽x12包x8串</td>
+              <td class="num">NT$655</td>
+              <td>待確認</td>
+              <td><span class="badge neutral">待確認</span></td>
+              <td class="note-cell">-</td>
+            </tr></tbody></table>
+        <p class="note">⚠️ 全電商均價 = 活動促銷後實際成交均價（CSV計算）；競品價格為搜尋當日掛牌價，僅供參考。</p>
+      </div>
+    </div>
+    <div class="supplier-block" id="sec-yfl">
+      <div class="supplier-header" style="border-left:5px solid #f57c00">
+        <div>
+          <span class="sup-cat">💊 保健</span>
+          <h2 class="sup-name">壹伍壹拾</h2>
+        </div>
+        <div class="sup-kpi-row">
+          <div class="sup-kpi"><div class="sup-kpi-label">總營收</div><div class="sup-kpi-val" style="color:#f57c00">NT$2.2M</div></div>
+          <div class="sup-kpi"><div class="sup-kpi-label">總訂單數</div><div class="sup-kpi-val">703</div></div>
+          <div class="sup-kpi"><div class="sup-kpi-label">均客單</div><div class="sup-kpi-val">NT$3,106</div></div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">月度營收趨勢</div>
+          <div class="chart-wrap"><canvas id="chart-yfl"></canvas></div>
+          <script>
+            new Chart(document.getElementById('chart-yfl'),{
+              type:'bar',
+              data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[426454, 153356, 332314, 479212, 751105, 41142],backgroundColor:'#f57c0022',borderColor:'#f57c00',borderWidth:2,borderRadius:4}]},
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+            });
+          </script>
+        </div>
+        <div class="card">
+          <div class="card-title">品牌營收佔比</div>
+          <div class="chart-wrap"><canvas id="chart-brand-yfl"></canvas></div>
+          <script>
+            new Chart(document.getElementById('chart-brand-yfl'),{
+              type:'doughnut',
+              data:{labels:['PP 石墨烯', '亞馬生醫', '飲后', 'LARGAN 大立美', 'iVENOR', '日南製藥'],datasets:[{data:[769413, 417632, 366174, 365802, 237484, 27078],backgroundColor:['#13227f','#e40011','#3d4fa0','#f57c00','#388e3c','#757575'],borderWidth:2,borderColor:'#fff'}]},
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},boxWidth:12}}}}
+            });
+          </script>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Top 30 SKU 排行（依總營收，1月～6月）
+          <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>月度趨勢 / 佔比</th></tr></thead>
+        <tbody><tr>
+              <td class="rank r1">1</td>
+              <td class="sku-name">【飲后】超孅飲-奇異果風味6盒(15包/盒)</td>
+              <td class="num">NT$327,244</td>
+              <td class="num">118</td>
+              <td class="num">NT$2,773</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">15.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r2">2</td>
+              <td class="sku-name">【亞馬生醫】MPE-311靈活粒現5盒(30顆/盒)</td>
+              <td class="num">NT$246,850</td>
+              <td class="num">70</td>
+              <td class="num">NT$3,526</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#f57c00bb" rx="1"/><rect x="24" y="4" width="11" height="16" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">11.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">3</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯羊駝絨超導被(NASA聯名)2入(陳美鳳代言推薦)</td>
+              <td class="num">NT$158,126</td>
+              <td class="num">11</td>
+              <td class="num">NT$14,375</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">7.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">4</td>
+              <td class="sku-name">【PP 石墨烯】第四代石墨烯能量護膝2雙(3D立體包覆 穩定支撐)</td>
+              <td class="num">NT$117,027</td>
+              <td class="num">33</td>
+              <td class="num">NT$3,546</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#f57c00bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#f57c00bb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#f57c00bb" rx="1"/><rect x="36" y="1" width="11" height="19" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">5.4%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">5</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯蠶絲助眠眼罩2件(天然蠶絲呵護眼周)</td>
+              <td class="num">NT$104,005</td>
+              <td class="num">39</td>
+              <td class="num">NT$2,666</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="16" width="11" height="4" fill="#f57c00bb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#f57c00bb" rx="1"/><rect x="24" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="36" y="14" width="11" height="6" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">4.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">6</td>
+              <td class="sku-name">【LARGAN 大立美】攝守立克5盒_大立光集團所屬(30顆/盒)</td>
+              <td class="num">NT$94,799</td>
+              <td class="num">27</td>
+              <td class="num">NT$3,511</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#f57c00bb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">4.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">7</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯粒線能量修復護腕2入(護手腕 媽媽手 滑鼠手)</td>
+              <td class="num">NT$71,016</td>
+              <td class="num">37</td>
+              <td class="num">NT$1,919</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#f57c00bb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">3.3%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">8</td>
+              <td class="sku-name">【LARGAN 大立美】關健立克5盒_大立光集團所屬(30顆/盒)</td>
+              <td class="num">NT$69,973</td>
+              <td class="num">20</td>
+              <td class="num">NT$3,498</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#f57c00bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#f57c00bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#f57c00bb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#f57c00bb" rx="1"/><rect x="60" y="15" width="11" height="5" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">3.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">9</td>
+              <td class="sku-name">【LARGAN 大立美】晶亮立克5盒_大立光集團所屬(30顆/盒)</td>
+              <td class="num">NT$65,914</td>
+              <td class="num">19</td>
+              <td class="num">NT$3,469</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#f57c00bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="36" y="7" width="11" height="13" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">3.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">10</td>
+              <td class="sku-name">【iVENOR】兆物主-元神錠6盒(30粒/盒)</td>
+              <td class="num">NT$65,875</td>
+              <td class="num">19</td>
+              <td class="num">NT$3,467</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="7" width="11" height="13" fill="#f57c00bb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#f57c00bb" rx="1"/><rect x="36" y="8" width="11" height="12" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="17" width="11" height="3" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">3.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">11</td>
+              <td class="sku-name">【亞馬生醫】MPE-311激孅粒現5盒(30顆/盒)</td>
+              <td class="num">NT$60,053</td>
+              <td class="num">16</td>
+              <td class="num">NT$3,753</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">2.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">12</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯羊駝絨超導被(NASA聯名)1入(陳美鳳代言推薦)</td>
+              <td class="num">NT$52,872</td>
+              <td class="num">6</td>
+              <td class="num">NT$8,812</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">2.4%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">13</td>
+              <td class="sku-name">【亞馬生醫】MPE-311超能粒現5盒(30顆/盒)</td>
+              <td class="num">NT$46,551</td>
+              <td class="num">13</td>
+              <td class="num">NT$3,580</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#f57c00bb" rx="1"/><rect x="24" y="11" width="11" height="9" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">2.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">14</td>
+              <td class="sku-name">【iVENOR】粒即穩6盒(30顆/盒)</td>
+              <td class="num">NT$44,008</td>
+              <td class="num">13</td>
+              <td class="num">NT$3,385</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">2.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">15</td>
+              <td class="sku-name">【PP 石墨烯】第四代石墨烯能量護膝1雙(3D立體包覆 穩定支撐)</td>
+              <td class="num">NT$31,149</td>
+              <td class="num">13</td>
+              <td class="num">NT$2,396</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#f57c00bb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.4%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">16</td>
+              <td class="sku-name">【飲后】超孅飲-奇異果風味2盒(15包/盒)</td>
+              <td class="num">NT$26,350</td>
+              <td class="num">25</td>
+              <td class="num">NT$1,054</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">17</td>
+              <td class="sku-name">【iVENOR】紫孅果5盒(30顆/盒)</td>
+              <td class="num">NT$25,900</td>
+              <td class="num">11</td>
+              <td class="num">NT$2,354</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="8" width="11" height="12" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">18</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯隨調記憶枕2入(美國NASA認證)</td>
+              <td class="num">NT$25,380</td>
+              <td class="num">3</td>
+              <td class="num">NT$8,460</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">19</td>
+              <td class="sku-name">【亞馬生醫】MPE-311靈活粒現3盒(30顆/盒)</td>
+              <td class="num">NT$24,157</td>
+              <td class="num">9</td>
+              <td class="num">NT$2,684</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#f57c00bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#f57c00bb" rx="1"/><rect x="24" y="10" width="11" height="10" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.1%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">20</td>
+              <td class="sku-name">【亞馬生醫】MPE-311激孅粒現3盒(30顆/盒)</td>
+              <td class="num">NT$22,460</td>
+              <td class="num">8</td>
+              <td class="num">NT$2,807</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="14" width="11" height="6" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">21</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯高腰暖腹女內褲(4件)</td>
+              <td class="num">NT$21,892</td>
+              <td class="num">6</td>
+              <td class="num">NT$3,648</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">22</td>
+              <td class="sku-name">【日南製藥】日本高濃度雪櫻姬白錠5盒(30顆/盒)</td>
+              <td class="num">NT$21,454</td>
+              <td class="num">9</td>
+              <td class="num">NT$2,383</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="16" width="11" height="4" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">23</td>
+              <td class="sku-name">【LARGAN 大立美】關健立克10盒_大立光集團所屬(30顆/盒)</td>
+              <td class="num">NT$21,130</td>
+              <td class="num">3</td>
+              <td class="num">NT$7,043</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">24</td>
+              <td class="sku-name">【LARGAN 大立美】攝守立克3盒_大立光集團所屬(30顆/盒)</td>
+              <td class="num">NT$20,610</td>
+              <td class="num">8</td>
+              <td class="num">NT$2,576</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="6" width="11" height="14" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="6" width="11" height="14" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">25</td>
+              <td class="sku-name">【LARGAN 大立美】晶亮立克7盒_大立光集團所屬(30顆/盒)</td>
+              <td class="num">NT$19,010</td>
+              <td class="num">4</td>
+              <td class="num">NT$4,752</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="2" width="11" height="18" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">26</td>
+              <td class="sku-name">【iVENOR】紫孅果8盒(30顆/盒)</td>
+              <td class="num">NT$17,493</td>
+              <td class="num">5</td>
+              <td class="num">NT$3,498</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">27</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯魔塑強力腰夾1入(護腰 保護腰椎 穩固支撐)</td>
+              <td class="num">NT$15,592</td>
+              <td class="num">6</td>
+              <td class="num">NT$2,598</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="48" y="16" width="11" height="4" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">28</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯粒線修復女內褲4件(購物一姐斯容愛用推薦)</td>
+              <td class="num">NT$15,046</td>
+              <td class="num">4</td>
+              <td class="num">NT$3,761</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">29</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯Y字領集中修復內衣3件(購物一姐斯容推薦)</td>
+              <td class="num">NT$14,538</td>
+              <td class="num">4</td>
+              <td class="num">NT$3,634</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="11" width="11" height="9" fill="#f57c00bb" rx="1"/><rect x="36" y="12" width="11" height="8" fill="#f57c00bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+            </tr><tr>
+              <td class="rank r3">30</td>
+              <td class="sku-name">【PP 石墨烯】石墨烯打卡褲_九分褲2件(愛莉莎莎代言推薦)</td>
+              <td class="num">NT$14,120</td>
+              <td class="num">3</td>
+              <td class="num">NT$4,706</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#f57c00bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#f57c00bb" rx="1"/><rect x="48" y="1" width="11" height="19" fill="#f57c00bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#f57c00bb" rx="1"/></svg><span class="bar-pct">0.6%</span></div></td>
+            </tr></tbody></table>
+        </div>
+        <p class="note">月度趨勢：每格代表一個月（1月→6月），高度代表當月相對銷售量</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">競品比價分析（momo / 蝦皮，2026-06-03 搜尋）</div>
+        <table class="data-table"><thead><tr><th>商品</th><th>全電商均價</th><th>競品參考價</th><th>價差</th><th>說明</th></tr></thead>
+        <tbody><tr>
+              <td class="sku-name">飲后超孅飲 奇異果 6盒</td>
+              <td class="num">NT$2,773</td>
+              <td>momo有上架（價格待確認）</td>
+              <td><span class="badge neutral">待確認</span></td>
+              <td class="note-cell">建議確認momo售價</td>
+            </tr><tr>
+              <td class="sku-name">PP石墨烯護膝 2雙</td>
+              <td class="num">NT$3,546</td>
+              <td>momo NT$3,618</td>
+              <td><span class="badge ok">全電商低2%</span></td>
+              <td class="note-cell">差異不大，靠活動加碼吸引</td>
+            </tr><tr>
+              <td class="sku-name">亞馬生醫靈活粒 5盒</td>
+              <td class="num">NT$3,526</td>
+              <td>待確認</td>
+              <td><span class="badge neutral">待確認</span></td>
+              <td class="note-cell">-</td>
+            </tr></tbody></table>
+        <p class="note">⚠️ 全電商均價 = 活動促銷後實際成交均價（CSV計算）；競品價格為搜尋當日掛牌價，僅供參考。</p>
+      </div>
+    </div>
+
+<!-- 檔期廣告建議 -->
+<div id="sec-campaign">
+  <div class="section-title">📅 檔期廣告建議（近三個檔期）</div>
+  
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div>
+            <div class="campaign-name">618年中大促 <span class="tag-active">進行中</span></div>
+            <div class="campaign-period">📅 06/05 ～ 06/25</div>
+            <div class="campaign-key">🎫 滿5000折500・滿15000折1500・週末神券600</div>
+          </div>
+        </div>
+        <div class="campaign-grid">
+          <div class="campaign-col" style="border-top:3px solid #13227f">
+            <div class="campaign-sup">💄 跨境豐收</div>
+            <ul class="campaign-list"><li>資生堂百優2入組（客單$2,407符合滿額）</li><li>雅詩蘭黛小棕瓶2入（$4,482高客單）</li><li>Diptyque香氛（送禮旺季）</li></ul>
+          </div>
+          <div class="campaign-col" style="border-top:3px solid #e40011">
+            <div class="campaign-sup">🧻 金盛世紙業</div>
+            <ul class="campaign-list"><li>CONSOFY 3串（大囤貨包）</li><li>倍潔雅環保系列</li></ul>
+          </div>
+          <div class="campaign-col" style="border-top:3px solid #f57c00">
+            <div class="campaign-sup">💊 壹伍壹拾</div>
+            <ul class="campaign-list"><li>飲后超孅飲6盒（達滿額門檻）</li><li>亞馬生醫靈活粒5盒</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div>
+            <div class="campaign-name">77好運節 <span class="tag-upcoming">即將開始</span></div>
+            <div class="campaign-period">📅 06/26 ～ 07/09</div>
+            <div class="campaign-key">🎫 滿12000折600・滿22000折1200・週末神券600</div>
+          </div>
+        </div>
+        <div class="campaign-grid">
+          <div class="campaign-col" style="border-top:3px solid #13227f">
+            <div class="campaign-sup">💄 跨境豐收</div>
+            <ul class="campaign-list"><li>Sisley全能乳液（高單價）</li><li>Diptyque香氛75ml（送禮）</li><li>資生堂百優4入組（衝高客單）</li></ul>
+          </div>
+          <div class="campaign-col" style="border-top:3px solid #e40011">
+            <div class="campaign-sup">🧻 金盛世紙業</div>
+            <ul class="campaign-list"><li>倍潔雅 PEFC環保認證（主打環保族群）</li><li>CONSOFY 3串（囤貨訴求）</li></ul>
+          </div>
+          <div class="campaign-col" style="border-top:3px solid #f57c00">
+            <div class="campaign-sup">💊 壹伍壹拾</div>
+            <ul class="campaign-list"><li>PP石墨烯護膝2雙（父親節前暖身）</li><li>亞馬生醫靈活粒（關節保健）</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div>
+            <div class="campaign-name">APP全新體驗 <span class="tag-upcoming">即將開始</span></div>
+            <div class="campaign-period">📅 07/10 ～ 08/06</div>
+            <div class="campaign-key">🎫 週末滿13000折600・LINE好友送$200・週三滿5000折500</div>
+          </div>
+        </div>
+        <div class="campaign-grid">
+          <div class="campaign-col" style="border-top:3px solid #13227f">
+            <div class="campaign-sup">💄 跨境豐收</div>
+            <ul class="campaign-list"><li>防曬品（夏季旺季）</li><li>資生堂百優 + 紅妍山茶花修護精華組合</li></ul>
+          </div>
+          <div class="campaign-col" style="border-top:3px solid #e40011">
+            <div class="campaign-sup">🧻 金盛世紙業</div>
+            <ul class="campaign-list"><li>CONSOFY 3串（颱風季前囤貨）</li><li>廚房紙巾系列（夏季料理需求）</li></ul>
+          </div>
+          <div class="campaign-col" style="border-top:3px solid #f57c00">
+            <div class="campaign-sup">💊 壹伍壹拾</div>
+            <ul class="campaign-list"><li>PP石墨烯護膝2雙（父親節主打）</li><li>PP石墨烯護腰（父親節禮物）</li><li>PP石墨烯蠶絲眼罩（睡眠品質）</li></ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="footer">
+  JBP 廣告策略報表 · 產製時間：2026-06-03 · 資料來源：全電商 BI（廠商銷售及上架資料）+ 競品搜尋
+  <br>⚠️ 全電商 BI 系統不含 RT 與箱購廠商資料，本報表僅供內部參考
+</div>
+
+</div>
+</body>
+</html>
