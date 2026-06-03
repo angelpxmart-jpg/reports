@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全站活動解析 2026 下半年｜全電商</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue: #13227f; --blue-pressed: #0e1a63; --blue-light: #eef0fa; --blue-mid: #3d4fa0;
+    --red: #e40011; --red-soft: #fff0f0;
+    --canvas: #ffffff; --surface: #f7f8fc; --surface-warm: #f5f5f5;
+    --hairline: #e0e0e0; --hairline-soft: #eeeeee;
+    --ink: #1a1a1a; --ink-light: #444444; --slate: #757575; --muted: #bdbdbd;
+    --success: #2e7d32; --success-soft: #e8f5e9;
+    --warning: #e65100; --warning-soft: #fff3e0;
+    --info: #1565c0; --info-soft: #e3f2fd;
+  }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--surface); color: var(--ink); font-size: 15px; line-height: 1.6; }
+
+  /* NAV */
+  nav { background: var(--blue); color: #fff; height: 56px; display: flex; align-items: center; padding: 0 32px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(19,34,127,.2); }
+  nav .brand { font-size: 16px; font-weight: 700; letter-spacing: .3px; }
+  nav .sub { margin-left: 12px; font-size: 13px; opacity: .7; }
+  nav .date { margin-left: auto; font-size: 12px; opacity: .65; }
+
+  /* LAYOUT */
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 32px 64px; }
+  .page-title { font-size: 28px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .page-sub { font-size: 15px; color: var(--slate); margin-bottom: 32px; }
+
+  /* SECTION */
+  .section { margin-bottom: 40px; }
+  .section-title { font-size: 22px; font-weight: 700; color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .section-title::before { content: ''; display: block; width: 4px; height: 22px; background: var(--blue); border-radius: 2px; }
+
+  /* CARDS GRID */
+  .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .cards-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .cards-3, .cards-2 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--canvas); border-radius: 12px; padding: 24px; border: 1px solid var(--hairline); box-shadow: rgba(19,34,127,0.06) 0 2px 8px; }
+  .card.highlight { background: var(--blue); color: #fff; border: none; box-shadow: rgba(19,34,127,0.20) 0 4px 16px; }
+  .card.soft { background: var(--blue-light); border: none; }
+  .card-label { font-size: 13px; font-weight: 500; color: var(--slate); margin-bottom: 6px; }
+  .card.highlight .card-label { color: rgba(255,255,255,.7); }
+  .card.soft .card-label { color: var(--blue-mid); }
+  .card-value { font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.15; }
+  .card.highlight .card-value { color: #fff; }
+  .card.soft .card-value { color: var(--blue); }
+  .card-sub { font-size: 13px; color: var(--slate); margin-top: 6px; }
+  .card.highlight .card-sub { color: rgba(255,255,255,.65); }
+  .card-badge { display: inline-block; padding: 3px 10px; border-radius: 9999px; font-size: 12px; font-weight: 700; margin-top: 8px; }
+  .badge-promo { background: var(--red); color: #fff; }
+  .badge-brand { background: var(--blue-light); color: var(--blue); }
+  .badge-up { background: var(--success-soft); color: var(--success); }
+  .badge-neutral { background: var(--surface-warm); color: var(--slate); }
+
+  /* TABLE */
+  .table-wrap { border-radius: 12px; border: 1px solid var(--hairline); overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead tr { background: var(--blue); color: #fff; }
+  thead th { padding: 12px 14px; text-align: left; font-size: 13px; font-weight: 700; white-space: nowrap; }
+  tbody tr:nth-child(odd) { background: var(--canvas); }
+  tbody tr:nth-child(even) { background: var(--surface); }
+  tbody td { padding: 11px 14px; border-bottom: 1px solid var(--hairline-soft); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.highlight-row td { background: var(--blue-light); color: var(--blue); font-weight: 700; }
+  .nowrap { white-space: nowrap; }
+
+  /* CALLOUT */
+  .callout { border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; font-size: 14px; }
+  .callout-brand { background: var(--blue-light); border-left: 4px solid var(--blue); color: var(--blue); }
+  .callout-success { background: var(--success-soft); border-left: 4px solid var(--success); color: var(--success); }
+  .callout-warning { background: var(--warning-soft); border-left: 4px solid var(--warning); color: var(--warning); }
+  .callout-info { background: var(--info-soft); border-left: 4px solid var(--info); color: var(--info); }
+  .callout strong { font-weight: 700; }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 0; margin-bottom: 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--hairline); }
+  .tl-phase { flex: 1; padding: 14px 16px; text-align: center; }
+  .tl-phase.phase-pre { background: #eef0fa; }
+  .tl-phase.phase-warm { background: #dce4ff; }
+  .tl-phase.phase-main { background: var(--blue); color: #fff; }
+  .tl-phase.phase-back { background: #c5cae9; }
+  .tl-phase.phase-62 { background: #fff3e0; }
+  .tl-phase.phase-07 { background: #e8f5e9; }
+  .tl-label { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+  .tl-date { font-size: 11px; opacity: .75; }
+  .tl-phase.phase-main .tl-date { opacity: .8; }
+
+  /* BUDGET BAR */
+  .budget-list { display: flex; flex-direction: column; gap: 10px; }
+  .budget-item { display: flex; align-items: center; gap: 12px; }
+  .budget-label { font-size: 13px; width: 220px; flex-shrink: 0; }
+  .budget-bar-wrap { flex: 1; background: var(--hairline); border-radius: 9999px; height: 10px; }
+  .budget-bar-fill { height: 10px; border-radius: 9999px; background: var(--blue); }
+  .budget-bar-fill.red { background: var(--red); }
+  .budget-pct { font-size: 12px; font-weight: 700; width: 40px; text-align: right; color: var(--blue-mid); }
+
+  /* PRIORITY TAG */
+  .pri { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .pri-high { background: var(--red); color: #fff; }
+  .pri-med-high { background: #ff8a65; color: #fff; }
+  .pri-med { background: #ffb74d; color: #fff; }
+  .pri-low { background: var(--surface-warm); color: var(--slate); border: 1px solid var(--hairline); }
+
+  /* MATRIX */
+  .matrix-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1px; background: var(--hairline); border-radius: 12px; overflow: hidden; border: 1px solid var(--hairline); }
+  .matrix-header { background: var(--blue); color: #fff; padding: 10px 14px; font-size: 13px; font-weight: 700; }
+  .matrix-cell { background: var(--canvas); padding: 12px 14px; font-size: 13px; }
+  .matrix-cell.even { background: var(--surface); }
+  .matrix-cell strong { display: block; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+  .matrix-cell span { color: var(--slate); font-size: 12px; }
+
+  /* FOOTER */
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 32px; }
+
+  /* ACCORDION */
+  details { margin-bottom: 8px; }
+  details > summary { cursor: pointer; font-weight: 700; font-size: 16px; color: var(--blue); padding: 12px 0; border-bottom: 1px solid var(--hairline); list-style: none; display: flex; align-items: center; gap: 8px; }
+  details > summary::before { content: '▶'; font-size: 10px; transition: transform .2s; }
+  details[open] > summary::before { transform: rotate(90deg); }
+  details > .detail-body { padding: 16px 0; }
+
+  .tag-618 { background: #fff0f0; color: #c62828; border: 1px solid #ffcdd2; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+  .tag-77 { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+  .tag-07 { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">全電商 全站活動解析</span>
+  <span class="sub">2026 下半年三檔</span>
+  <span class="date">產出日期：2026-06-03</span>
+</nav>
+
+<div class="container">
+  <div class="page-title">全站活動機制解析</div>
+  <div class="page-sub">資料來源：Google Drive 活動辦法 PDF ｜ 分析角度：活動機制 × 消費者行為 × 供應商建議</div>
+
+  <!-- 三檔概覽 -->
+  <div class="section">
+    <div class="section-title">三檔檔期總覽</div>
+    <div class="cards-3">
+      <div class="card highlight">
+        <div class="card-label">6-1 檔 ｜ 進行中</div>
+        <div class="card-value">618 年中大促</div>
+        <div class="card-sub">2026/05/29 ～ 06/25（28天）</div>
+        <div class="card-sub" style="margin-top:8px; font-size:13px;">最大神券 <strong style="color:#fff;">500元</strong>（滿8,000）<br>閃購：每日多時段，最低68份</div>
+        <span class="card-badge badge-promo">四階段遞進</span>
+      </div>
+      <div class="card soft">
+        <div class="card-label">6-2 檔 ｜ 即將到來</div>
+        <div class="card-value">77 好運節</div>
+        <div class="card-sub">2026/06/26 ～ 07/09（14天）</div>
+        <div class="card-sub" style="margin-top:8px; font-size:13px;">最大神券 <strong>1,200元</strong>（滿22,000）<br>77主題日：滿7,777折777</div>
+        <span class="card-badge badge-brand">短衝型高客單</span>
+      </div>
+      <div class="card">
+        <div class="card-label">07 檔 ｜ 下下檔</div>
+        <div class="card-value">APP 全新體驗</div>
+        <div class="card-sub">2026/07/10 ～ 08/06（28天）</div>
+        <div class="card-sub" style="margin-top:8px; font-size:13px;">最大神券 <strong>1,200元</strong>（滿25,000）<br>週三/週末雙軌週期節奏</div>
+        <span class="card-badge badge-up">週期型高回報</span>
+      </div>
+    </div>
+
+    <!-- 時間軸 -->
+    <div class="callout callout-brand" style="margin-bottom:12px;"><strong>時間軸</strong> — 今天（6/3）正處於 618 前導期最後兩天，三檔無縫接續到 8/6。</div>
+    <div class="timeline">
+      <div class="tl-phase phase-pre">
+        <div class="tl-label">618 前導</div>
+        <div class="tl-date">5/29–6/4</div>
+      </div>
+      <div class="tl-phase phase-warm">
+        <div class="tl-label">618 暖身</div>
+        <div class="tl-date">6/5–6/11</div>
+      </div>
+      <div class="tl-phase phase-main">
+        <div class="tl-label">618 正式</div>
+        <div class="tl-date">6/12–6/18</div>
+      </div>
+      <div class="tl-phase phase-back">
+        <div class="tl-label">618 返場</div>
+        <div class="tl-date">6/19–6/25</div>
+      </div>
+      <div class="tl-phase phase-62">
+        <div class="tl-label">77 好運節</div>
+        <div class="tl-date">6/26–7/9</div>
+      </div>
+      <div class="tl-phase phase-07">
+        <div class="tl-label">APP 全新體驗</div>
+        <div class="tl-date">7/10–8/6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 一、活動機制總覽 -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-title">一、活動機制總覽</div>
+
+    <!-- 三檔對照表 -->
+    <div class="table-wrap" style="margin-bottom:24px;">
+      <table>
+        <thead>
+          <tr>
+            <th>面向</th>
+            <th><span class="tag-618">618 年中大促</span></th>
+            <th><span class="tag-77">77 好運節</span></th>
+            <th><span class="tag-07">APP 全新體驗</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="nowrap"><strong>時間</strong></td>
+            <td>5/29 ～ 6/25（28天）</td>
+            <td>6/26 ～ 7/9（14天）</td>
+            <td>7/10 ～ 8/6（28天）</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>檔期結構</strong></td>
+            <td>四階段（前導→暖身→正式→返場）</td>
+            <td>單一檔期</td>
+            <td>首十日 + 週循環</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>免運條件</strong></td>
+            <td>宅配一般/門市取貨/廠配 全免<br><span style="color:var(--slate);font-size:12px;">快配 399 門檻</span></td>
+            <td>同左</td>
+            <td>同左</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>最低門檻神券</strong></td>
+            <td>滿1,000 折168（LINE好友）</td>
+            <td>滿1,500 折100</td>
+            <td>滿999 折200（LINE好友）</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>最大神券面額</strong></td>
+            <td><strong>500元</strong>（滿8,000）</td>
+            <td><strong>1,200元</strong>（滿22,000）</td>
+            <td><strong>1,200元</strong>（滿25,000）</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>閃購券</strong></td>
+            <td>每日多時段，限68～800份</td>
+            <td>7/3起每日12/15/20點，限177份</td>
+            <td>7/20起每日10/15/20點，限300份</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>夜間加碼</strong></td>
+            <td>暖身+正式每日20:00–21:59，88折（最高400）</td>
+            <td>無</td>
+            <td>無</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>全支付加碼</strong></td>
+            <td>暖身：滿1,680送618點</td>
+            <td>滿2,000送1,000點</td>
+            <td>週末每滿1,500送1,000點（上限10,000）</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><strong>特色機制</strong></td>
+            <td>預領抵用券（前導期領、暖身/正式用）<br>累計滿68,000送68,000點</td>
+            <td>77神券（滿7,777折777）<br>大額即領即用券</td>
+            <td>週三固定500神券<br>週末三層神券並行</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 618 四階段詳細 -->
+    <details>
+      <summary><span class="tag-618">618 年中大促</span> 四階段機制拆解</summary>
+      <div class="detail-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>階段</th><th>時間</th><th>核心機制</th><th>重要性</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap"><strong>前導期</strong></td>
+                <td class="nowrap">5/29–6/4</td>
+                <td>
+                  • 預領抵用券（滿5,000折500 ～ 滿30,000折3,000）→ 正式期才可用<br>
+                  • 閃購券每日10/15/20點：滿1,000享5折，<strong>限68份</strong><br>
+                  • LINE好友神券：滿1,000折168<br>
+                  • 前導神券：滿3,000折200
+                </td>
+                <td><span class="card-badge badge-neutral">領券期</span></td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>暖身期</strong></td>
+                <td class="nowrap">6/5–6/11</td>
+                <td>
+                  • 前導抵用券可開始使用<br>
+                  • 夜貓88折：每日20:00–21:59，最高折288<br>
+                  • 暖身神券：滿6,000折300 / 滿15,000折600<br>
+                  • 全支付：滿1,680送618點<br>
+                  • 閃購券更稀有（每日限10份），但幸運者折扣極大
+                </td>
+                <td><span class="card-badge badge-up">第一波爆單</span></td>
+              </tr>
+              <tr class="highlight-row">
+                <td class="nowrap"><strong>正式期 🔥</strong></td>
+                <td class="nowrap">6/12–6/18</td>
+                <td>
+                  • 500神券：滿8,000折500<br>
+                  • 夜貓88折升級：最高折400（比暖身更強）<br>
+                  • <strong>6/18當天13–18點每小時閃券：滿1元享1折（最高300），限68份</strong><br>
+                  • 累計滿68,000送68,000福利點（約3.6萬元回饋）
+                </td>
+                <td><span class="card-badge badge-promo">全年最高峰</span></td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>返場期</strong></td>
+                <td class="nowrap">6/19–6/25</td>
+                <td>
+                  • 滿10,000折1,000（門檻比正式期低）<br>
+                  • 整體力道減弱，主要消化未使用抵用券
+                </td>
+                <td><span class="card-badge badge-neutral">收尾期</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <!-- 77好運節詳細 -->
+    <details>
+      <summary><span class="tag-77">77 好運節</span> 活動機制拆解</summary>
+      <div class="detail-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>活動</th><th>時間</th><th>門檻</th><th>回饋</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>大額抵用券①</td><td>6/26–7/9（即領即用）</td><td>滿15,000</td><td>折1,500</td></tr>
+              <tr><td>大額抵用券②</td><td>6/26–7/9（即領即用）</td><td>滿50,000</td><td>折5,000</td></tr>
+              <tr><td>閃購券（限177份）</td><td>7/3–7/9每日12/15/20點</td><td>滿1元</td><td>7折（最高588）</td></tr>
+              <tr><td>週末600神券</td><td>6/26–6/28, 7/3–7/5</td><td>滿12,000</td><td>折600</td></tr>
+              <tr><td>週末1,200神券</td><td>6/26–6/28, 7/3–7/5</td><td>滿22,000</td><td>折1,200</td></tr>
+              <tr class="highlight-row"><td>🎯 77神券</td><td>7/7–7/8</td><td>滿7,777</td><td>折777</td></tr>
+              <tr><td>指定日100神券</td><td>6/26–6/28, 7/3–7/9</td><td>滿1,500</td><td>折100</td></tr>
+              <tr><td>全支付贈福利點</td><td>6/26–6/28, 7/3–7/9</td><td>滿2,000</td><td>送1,000點</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <!-- 07 檔詳細 -->
+    <details>
+      <summary><span class="tag-07">APP 全新體驗</span> 活動機制拆解</summary>
+      <div class="detail-body">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>活動</th><th>時間</th><th>門檻</th><th>回饋</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LINE好友神券（全程）</td><td>7/10–8/6</td><td>滿999</td><td>折200</td></tr>
+              <tr><td>首十日150神券</td><td>7/10–7/19</td><td>滿2,500</td><td>折150</td></tr>
+              <tr><td>閃購券（限300份）</td><td>7/20–7/31每日10/15/20點</td><td>滿1,000</td><td>85折（最高200）</td></tr>
+              <tr><td>閃購券第二波</td><td>8/1–8/10每日10/15/20點</td><td>滿1,000</td><td>88折（最高288）</td></tr>
+              <tr><td>週三500神券</td><td>7/15, 7/22, 7/29, 8/5</td><td>滿5,000</td><td>折500</td></tr>
+              <tr><td>週末100神券</td><td>各週末</td><td>滿1,500</td><td>折100</td></tr>
+              <tr><td>週末600神券</td><td>各週末</td><td>滿13,000</td><td>折600</td></tr>
+              <tr class="highlight-row"><td>週末1,200神券</td><td>各週末</td><td>滿25,000</td><td>折1,200</td></tr>
+              <tr><td>全支付週末贈點</td><td>各週末</td><td>每滿1,500</td><td>送1,000點（上限10,000）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 二、消費者行為預測 -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-title">二、消費者行為預測</div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span class="tag-618">618 年中大促</span> 「等待型」消費者主導
+      </div>
+      <div class="callout callout-brand">
+        <strong>前導期（5/29–6/4）：</strong>消費者主要在領券、觀望，下單意願低。廣告轉換率此時最差。
+      </div>
+      <div class="callout callout-info">
+        <strong>暖身期（6/5–6/11）：</strong>抵用券解鎖 + 夜貓88折，每晚20:00後出現第一波下單尖峰。夜間流量品質遠高於白天。
+      </div>
+      <div class="callout callout-success">
+        <strong>正式期 6/18 當天：</strong>下午到夜間密集閃購券（每小時限68份），消費者會全天守著APP等待，轉換率是全年最高點。
+      </div>
+      <div class="callout callout-warning">
+        <strong>返場期（6/19–6/25）：</strong>活動力道明顯下降，主要是清掉前期領的抵用券（門檻滿10,000），以高客單商品為主要受益對象。
+      </div>
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span class="tag-77">77 好運節</span> 「高客單」消費者主導
+      </div>
+      <div class="callout callout-brand">
+        <strong>大額抵用券即領即用：</strong>有計劃購買大宗商品（滿15,000）的消費者是主力，衝動型低客單消費者受惠有限。
+      </div>
+      <div class="callout callout-info">
+        <strong>7/7–7/8 77神券主題日：</strong>滿7,777折777的記憶點強，消費者會特意等到這兩天下單，7/7前會有明顯壓單現象。
+      </div>
+      <div class="callout callout-warning">
+        <strong>週一到週五消費意願低：</strong>優惠幾乎集中在週末，平日流量品質差，廣告效益低。
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span class="tag-07">APP 全新體驗</span> 「節奏型」消費者主導
+      </div>
+      <div class="callout callout-brand">
+        <strong>首十日（7/10–7/19）：</strong>150神券門檻最低（2,500），吸引新客或低決策商品，是整檔最容易帶量的時段。
+      </div>
+      <div class="callout callout-success">
+        <strong>週三是平日最佳下單日：</strong>500神券（滿5,000）讓消費者把需求集中到週三，白天流量品質高於週一二四五。
+      </div>
+      <div class="callout callout-info">
+        <strong>全支付「拆單效應」：</strong>每滿1,500送1,000點（上限10,000），消費者會將大筆消費拆成多筆小單（如$7,500拆成5筆），與神券「單筆大額」邏輯相反，形成客單價分散現象。
+      </div>
+      <div class="callout callout-warning">
+        <strong>7/10–7/19 無閃購券：</strong>閃購券從7/20才出現，前十天相對單純，消費者不需「搶券」，行為更可預測。
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 三、供應商廣告操作建議 -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-title">三、供應商廣告操作建議</div>
+
+    <!-- 618 建議 -->
+    <div style="margin-bottom:28px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span class="tag-618">618 年中大促</span> 分階段投放策略
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>時間區間</th><th>廣告力道</th><th>建議操作</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nowrap">現在 6/3–6/4<br><small>前導最後兩天</small></td>
+              <td><span class="pri pri-low">低</span></td>
+              <td>維持基本曝光，不加碼</td>
+              <td>消費者在領券，尚未下單，廣告轉換率最低</td>
+            </tr>
+            <tr>
+              <td class="nowrap">6/5–6/11<br><small>暖身期</small></td>
+              <td><span class="pri pri-med">中高</span></td>
+              <td>開始加碼，<strong>夜間20:00後重點投放</strong></td>
+              <td>夜貓88折讓夜間成交率大升，是暖身期最佳時段</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="nowrap">6/12–6/18<br><small>正式期 🔥</small></td>
+              <td><span class="pri pri-high">最高</span></td>
+              <td><strong>全力投放</strong>，預算集中此週</td>
+              <td>購買意願全季最強，神券加持轉換率高</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="nowrap">6/17夜–6/18全天<br><small>正式最高峰</small></td>
+              <td><span class="pri pri-high">最高</span></td>
+              <td><strong>集中預算，全年最佳ROI時段</strong></td>
+              <td>閃券（1折）+ 夜貓升級版，這兩天轉換率遠超平日</td>
+            </tr>
+            <tr>
+              <td class="nowrap">6/19–6/25<br><small>返場期</small></td>
+              <td><span class="pri pri-low">保守</span></td>
+              <td>僅保留高客單商品廣告</td>
+              <td>活動力道弱，僅對滿10,000門檻商品有意義</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 77 建議 -->
+    <div style="margin-bottom:28px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span class="tag-77">77 好運節</span> 分時段投放策略
+      </div>
+      <div class="callout callout-warning" style="margin-bottom:12px;">
+        <strong>注意：</strong>77好運節整體偏向高客單（神券門檻起跳12,000）。主推商品單價在1,000–3,000元之間的供應商，應主攻「指定日滿1,500折100」時段，而非週末神券時段。
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>時間區間</th><th>廣告力道</th><th>建議操作</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nowrap">6/26–7/2</td>
+              <td><span class="pri pri-med-high">中高</span></td>
+              <td>主打高客單商品（滿15,000以上組合）</td>
+              <td>大額券剛開放，有購買意願的高客單消費者最積極</td>
+            </tr>
+            <tr>
+              <td class="nowrap">7/3–7/6<br><small>閃購券時段</small></td>
+              <td><span class="pri pri-med-high">中高</span></td>
+              <td><strong>12/15/20點前後加碼投放</strong></td>
+              <td>閃購券領完後消費者立刻找商品下單，廣告黃金時段</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="nowrap">7/7–7/8<br><small>77主題日</small></td>
+              <td><span class="pri pri-high">最高</span></td>
+              <td><strong>全力衝刺</strong>，中高客單主力商品</td>
+              <td>77神券主題感最強，全站氣氛熱，是整檔ROI最高兩天</td>
+            </tr>
+            <tr>
+              <td class="nowrap">週末整體</td>
+              <td><span class="pri pri-med-high">中高</span></td>
+              <td>週末比週一到週五 ROI 更高</td>
+              <td>三層神券並行，消費者集中週末清購物車</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 07 建議 -->
+    <div style="margin-bottom:28px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <span class="tag-07">APP 全新體驗</span> 週期性投放策略
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>時間區間</th><th>廣告力道</th><th>建議操作</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nowrap">7/10–7/19<br><small>首十日</small></td>
+              <td><span class="pri pri-med-high">中高</span></td>
+              <td>新品或首購商品主打，門檻低（2,500）</td>
+              <td>150神券是整檔最低門檻，容易帶動低決策商品量</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="nowrap">每週三<br><small>7/15, 7/22, 7/29, 8/5</small></td>
+              <td><span class="pri pri-med-high">中高</span></td>
+              <td><strong>固定加碼日，穩定週三預算</strong></td>
+              <td>平日唯一的500神券（滿5,000），消費者習慣把需求存到週三</td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="nowrap">每個週末</td>
+              <td><span class="pri pri-high">最高</span></td>
+              <td><strong>主力商品全力投放</strong></td>
+              <td>三層神券（100/600/1200）同時覆蓋高中低客單，週末ROI最好</td>
+            </tr>
+            <tr>
+              <td class="nowrap">7/20 起<br><small>閃購券啟動</small></td>
+              <td><span class="pri pri-high">最高</span></td>
+              <td><strong>7/20後廣告力道要比首十日更強</strong></td>
+              <td>閃購券是第二波刺激，消費者從此進入高度活躍狀態</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 四、全季預算分配 -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-title">四、全季廣告預算分配建議</div>
+
+    <div class="cards-2" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="card-label">預算優先序</div>
+        <div class="budget-list" style="margin-top:12px;">
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">618 正式期（6/12–6/18）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:100%;"></div></div>
+            <div class="budget-pct" style="color:var(--red);">最高</div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">77 主題日（7/7–7/8）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:82%;"></div></div>
+            <div class="budget-pct">次高</div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">07 週末（每個）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:72%;"></div></div>
+            <div class="budget-pct">高</div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">618 暖身（6/5–6/11）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:60%;"></div></div>
+            <div class="budget-pct">中高</div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">07 週三（每週）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:50%;"></div></div>
+            <div class="budget-pct">中</div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">618 返場（6/19–6/25）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill red" style="width:30%;"></div></div>
+            <div class="budget-pct">低</div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label" style="font-size:13px;">前導期（5/29–6/4）</div>
+            <div class="budget-bar-wrap"><div class="budget-bar-fill red" style="width:15%;"></div></div>
+            <div class="budget-pct">最低</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">商品客單價與最佳活動配對</div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <thead>
+              <tr><th>商品單價區間</th><th>最適合的活動／時機</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap"><strong>$999–$3,000</strong></td>
+                <td>618夜貓88折<br>07首十日150神券<br>07週末滿1,500折100</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>$3,000–$8,000</strong></td>
+                <td>618前導神券200<br>618暖身300神券<br>77指定日滿1,500折100</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>$8,000–$15,000</strong></td>
+                <td>618正式500神券<br>77週末600神券<br>07週末600神券</td>
+              </tr>
+              <tr>
+                <td class="nowrap"><strong>$15,000 以上</strong></td>
+                <td>618大額抵用券<br>77滿15,000折1,500<br>07週末1,200神券</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-success">
+      <strong>總結核心策略：</strong>618正式期（6/12–6/18）是全季最重要的廣告週，尤其6/18當天應集中所有預算。77好運節善用「週末+77主題日」雙峰結構。07檔建立週三/週末固定節奏，7/20後追加閃購券期間的投放力道。
+    </div>
+  </div>
+
+  <div class="callout callout-brand" style="font-size:13px;">
+    <strong>資料來源：</strong>Google Drive 全站活動辦法 PDF（6-1檔V3、6-2檔V1、07檔）｜
+    <strong>產出方式：</strong>Claude Code 讀取 Drive MCP → 活動機制解析 → HTML報表｜
+    <strong>產出日期：</strong>2026-06-03
+  </div>
+</div>
+
+<footer>全聯全電商內部分析用途 ｜ Claude Code 產出</footer>
+
+</body>
+</html>
