@@ -193,10 +193,12 @@ a{color:#13227f}
           <div class="card-title">月度營收趨勢</div>
           <div class="chart-wrap"><canvas id="chart-cbh"></canvas></div>
           <script>
+            const momPlugin={id:'mom',afterDatasetsDraw(chart){const ctx=chart.ctx;const ds=chart.data.datasets[0];const meta=chart.getDatasetMeta(0);meta.data.forEach((bar,i)=>{if(i===0||i===5)return;const prev=ds.data[i-1],curr=ds.data[i];if(!prev)return;const pct=((curr-prev)/prev*100).toFixed(1);const lbl=(pct>0?'+':'')+pct+'%';ctx.save();ctx.fillStyle=pct>0?'#388e3c':'#e53935';ctx.font='bold 11px "Noto Sans TC",sans-serif';ctx.textAlign='center';ctx.fillText(lbl,bar.x,bar.y-8);ctx.restore();});}};
             new Chart(document.getElementById('chart-cbh'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[2744994, 1710703, 3457533, 2964049, 3418847, 132646],backgroundColor:'#13227f22',borderColor:'#13227f',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin]
             });
           </script>
         </div>
@@ -218,217 +220,247 @@ a{color:#13227f}
           <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
         </div>
         <div style="overflow-x:auto">
-        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>月度趨勢 / 佔比</th></tr></thead>
+        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>廣告建議</th><th>月度趨勢 / 佔比</th></tr></thead>
         <tbody><tr>
               <td class="rank r1">1</td>
               <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml 2入組(航空版)</td>
               <td class="num">NT$2,474,830</td>
               <td class="num">1,028</td>
               <td class="num">NT$2,407</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="48" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">17.2%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$600,431</title></rect><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>2月: NT$239,553</title></rect><rect x="24" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>3月: NT$498,477</title></rect><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"><title>4月: NT$553,120</title></rect><rect x="48" y="1" width="11" height="19" fill="#13227fbb" rx="1"><title>5月: NT$574,472</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$8,777</title></rect></svg><span class="bar-pct">17.2%</span></div></td>
             </tr><tr>
               <td class="rank r2">2</td>
               <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml(航空版)</td>
               <td class="num">NT$740,859</td>
               <td class="num">638</td>
               <td class="num">NT$1,161</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">5.1%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>1月: NT$100,608</title></rect><rect x="12" y="16" width="11" height="4" fill="#13227fbb" rx="1"><title>2月: NT$63,745</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$255,724</title></rect><rect x="36" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>4月: NT$214,975</title></rect><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>5月: NT$102,345</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$3,462</title></rect></svg><span class="bar-pct">5.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">3</td>
               <td class="sku-name">【ESTEE LAUDER 雅詩蘭黛】特潤超導全方位修護露 100ml 小棕瓶 2入組(航空版)</td>
               <td class="num">NT$690,241</td>
               <td class="num">154</td>
               <td class="num">NT$4,482</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">4.8%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#13227fbb" rx="1"><title>1月: NT$107,146</title></rect><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>2月: NT$90,521</title></rect><rect x="24" y="5" width="11" height="15" fill="#13227fbb" rx="1"><title>3月: NT$168,125</title></rect><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>4月: NT$103,206</title></rect><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>5月: NT$211,867</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$9,376</title></rect></svg><span class="bar-pct">4.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">4</td>
               <td class="sku-name">【cle de peau BEAUTE 肌膚之鑰】光采無瑕妝前凝霜 37ml(航空版)</td>
               <td class="num">NT$609,389</td>
               <td class="num">592</td>
               <td class="num">NT$1,029</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="12" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">4.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#13227fbb" rx="1"><title>1月: NT$106,059</title></rect><rect x="12" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>2月: NT$77,382</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$171,524</title></rect><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>4月: NT$102,294</title></rect><rect x="48" y="3" width="11" height="17" fill="#13227fbb" rx="1"><title>5月: NT$148,129</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$4,000</title></rect></svg><span class="bar-pct">4.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">5</td>
               <td class="sku-name">【LA ROCHE-POSAY 理膚寶水】B5+全面修復霜100ml 2入組(航空版)</td>
               <td class="num">NT$487,189</td>
               <td class="num">561</td>
               <td class="num">NT$868</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">3.4%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$141,507</title></rect><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>2月: NT$51,648</title></rect><rect x="24" y="1" width="11" height="19" fill="#13227fbb" rx="1"><title>3月: NT$138,280</title></rect><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>4月: NT$81,421</title></rect><rect x="48" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>5月: NT$67,240</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$7,093</title></rect></svg><span class="bar-pct">3.4%</span></div></td>
             </tr><tr>
               <td class="rank r3">6</td>
               <td class="sku-name">【SISLEY 希思黎】全能乳液125ml 新版(航空版)</td>
               <td class="num">NT$454,078</td>
               <td class="num">156</td>
               <td class="num">NT$2,910</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">3.1%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$149,824</title></rect><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>2月: NT$60,542</title></rect><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"><title>3月: NT$127,709</title></rect><rect x="36" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>4月: NT$54,622</title></rect><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>5月: NT$61,381</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">3.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">7</td>
               <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml 4入組(航空版)</td>
               <td class="num">NT$416,678</td>
               <td class="num">87</td>
               <td class="num">NT$4,789</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.9%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>1月: NT$43,425</title></rect><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>2月: NT$41,260</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$122,157</title></rect><rect x="36" y="5" width="11" height="15" fill="#13227fbb" rx="1"><title>4月: NT$92,066</title></rect><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"><title>5月: NT$112,871</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$4,899</title></rect></svg><span class="bar-pct">2.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">8</td>
               <td class="sku-name">【SHISEIDO 資生堂】百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td>
               <td class="num">NT$325,902</td>
               <td class="num">133</td>
               <td class="num">NT$2,450</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="12" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="48" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.3%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>1月: NT$68,665</title></rect><rect x="12" y="6" width="11" height="14" fill="#13227fbb" rx="1"><title>2月: NT$58,931</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$82,427</title></rect><rect x="36" y="6" width="11" height="14" fill="#13227fbb" rx="1"><title>4月: NT$58,517</title></rect><rect x="48" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>5月: NT$57,362</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">2.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">9</td>
               <td class="sku-name">【LANCOME 蘭蔻】超極限肌因賦活露 115ml 2入組(航空版)</td>
               <td class="num">NT$305,540</td>
               <td class="num">54</td>
               <td class="num">NT$5,658</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"/><rect x="24" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.1%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$90,767</title></rect><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"><title>2月: NT$23,184</title></rect><rect x="24" y="8" width="11" height="12" fill="#13227fbb" rx="1"><title>3月: NT$55,277</title></rect><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>4月: NT$51,780</title></rect><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"><title>5月: NT$84,532</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">2.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">10</td>
               <td class="sku-name">【Diptyque】淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)</td>
               <td class="num">NT$295,222</td>
               <td class="num">75</td>
               <td class="num">NT$3,936</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="12" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>1月: NT$75,862</title></rect><rect x="12" y="5" width="11" height="15" fill="#13227fbb" rx="1"><title>2月: NT$84,108</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$109,690</title></rect><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>4月: NT$12,612</title></rect><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>5月: NT$8,660</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$4,290</title></rect></svg><span class="bar-pct">2.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">11</td>
               <td class="sku-name">【Elizabeth Arden】21天霜 75ml 3入組(航空版)</td>
               <td class="num">NT$289,896</td>
               <td class="num">288</td>
               <td class="num">NT$1,006</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="24" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">2.0%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$75,478</title></rect><rect x="12" y="8" width="11" height="12" fill="#13227fbb" rx="1"><title>2月: NT$47,639</title></rect><rect x="24" y="1" width="11" height="19" fill="#13227fbb" rx="1"><title>3月: NT$74,553</title></rect><rect x="36" y="5" width="11" height="15" fill="#13227fbb" rx="1"><title>4月: NT$57,025</title></rect><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>5月: NT$33,003</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$2,198</title></rect></svg><span class="bar-pct">2.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">12</td>
               <td class="sku-name">【CLINIQUE 倩碧】水磁場100H活水循環保濕凝膠 200ml(航空版)</td>
               <td class="num">NT$223,716</td>
               <td class="num">191</td>
               <td class="num">NT$1,171</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.6%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>1月: NT$41,967</title></rect><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>2月: NT$32,109</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$71,854</title></rect><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>4月: NT$33,567</title></rect><rect x="48" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>5月: NT$39,557</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$4,662</title></rect></svg><span class="bar-pct">1.6%</span></div></td>
             </tr><tr>
               <td class="rank r3">13</td>
               <td class="sku-name">【SHISEIDO 資生堂】紅妍山茶花修護精華 75ml 小紅瓶(航空版)</td>
               <td class="num">NT$217,949</td>
               <td class="num">157</td>
               <td class="num">NT$1,388</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="48" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.5%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>1月: NT$41,786</title></rect><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>2月: NT$20,750</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$62,444</title></rect><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"><title>4月: NT$58,782</title></rect><rect x="48" y="10" width="11" height="10" fill="#13227fbb" rx="1"><title>5月: NT$32,758</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,429</title></rect></svg><span class="bar-pct">1.5%</span></div></td>
             </tr><tr>
               <td class="rank r3">14</td>
               <td class="sku-name">【Kiehl's 契爾氏】激光極淨白淡斑精華 115ml(航空版)</td>
               <td class="num">NT$190,086</td>
               <td class="num">93</td>
               <td class="num">NT$2,043</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="17" width="11" height="3" fill="#13227fbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.3%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="17" width="11" height="3" fill="#13227fbb" rx="1"><title>1月: NT$12,832</title></rect><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"><title>2月: NT$19,176</title></rect><rect x="24" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>3月: NT$41,562</title></rect><rect x="36" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>4月: NT$42,193</title></rect><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>5月: NT$74,323</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">15</td>
               <td class="sku-name">【AVEDA 肯夢】純香/迷迭薄荷洗髮精 1000ml(多款任選 航空版)</td>
               <td class="num">NT$180,789</td>
               <td class="num">169</td>
               <td class="num">NT$1,069</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="48" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.3%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>1月: NT$52,464</title></rect><rect x="12" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>2月: NT$26,212</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$64,001</title></rect><rect x="36" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>4月: NT$22,744</title></rect><rect x="48" y="16" width="11" height="4" fill="#13227fbb" rx="1"><title>5月: NT$15,368</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">16</td>
               <td class="sku-name">【Avene 雅漾】舒護活泉水 300ml 6入組(航空版)</td>
               <td class="num">NT$166,289</td>
               <td class="num">137</td>
               <td class="num">NT$1,213</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="24" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>1月: NT$17,296</title></rect><rect x="12" y="10" width="11" height="10" fill="#13227fbb" rx="1"><title>2月: NT$28,216</title></rect><rect x="24" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>3月: NT$20,552</title></rect><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>4月: NT$54,548</title></rect><rect x="48" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>5月: NT$45,677</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">17</td>
               <td class="sku-name">【LA MER 海洋拉娜】經典乳霜 60ml 加贈7ml*5入(航空版)</td>
               <td class="num">NT$143,542</td>
               <td class="num">19</td>
               <td class="num">NT$7,554</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="36" y="1" width="11" height="19" fill="#13227fbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$53,173</title></rect><rect x="12" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>2月: NT$7,611</title></rect><rect x="24" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>3月: NT$29,628</title></rect><rect x="36" y="1" width="11" height="19" fill="#13227fbb" rx="1"><title>4月: NT$53,130</title></rect><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">18</td>
               <td class="sku-name">【Avene 雅漾】舒護活泉水 300ml 四入組(航空版)</td>
               <td class="num">NT$132,602</td>
               <td class="num">157</td>
               <td class="num">NT$844</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"/><rect x="24" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="36" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>1月: NT$20,976</title></rect><rect x="12" y="15" width="11" height="5" fill="#13227fbb" rx="1"><title>2月: NT$12,146</title></rect><rect x="24" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>3月: NT$17,745</title></rect><rect x="36" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>4月: NT$35,023</title></rect><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>5月: NT$42,317</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$4,395</title></rect></svg><span class="bar-pct">0.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">19</td>
               <td class="sku-name">【GIORGIO ARMANI 亞曼尼】高級訂製淡香水花園 100ml (香格里拉茶園/東洋茉莉/蘇州牡丹)(…</td>
               <td class="num">NT$130,851</td>
               <td class="num">34</td>
               <td class="num">NT$3,848</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#13227fbb" rx="1"/><rect x="24" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>1月: NT$23,194</title></rect><rect x="12" y="17" width="11" height="3" fill="#13227fbb" rx="1"><title>2月: NT$7,698</title></rect><rect x="24" y="10" width="11" height="10" fill="#13227fbb" rx="1"><title>3月: NT$25,918</title></rect><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>4月: NT$23,494</title></rect><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>5月: NT$50,547</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">20</td>
               <td class="sku-name">【ESTEE LAUDER 雅詩蘭黛】粉持久完美持妝粉底 30ml(多款任選 航空版)</td>
               <td class="num">NT$123,176</td>
               <td class="num">119</td>
               <td class="num">NT$1,035</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>1月: NT$17,606</title></rect><rect x="12" y="17" width="11" height="3" fill="#13227fbb" rx="1"><title>2月: NT$8,164</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$50,344</title></rect><rect x="36" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>4月: NT$24,084</title></rect><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>5月: NT$20,580</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$2,398</title></rect></svg><span class="bar-pct">0.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">21</td>
               <td class="sku-name">【SHISEIDO 資生堂】紅妍山茶花修護精華 75ml 2入組 小紅瓶(航空版)</td>
               <td class="num">NT$122,574</td>
               <td class="num">44</td>
               <td class="num">NT$2,785</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="8" width="11" height="12" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>3月: NT$5,720</title></rect><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>4月: NT$71,993</title></rect><rect x="48" y="8" width="11" height="12" fill="#13227fbb" rx="1"><title>5月: NT$44,861</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">22</td>
               <td class="sku-name">【LANCOME 蘭蔻】零粉感超持久粉底 30ml 新版(航空版)</td>
               <td class="num">NT$121,061</td>
               <td class="num">111</td>
               <td class="num">NT$1,090</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="36" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="3" width="11" height="17" fill="#13227fbb" rx="1"><title>1月: NT$32,256</title></rect><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>2月: NT$14,034</title></rect><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>3月: NT$24,546</title></rect><rect x="36" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>4月: NT$11,451</title></rect><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>5月: NT$37,524</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,250</title></rect></svg><span class="bar-pct">0.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">23</td>
               <td class="sku-name">【LA ROCHE-POSAY 理膚寶水】B5+全面修復霜100ml 6入組(航空版)</td>
               <td class="num">NT$117,816</td>
               <td class="num">45</td>
               <td class="num">NT$2,618</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="12" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>1月: NT$17,704</title></rect><rect x="12" y="3" width="11" height="17" fill="#13227fbb" rx="1"><title>2月: NT$23,203</title></rect><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"><title>3月: NT$23,225</title></rect><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>4月: NT$26,271</title></rect><rect x="48" y="2" width="11" height="18" fill="#13227fbb" rx="1"><title>5月: NT$24,633</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$2,780</title></rect></svg><span class="bar-pct">0.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">24</td>
               <td class="sku-name">【Diptyque】淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td>
               <td class="num">NT$111,189</td>
               <td class="num">25</td>
               <td class="num">NT$4,447</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>1月: NT$13,497</title></rect><rect x="12" y="16" width="11" height="4" fill="#13227fbb" rx="1"><title>2月: NT$9,098</title></rect><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>3月: NT$30,765</title></rect><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>4月: NT$44,402</title></rect><rect x="48" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>5月: NT$13,427</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">25</td>
               <td class="sku-name">【YSL】超模光感精華水氣墊 12g(多款任選 航空版)</td>
               <td class="num">NT$102,933</td>
               <td class="num">59</td>
               <td class="num">NT$1,744</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="12" y="4" width="11" height="16" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>1月: NT$12,335</title></rect><rect x="12" y="4" width="11" height="16" fill="#13227fbb" rx="1"><title>2月: NT$22,898</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$28,024</title></rect><rect x="36" y="2" width="11" height="18" fill="#13227fbb" rx="1"><title>4月: NT$25,666</title></rect><rect x="48" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>5月: NT$12,235</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,775</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">26</td>
               <td class="sku-name">【CHANEL 香奈兒】超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td>
               <td class="num">NT$101,919</td>
               <td class="num">71</td>
               <td class="num">NT$1,435</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="12" y="5" width="11" height="15" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#13227fbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>1月: NT$12,991</title></rect><rect x="12" y="5" width="11" height="15" fill="#13227fbb" rx="1"><title>2月: NT$28,477</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$35,720</title></rect><rect x="36" y="10" width="11" height="10" fill="#13227fbb" rx="1"><title>4月: NT$18,883</title></rect><rect x="48" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>5月: NT$4,249</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,599</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">27</td>
               <td class="sku-name">【AVEDA 肯夢】蘊活煥欣洗髮精 1000ml(航空版)</td>
               <td class="num">NT$100,960</td>
               <td class="num">40</td>
               <td class="num">NT$2,524</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="48" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>1月: NT$42,441</title></rect><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>2月: NT$15,218</title></rect><rect x="24" y="7" width="11" height="13" fill="#13227fbb" rx="1"><title>3月: NT$27,794</title></rect><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>4月: NT$5,198</title></rect><rect x="48" y="16" width="11" height="4" fill="#13227fbb" rx="1"><title>5月: NT$10,309</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">28</td>
               <td class="sku-name">【Elizabeth Arden】 21天霜 75ml 2入組(航空版)</td>
               <td class="num">NT$100,328</td>
               <td class="num">139</td>
               <td class="num">NT$721</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#13227fbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#13227fbb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#13227fbb" rx="1"><title>1月: NT$17,085</title></rect><rect x="12" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>2月: NT$12,659</title></rect><rect x="24" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>3月: NT$41,222</title></rect><rect x="36" y="16" width="11" height="4" fill="#13227fbb" rx="1"><title>4月: NT$9,248</title></rect><rect x="48" y="11" width="11" height="9" fill="#13227fbb" rx="1"><title>5月: NT$19,264</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$850</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">29</td>
               <td class="sku-name">【AVEDA 肯夢】蘊活煥欣豐盈菁華 150ml(航空版)</td>
               <td class="num">NT$98,495</td>
               <td class="num">73</td>
               <td class="num">NT$1,349</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="9" width="11" height="11" fill="#13227fbb" rx="1"/><rect x="12" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="24" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="9" width="11" height="11" fill="#13227fbb" rx="1"><title>1月: NT$19,036</title></rect><rect x="12" y="6" width="11" height="14" fill="#13227fbb" rx="1"><title>2月: NT$24,602</title></rect><rect x="24" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>3月: NT$10,882</title></rect><rect x="36" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>4月: NT$32,975</title></rect><rect x="48" y="14" width="11" height="6" fill="#13227fbb" rx="1"><title>5月: NT$11,000</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">30</td>
               <td class="sku-name">【Guerlain 嬌蘭】皇家蜂王乳平衡油精華 50ml(航空版)</td>
               <td class="num">NT$92,106</td>
               <td class="num">42</td>
               <td class="num">NT$2,193</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="6" width="11" height="14" fill="#13227fbb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#13227fbb" rx="1"/></svg><span class="bar-pct">0.6%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="6" width="11" height="14" fill="#13227fbb" rx="1"><title>1月: NT$21,971</title></rect><rect x="12" y="13" width="11" height="7" fill="#13227fbb" rx="1"><title>2月: NT$11,260</title></rect><rect x="24" y="3" width="11" height="17" fill="#13227fbb" rx="1"><title>3月: NT$26,472</title></rect><rect x="36" y="18" width="11" height="2" fill="#13227fbb" rx="1"><title>4月: NT$2,150</title></rect><rect x="48" y="0" width="11" height="20" fill="#13227fbb" rx="1"><title>5月: NT$30,253</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.6%</span></div></td>
             </tr></tbody></table>
         </div>
         <p class="note">月度趨勢：每格代表一個月（1月→6月），高度代表當月相對銷售量</p>
@@ -502,7 +534,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-gsj'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[1954035, 1521395, 3894310, 2764906, 2004293, 88179],backgroundColor:'#e4001122',borderColor:'#e40011',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin]
             });
           </script>
         </div>
@@ -524,217 +557,247 @@ a{color:#13227f}
           <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
         </div>
         <div style="overflow-x:auto">
-        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>月度趨勢 / 佔比</th></tr></thead>
+        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>廣告建議</th><th>月度趨勢 / 佔比</th></tr></thead>
         <tbody><tr>
               <td class="rank r1">1</td>
               <td class="sku-name">【CONSOFY】3層抽取衛生紙 (120抽x24包x3串)</td>
               <td class="num">NT$4,173,912</td>
               <td class="num">4,577</td>
               <td class="num">NT$911</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#e40011bb" rx="1"/><rect x="12" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">34.1%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#e40011bb" rx="1"><title>1月: NT$734,962</title></rect><rect x="12" y="11" width="11" height="9" fill="#e40011bb" rx="1"><title>2月: NT$566,250</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$1,172,242</title></rect><rect x="36" y="2" width="11" height="18" fill="#e40011bb" rx="1"><title>4月: NT$1,098,678</title></rect><rect x="48" y="11" width="11" height="9" fill="#e40011bb" rx="1"><title>5月: NT$581,764</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$20,016</title></rect></svg><span class="bar-pct">34.1%</span></div></td>
             </tr><tr>
               <td class="rank r2">2</td>
               <td class="sku-name">【倍潔雅】柔軟舒適抽取式衛生紙(110抽x12包x8串)</td>
               <td class="num">NT$1,916,631</td>
               <td class="num">2,926</td>
               <td class="num">NT$655</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">15.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>1月: NT$294,326</title></rect><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>2月: NT$263,435</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$682,808</title></rect><rect x="36" y="9" width="11" height="11" fill="#e40011bb" rx="1"><title>4月: NT$394,959</title></rect><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>5月: NT$274,768</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$6,335</title></rect></svg><span class="bar-pct">15.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">3</td>
               <td class="sku-name">【柔芙】優質抽取式衛生紙(100抽x10包x10串)</td>
               <td class="num">NT$1,393,670</td>
               <td class="num">2,104</td>
               <td class="num">NT$662</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">11.4%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>1月: NT$180,833</title></rect><rect x="12" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>2月: NT$133,592</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$534,133</title></rect><rect x="36" y="7" width="11" height="13" fill="#e40011bb" rx="1"><title>4月: NT$373,261</title></rect><rect x="48" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>5月: NT$166,371</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$5,480</title></rect></svg><span class="bar-pct">11.4%</span></div></td>
             </tr><tr>
               <td class="rank r3">4</td>
               <td class="sku-name">【怡柔】3層抽取式衛生紙(100抽x12包x8串)</td>
               <td class="num">NT$1,213,378</td>
               <td class="num">1,173</td>
               <td class="num">NT$1,034</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">9.9%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>1月: NT$187,250</title></rect><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>2月: NT$162,589</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$456,177</title></rect><rect x="36" y="11" width="11" height="9" fill="#e40011bb" rx="1"><title>4月: NT$225,143</title></rect><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>5月: NT$170,281</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$11,938</title></rect></svg><span class="bar-pct">9.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">5</td>
               <td class="sku-name">【柔芙】輕巧包抽取式衛生紙 (120抽x20包x6串)</td>
               <td class="num">NT$683,393</td>
               <td class="num">865</td>
               <td class="num">NT$790</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="12" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="48" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">5.6%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="3" width="11" height="17" fill="#e40011bb" rx="1"><title>1月: NT$146,615</title></rect><rect x="12" y="9" width="11" height="11" fill="#e40011bb" rx="1"><title>2月: NT$96,081</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$171,796</title></rect><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"><title>4月: NT$131,475</title></rect><rect x="48" y="5" width="11" height="15" fill="#e40011bb" rx="1"><title>5月: NT$131,168</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$6,258</title></rect></svg><span class="bar-pct">5.6%</span></div></td>
             </tr><tr>
               <td class="rank r3">6</td>
               <td class="sku-name">【CONSOFY】2層抽取衛生紙(150抽x24包x3串)</td>
               <td class="num">NT$551,887</td>
               <td class="num">747</td>
               <td class="num">NT$738</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="48" y="4" width="11" height="16" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">4.5%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: NT$8,387</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$207,144</title></rect><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"><title>4月: NT$152,392</title></rect><rect x="48" y="4" width="11" height="16" fill="#e40011bb" rx="1"><title>5月: NT$170,782</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$13,182</title></rect></svg><span class="bar-pct">4.5%</span></div></td>
             </tr><tr>
               <td class="rank r3">7</td>
               <td class="sku-name">【CONSOFY】3層抽取衛生紙(120抽*24包)</td>
               <td class="num">NT$407,347</td>
               <td class="num">1,321</td>
               <td class="num">NT$308</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">3.3%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>1月: NT$60,866</title></rect><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>2月: NT$53,783</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$158,872</title></rect><rect x="36" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>4月: NT$82,081</title></rect><rect x="48" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>5月: NT$48,319</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$3,426</title></rect></svg><span class="bar-pct">3.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">8</td>
               <td class="sku-name">【倍潔雅】好韌真Pro 3層抽取式衛生紙 (100抽x10包x10串)</td>
               <td class="num">NT$382,435</td>
               <td class="num">363</td>
               <td class="num">NT$1,053</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="48" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">3.1%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>1月: NT$75,907</title></rect><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>2月: NT$53,670</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$143,445</title></rect><rect x="36" y="11" width="11" height="9" fill="#e40011bb" rx="1"><title>4月: NT$69,880</title></rect><rect x="48" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>5月: NT$38,462</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,071</title></rect></svg><span class="bar-pct">3.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">9</td>
               <td class="sku-name">【唯潔雅】潔淨柔感抽取式衛生紙(140抽x10包x8串)</td>
               <td class="num">NT$321,641</td>
               <td class="num">378</td>
               <td class="num">NT$850</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="48" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">2.6%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="5" width="11" height="15" fill="#e40011bb" rx="1"><title>1月: NT$75,343</title></rect><rect x="12" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>2月: NT$54,344</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$99,178</title></rect><rect x="36" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>4月: NT$39,972</title></rect><rect x="48" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>5月: NT$50,315</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$2,489</title></rect></svg><span class="bar-pct">2.6%</span></div></td>
             </tr><tr>
               <td class="rank r3">10</td>
               <td class="sku-name">【PASEO】3層柔韌舒適抽取式衛生紙 (100抽x10包x6串)</td>
               <td class="num">NT$113,229</td>
               <td class="num">148</td>
               <td class="num">NT$765</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="12" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="48" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>1月: NT$12,745</title></rect><rect x="12" y="7" width="11" height="13" fill="#e40011bb" rx="1"><title>2月: NT$21,456</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$32,732</title></rect><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"><title>4月: NT$26,184</title></rect><rect x="48" y="9" width="11" height="11" fill="#e40011bb" rx="1"><title>5月: NT$18,442</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,670</title></rect></svg><span class="bar-pct">0.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">11</td>
               <td class="sku-name">【倍潔雅】好韌真Pro三層抽取式衛生紙(100抽*24包)</td>
               <td class="num">NT$93,043</td>
               <td class="num">352</td>
               <td class="num">NT$264</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="48" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>1月: NT$11,154</title></rect><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>2月: NT$10,830</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$33,930</title></rect><rect x="36" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>4月: NT$12,948</title></rect><rect x="48" y="7" width="11" height="13" fill="#e40011bb" rx="1"><title>5月: NT$23,567</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$614</title></rect></svg><span class="bar-pct">0.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">12</td>
               <td class="sku-name">【柔芙】輕巧包抽取式衛生紙(120抽*20包)</td>
               <td class="num">NT$81,921</td>
               <td class="num">545</td>
               <td class="num">NT$150</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#e40011bb" rx="1"/><rect x="48" y="17" width="11" height="3" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>1月: NT$13,822</title></rect><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>2月: NT$13,077</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$38,390</title></rect><rect x="36" y="16" width="11" height="4" fill="#e40011bb" rx="1"><title>4月: NT$9,433</title></rect><rect x="48" y="17" width="11" height="3" fill="#e40011bb" rx="1"><title>5月: NT$7,030</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$169</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">13</td>
               <td class="sku-name">【倍潔雅】純淨柔感抽取式衛生紙(150抽X10包X6袋)</td>
               <td class="num">NT$80,902</td>
               <td class="num">141</td>
               <td class="num">NT$573</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>3月: -</title></rect><rect x="36" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>4月: NT$18,791</title></rect><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>5月: NT$57,753</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$4,358</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">14</td>
               <td class="sku-name">【倍潔雅】蝶舞輕柔抽取式衛生紙(120抽x10包x8串)</td>
               <td class="num">NT$78,339</td>
               <td class="num">110</td>
               <td class="num">NT$712</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.6%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>1月: NT$29,556</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: NT$3,507</title></rect><rect x="24" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>3月: NT$8,819</title></rect><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>4月: NT$8,156</title></rect><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"><title>5月: NT$26,899</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,402</title></rect></svg><span class="bar-pct">0.6%</span></div></td>
             </tr><tr>
               <td class="rank r3">15</td>
               <td class="sku-name">【柔芙】便利抽抽取式廚房紙巾 (100抽x3包x10袋)</td>
               <td class="num">NT$66,702</td>
               <td class="num">111</td>
               <td class="num">NT$600</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="24" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="36" y="1" width="11" height="19" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>1月: NT$15,922</title></rect><rect x="12" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>2月: NT$8,587</title></rect><rect x="24" y="5" width="11" height="15" fill="#e40011bb" rx="1"><title>3月: NT$12,161</title></rect><rect x="36" y="1" width="11" height="19" fill="#e40011bb" rx="1"><title>4月: NT$15,503</title></rect><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"><title>5月: NT$14,529</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.5%</span></div></td>
             </tr><tr>
               <td class="rank r3">16</td>
               <td class="sku-name">【倍潔雅】好韌真3層抽取衛生紙 PEFC (100抽X24包X4袋)</td>
               <td class="num">NT$65,291</td>
               <td class="num">68</td>
               <td class="num">NT$960</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>3月: -</title></rect><rect x="36" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>4月: NT$21,747</title></rect><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>5月: NT$40,445</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$3,099</title></rect></svg><span class="bar-pct">0.5%</span></div></td>
             </tr><tr>
               <td class="rank r3">17</td>
               <td class="sku-name">【唯潔雅】萬用抽取衛生紙(120抽*30包)</td>
               <td class="num">NT$63,234</td>
               <td class="num">261</td>
               <td class="num">NT$242</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="1" width="11" height="19" fill="#e40011bb" rx="1"/><rect x="12" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="1" width="11" height="19" fill="#e40011bb" rx="1"><title>1月: NT$14,737</title></rect><rect x="12" y="9" width="11" height="11" fill="#e40011bb" rx="1"><title>2月: NT$8,352</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$14,998</title></rect><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"><title>4月: NT$10,916</title></rect><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"><title>5月: NT$14,006</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$225</title></rect></svg><span class="bar-pct">0.5%</span></div></td>
             </tr><tr>
               <td class="rank r3">18</td>
               <td class="sku-name">【CONSOFY】二層抽取衛生紙(150抽*24包)</td>
               <td class="num">NT$56,668</td>
               <td class="num">218</td>
               <td class="num">NT$259</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.5%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>2月: NT$11,986</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$28,260</title></rect><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>4月: NT$4,196</title></rect><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>5月: NT$12,226</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.5%</span></div></td>
             </tr><tr>
               <td class="rank r3">19</td>
               <td class="sku-name">【倍潔雅】抽取式衛生紙(150抽*14包)</td>
               <td class="num">NT$48,818</td>
               <td class="num">284</td>
               <td class="num">NT$171</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#e40011bb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="48" y="9" width="11" height="11" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.4%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="7" width="11" height="13" fill="#e40011bb" rx="1"><title>1月: NT$10,798</title></rect><rect x="12" y="16" width="11" height="4" fill="#e40011bb" rx="1"><title>2月: NT$3,780</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$15,708</title></rect><rect x="36" y="9" width="11" height="11" fill="#e40011bb" rx="1"><title>4月: NT$8,963</title></rect><rect x="48" y="9" width="11" height="11" fill="#e40011bb" rx="1"><title>5月: NT$8,809</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$760</title></rect></svg><span class="bar-pct">0.4%</span></div></td>
             </tr><tr>
               <td class="rank r3">20</td>
               <td class="sku-name">【Livi 優活】抽取式衛生紙 PEFC(150抽X10包X8袋)</td>
               <td class="num">NT$42,699</td>
               <td class="num">56</td>
               <td class="num">NT$762</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.3%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>3月: -</title></rect><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>4月: NT$8,209</title></rect><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>5月: NT$32,812</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$1,678</title></rect></svg><span class="bar-pct">0.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">21</td>
               <td class="sku-name">【唯潔雅】唯潔雅抽取式衛生紙100抽24包(.)</td>
               <td class="num">NT$39,243</td>
               <td class="num">204</td>
               <td class="num">NT$192</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.3%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>1月: NT$31,130</title></rect><rect x="12" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>2月: NT$8,113</title></rect><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>4月: -</title></rect><rect x="48" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">22</td>
               <td class="sku-name">【倍潔雅】強效吸油料理捲筒式廚房紙巾-萬用尺寸(120組x6捲x8袋)</td>
               <td class="num">NT$31,199</td>
               <td class="num">51</td>
               <td class="num">NT$611</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.3%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: NT$1,210</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$17,818</title></rect><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>4月: NT$4,466</title></rect><rect x="48" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>5月: NT$7,705</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">23</td>
               <td class="sku-name">【倍潔雅】袖珍包面紙 (10抽x36包x24組)</td>
               <td class="num">NT$30,543</td>
               <td class="num">26</td>
               <td class="num">NT$1,174</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: NT$1,111</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: NT$1,236</title></rect><rect x="24" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>3月: NT$6,032</title></rect><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>4月: NT$2,294</title></rect><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>5月: NT$19,870</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">24</td>
               <td class="sku-name">【PASEO】三層柔韌舒適抽取式衛生紙(100抽*24包)</td>
               <td class="num">NT$24,973</td>
               <td class="num">83</td>
               <td class="num">NT$300</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>1月: NT$6,206</title></rect><rect x="12" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>2月: NT$2,503</title></rect><rect x="24" y="3" width="11" height="17" fill="#e40011bb" rx="1"><title>3月: NT$5,552</title></rect><rect x="36" y="6" width="11" height="14" fill="#e40011bb" rx="1"><title>4月: NT$4,631</title></rect><rect x="48" y="2" width="11" height="18" fill="#e40011bb" rx="1"><title>5月: NT$5,812</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$269</title></rect></svg><span class="bar-pct">0.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">25</td>
               <td class="sku-name">【綺朵】抽取式衛生紙(140抽*28包)</td>
               <td class="num">NT$23,637</td>
               <td class="num">96</td>
               <td class="num">NT$246</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#e40011bb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#e40011bb" rx="1"/><rect x="48" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="11" height="16" fill="#e40011bb" rx="1"><title>1月: NT$7,253</title></rect><rect x="12" y="14" width="11" height="6" fill="#e40011bb" rx="1"><title>2月: NT$2,993</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$8,918</title></rect><rect x="36" y="16" width="11" height="4" fill="#e40011bb" rx="1"><title>4月: NT$2,194</title></rect><rect x="48" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>5月: NT$2,279</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">26</td>
               <td class="sku-name">【倍潔雅】強效吸油料理廚房紙巾-大尺寸 (90組x4捲x6串)</td>
               <td class="num">NT$22,270</td>
               <td class="num">46</td>
               <td class="num">NT$484</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="12" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>1月: NT$2,579</title></rect><rect x="12" y="11" width="11" height="9" fill="#e40011bb" rx="1"><title>2月: NT$2,882</title></rect><rect x="24" y="3" width="11" height="17" fill="#e40011bb" rx="1"><title>3月: NT$5,535</title></rect><rect x="36" y="5" width="11" height="15" fill="#e40011bb" rx="1"><title>4月: NT$4,929</title></rect><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>5月: NT$6,345</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">27</td>
               <td class="sku-name">【怡柔】3層抽取式衛生紙(100抽*12包)</td>
               <td class="num">NT$19,027</td>
               <td class="num">129</td>
               <td class="num">NT$147</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#e40011bb" rx="1"/><rect x="12" y="6" width="11" height="14" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"/><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="11" height="9" fill="#e40011bb" rx="1"><title>1月: NT$3,005</title></rect><rect x="12" y="6" width="11" height="14" fill="#e40011bb" rx="1"><title>2月: NT$4,985</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$6,674</title></rect><rect x="36" y="15" width="11" height="5" fill="#e40011bb" rx="1"><title>4月: NT$1,873</title></rect><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>5月: NT$2,490</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">28</td>
               <td class="sku-name">【Hello】日式手感擦臉紙巾 (180張x3包x6袋)</td>
               <td class="num">NT$16,671</td>
               <td class="num">27</td>
               <td class="num">NT$617</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#e40011bb" rx="1"/><rect x="12" y="4" width="11" height="16" fill="#e40011bb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="36" y="3" width="11" height="17" fill="#e40011bb" rx="1"/><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.1%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#e40011bb" rx="1"><title>1月: NT$2,495</title></rect><rect x="12" y="4" width="11" height="16" fill="#e40011bb" rx="1"><title>2月: NT$3,873</title></rect><rect x="24" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>3月: NT$4,557</title></rect><rect x="36" y="3" width="11" height="17" fill="#e40011bb" rx="1"><title>4月: NT$3,942</title></rect><rect x="48" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>5月: NT$1,804</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">29</td>
               <td class="sku-name">【倍潔雅】柔拭萬用紙巾 PEFC(120抽X20包X4袋)</td>
               <td class="num">NT$14,884</td>
               <td class="num">24</td>
               <td class="num">NT$620</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="12" width="11" height="8" fill="#e40011bb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.1%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>3月: -</title></rect><rect x="36" y="12" width="11" height="8" fill="#e40011bb" rx="1"><title>4月: NT$4,319</title></rect><rect x="48" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>5月: NT$10,565</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">30</td>
               <td class="sku-name">【倍潔雅】倍潔雅抽取式衛生紙100抽24包(.)</td>
               <td class="num">NT$14,765</td>
               <td class="num">73</td>
               <td class="num">NT$202</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"/><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#e40011bb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#e40011bb" rx="1"/></svg><span class="bar-pct">0.1%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#e40011bb" rx="1"><title>1月: NT$10,603</title></rect><rect x="12" y="13" width="11" height="7" fill="#e40011bb" rx="1"><title>2月: NT$4,162</title></rect><rect x="24" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>4月: -</title></rect><rect x="48" y="18" width="11" height="2" fill="#e40011bb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.1%</span></div></td>
             </tr></tbody></table>
         </div>
         <p class="note">月度趨勢：每格代表一個月（1月→6月），高度代表當月相對銷售量</p>
@@ -801,7 +864,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-yfl'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[426454, 153356, 332314, 479212, 751105, 41142],backgroundColor:'#388e3c22',borderColor:'#388e3c',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin]
             });
           </script>
         </div>
@@ -823,217 +887,247 @@ a{color:#13227f}
           <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
         </div>
         <div style="overflow-x:auto">
-        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>月度趨勢 / 佔比</th></tr></thead>
+        <table class="data-table"><thead><tr><th>#</th><th>商品名稱</th><th>單品總金額</th><th>銷售數量</th><th>均客單</th><th>廣告建議</th><th>月度趨勢 / 佔比</th></tr></thead>
         <tbody><tr>
               <td class="rank r1">1</td>
               <td class="sku-name">【飲后】超孅飲-奇異果風味6盒(15包/盒)</td>
               <td class="num">NT$327,244</td>
               <td class="num">118</td>
               <td class="num">NT$2,773</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">15.0%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>4月: NT$84,792</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$233,898</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$8,554</title></rect></svg><span class="bar-pct">15.0%</span></div></td>
             </tr><tr>
               <td class="rank r2">2</td>
               <td class="sku-name">【亞馬生醫】MPE-311靈活粒現5盒(30顆/盒)</td>
               <td class="num">NT$246,850</td>
               <td class="num">70</td>
               <td class="num">NT$3,526</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#388e3cbb" rx="1"/><rect x="24" y="4" width="11" height="16" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">11.3%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>1月: NT$32,057</title></rect><rect x="12" y="17" width="11" height="3" fill="#388e3cbb" rx="1"><title>2月: NT$14,520</title></rect><rect x="24" y="4" width="11" height="16" fill="#388e3cbb" rx="1"><title>3月: NT$70,486</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$86,250</title></rect><rect x="48" y="11" width="11" height="9" fill="#388e3cbb" rx="1"><title>5月: NT$40,219</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$3,318</title></rect></svg><span class="bar-pct">11.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">3</td>
               <td class="sku-name">【PP 石墨烯】石墨烯羊駝絨超導被(NASA聯名)2入(陳美鳳代言推薦)</td>
               <td class="num">NT$158,126</td>
               <td class="num">11</td>
               <td class="num">NT$14,375</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">7.2%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>1月: NT$130,978</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: NT$13,740</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: NT$13,408</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">7.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">4</td>
               <td class="sku-name">【PP 石墨烯】第四代石墨烯能量護膝2雙(3D立體包覆 穩定支撐)</td>
               <td class="num">NT$117,027</td>
               <td class="num">33</td>
               <td class="num">NT$3,546</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#388e3cbb" rx="1"/><rect x="12" y="14" width="11" height="6" fill="#388e3cbb" rx="1"/><rect x="24" y="3" width="11" height="17" fill="#388e3cbb" rx="1"/><rect x="36" y="1" width="11" height="19" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">5.4%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="14" width="11" height="6" fill="#388e3cbb" rx="1"><title>1月: NT$10,489</title></rect><rect x="12" y="14" width="11" height="6" fill="#388e3cbb" rx="1"><title>2月: NT$11,056</title></rect><rect x="24" y="3" width="11" height="17" fill="#388e3cbb" rx="1"><title>3月: NT$28,017</title></rect><rect x="36" y="1" width="11" height="19" fill="#388e3cbb" rx="1"><title>4月: NT$31,732</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$32,315</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$3,418</title></rect></svg><span class="bar-pct">5.4%</span></div></td>
             </tr><tr>
               <td class="rank r3">5</td>
               <td class="sku-name">【PP 石墨烯】石墨烯蠶絲助眠眼罩2件(天然蠶絲呵護眼周)</td>
               <td class="num">NT$104,005</td>
               <td class="num">39</td>
               <td class="num">NT$2,666</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="16" width="11" height="4" fill="#388e3cbb" rx="1"/><rect x="12" y="16" width="11" height="4" fill="#388e3cbb" rx="1"/><rect x="24" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="36" y="14" width="11" height="6" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">4.8%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="16" width="11" height="4" fill="#388e3cbb" rx="1"><title>1月: NT$11,189</title></rect><rect x="12" y="16" width="11" height="4" fill="#388e3cbb" rx="1"><title>2月: NT$11,100</title></rect><rect x="24" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>3月: NT$18,286</title></rect><rect x="36" y="14" width="11" height="6" fill="#388e3cbb" rx="1"><title>4月: NT$15,537</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$47,893</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">4.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">6</td>
               <td class="sku-name">【LARGAN 大立美】攝守立克5盒_大立光集團所屬(30顆/盒)</td>
               <td class="num">NT$94,799</td>
               <td class="num">27</td>
               <td class="num">NT$3,511</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#388e3cbb" rx="1"/><rect x="36" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="48" y="11" width="11" height="9" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">4.3%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>1月: NT$37,453</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: NT$3,188</title></rect><rect x="24" y="9" width="11" height="11" fill="#388e3cbb" rx="1"><title>3月: NT$21,044</title></rect><rect x="36" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>4月: NT$14,418</title></rect><rect x="48" y="11" width="11" height="9" fill="#388e3cbb" rx="1"><title>5月: NT$18,696</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">4.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">7</td>
               <td class="sku-name">【PP 石墨烯】石墨烯粒線能量修復護腕2入(護手腕 媽媽手 滑鼠手)</td>
               <td class="num">NT$71,016</td>
               <td class="num">37</td>
               <td class="num">NT$1,919</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#388e3cbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">3.3%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#388e3cbb" rx="1"><title>1月: NT$22,366</title></rect><rect x="12" y="17" width="11" height="3" fill="#388e3cbb" rx="1"><title>2月: NT$5,882</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: NT$4,260</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: NT$3,460</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$35,048</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">3.3%</span></div></td>
             </tr><tr>
               <td class="rank r3">8</td>
               <td class="sku-name">【LARGAN 大立美】關健立克5盒_大立光集團所屬(30顆/盒)</td>
               <td class="num">NT$69,973</td>
               <td class="num">20</td>
               <td class="num">NT$3,498</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#388e3cbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#388e3cbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="36" y="9" width="11" height="11" fill="#388e3cbb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#388e3cbb" rx="1"/><rect x="60" y="15" width="11" height="5" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">3.2%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="11" height="8" fill="#388e3cbb" rx="1"><title>1月: NT$10,216</title></rect><rect x="12" y="15" width="11" height="5" fill="#388e3cbb" rx="1"><title>2月: NT$7,126</title></rect><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>3月: NT$24,084</title></rect><rect x="36" y="9" width="11" height="11" fill="#388e3cbb" rx="1"><title>4月: NT$14,163</title></rect><rect x="48" y="14" width="11" height="6" fill="#388e3cbb" rx="1"><title>5月: NT$7,348</title></rect><rect x="60" y="15" width="11" height="5" fill="#c8c8c8" rx="1"><title>6月: NT$7,036</title></rect></svg><span class="bar-pct">3.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">9</td>
               <td class="sku-name">【LARGAN 大立美】晶亮立克5盒_大立光集團所屬(30顆/盒)</td>
               <td class="num">NT$65,914</td>
               <td class="num">19</td>
               <td class="num">NT$3,469</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#388e3cbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="36" y="7" width="11" height="13" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">3.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>1月: NT$9,876</title></rect><rect x="12" y="15" width="11" height="5" fill="#388e3cbb" rx="1"><title>2月: NT$7,103</title></rect><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>3月: NT$26,940</title></rect><rect x="36" y="7" width="11" height="13" fill="#388e3cbb" rx="1"><title>4月: NT$18,307</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: NT$3,688</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">3.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">10</td>
               <td class="sku-name">【iVENOR】兆物主-元神錠6盒(30粒/盒)</td>
               <td class="num">NT$65,875</td>
               <td class="num">19</td>
               <td class="num">NT$3,467</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="7" width="11" height="13" fill="#388e3cbb" rx="1"/><rect x="24" y="7" width="11" height="13" fill="#388e3cbb" rx="1"/><rect x="36" y="8" width="11" height="12" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="17" width="11" height="3" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">3.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="7" width="11" height="13" fill="#388e3cbb" rx="1"><title>2月: NT$14,670</title></rect><rect x="24" y="7" width="11" height="13" fill="#388e3cbb" rx="1"><title>3月: NT$14,020</title></rect><rect x="36" y="8" width="11" height="12" fill="#388e3cbb" rx="1"><title>4月: NT$12,807</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$21,060</title></rect><rect x="60" y="17" width="11" height="3" fill="#c8c8c8" rx="1"><title>6月: NT$3,318</title></rect></svg><span class="bar-pct">3.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">11</td>
               <td class="sku-name">【亞馬生醫】MPE-311激孅粒現5盒(30顆/盒)</td>
               <td class="num">NT$60,053</td>
               <td class="num">16</td>
               <td class="num">NT$3,753</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">2.8%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$56,273</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$3,780</title></rect></svg><span class="bar-pct">2.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">12</td>
               <td class="sku-name">【PP 石墨烯】石墨烯羊駝絨超導被(NASA聯名)1入(陳美鳳代言推薦)</td>
               <td class="num">NT$52,872</td>
               <td class="num">6</td>
               <td class="num">NT$8,812</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="12" y="10" width="11" height="10" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">2.4%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>1月: NT$34,950</title></rect><rect x="12" y="10" width="11" height="10" fill="#388e3cbb" rx="1"><title>2月: NT$17,922</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">2.4%</span></div></td>
             </tr><tr>
               <td class="rank r3">13</td>
               <td class="sku-name">【亞馬生醫】MPE-311超能粒現5盒(30顆/盒)</td>
               <td class="num">NT$46,551</td>
               <td class="num">13</td>
               <td class="num">NT$3,580</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="17" width="11" height="3" fill="#388e3cbb" rx="1"/><rect x="24" y="11" width="11" height="9" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="14" width="11" height="6" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">2.1%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="17" width="11" height="3" fill="#388e3cbb" rx="1"><title>2月: NT$3,780</title></rect><rect x="24" y="11" width="11" height="9" fill="#388e3cbb" rx="1"><title>3月: NT$11,160</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$23,871</title></rect><rect x="48" y="14" width="11" height="6" fill="#388e3cbb" rx="1"><title>5月: NT$7,740</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">2.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">14</td>
               <td class="sku-name">【iVENOR】粒即穩6盒(30顆/盒)</td>
               <td class="num">NT$44,008</td>
               <td class="num">13</td>
               <td class="num">NT$3,385</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="12" width="11" height="8" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">2.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: NT$3,388</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: NT$3,638</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$26,209</title></rect><rect x="48" y="12" width="11" height="8" fill="#388e3cbb" rx="1"><title>5月: NT$10,773</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">2.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">15</td>
               <td class="sku-name">【PP 石墨烯】第四代石墨烯能量護膝1雙(3D立體包覆 穩定支撐)</td>
               <td class="num">NT$31,149</td>
               <td class="num">13</td>
               <td class="num">NT$2,396</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="9" width="11" height="11" fill="#388e3cbb" rx="1"/><rect x="36" y="10" width="11" height="10" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.4%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>1月: NT$4,760</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="9" width="11" height="11" fill="#388e3cbb" rx="1"><title>3月: NT$7,090</title></rect><rect x="36" y="10" width="11" height="10" fill="#388e3cbb" rx="1"><title>4月: NT$6,577</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$12,722</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.4%</span></div></td>
             </tr><tr>
               <td class="rank r3">16</td>
               <td class="sku-name">【飲后】超孅飲-奇異果風味2盒(15包/盒)</td>
               <td class="num">NT$26,350</td>
               <td class="num">25</td>
               <td class="num">NT$1,054</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+              <td style="color:#bdbdbd;font-size:11px">—</td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: NT$2,940</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$21,250</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: NT$2,160</title></rect></svg><span class="bar-pct">1.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">17</td>
               <td class="sku-name">【iVENOR】紫孅果5盒(30顆/盒)</td>
               <td class="num">NT$25,900</td>
               <td class="num">11</td>
               <td class="num">NT$2,354</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="8" width="11" height="12" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="11" height="12" fill="#388e3cbb" rx="1"><title>1月: NT$7,044</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="8" width="11" height="12" fill="#388e3cbb" rx="1"><title>4月: NT$7,202</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$11,654</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">18</td>
               <td class="sku-name">【PP 石墨烯】石墨烯隨調記憶枕2入(美國NASA認證)</td>
               <td class="num">NT$25,380</td>
               <td class="num">3</td>
               <td class="num">NT$8,460</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.2%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="11" width="11" height="9" fill="#388e3cbb" rx="1"><title>4月: NT$8,300</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$17,080</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.2%</span></div></td>
             </tr><tr>
               <td class="rank r3">19</td>
               <td class="sku-name">【亞馬生醫】MPE-311靈活粒現3盒(30顆/盒)</td>
               <td class="num">NT$24,157</td>
               <td class="num">9</td>
               <td class="num">NT$2,684</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#388e3cbb" rx="1"/><rect x="12" y="15" width="11" height="5" fill="#388e3cbb" rx="1"/><rect x="24" y="10" width="11" height="10" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.1%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#388e3cbb" rx="1"><title>1月: NT$5,611</title></rect><rect x="12" y="15" width="11" height="5" fill="#388e3cbb" rx="1"><title>2月: NT$2,780</title></rect><rect x="24" y="10" width="11" height="10" fill="#388e3cbb" rx="1"><title>3月: NT$5,518</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$10,248</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.1%</span></div></td>
             </tr><tr>
               <td class="rank r3">20</td>
               <td class="sku-name">【亞馬生醫】MPE-311激孅粒現3盒(30顆/盒)</td>
               <td class="num">NT$22,460</td>
               <td class="num">8</td>
               <td class="num">NT$2,807</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="14" width="11" height="6" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$16,700</title></rect><rect x="60" y="14" width="11" height="6" fill="#c8c8c8" rx="1"><title>6月: NT$5,760</title></rect></svg><span class="bar-pct">1.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">21</td>
               <td class="sku-name">【PP 石墨烯】石墨烯高腰暖腹女內褲(4件)</td>
               <td class="num">NT$21,892</td>
               <td class="num">6</td>
               <td class="num">NT$3,648</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="36" y="11" width="11" height="9" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>3月: NT$14,894</title></rect><rect x="36" y="11" width="11" height="9" fill="#388e3cbb" rx="1"><title>4月: NT$6,998</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">22</td>
               <td class="sku-name">【日南製藥】日本高濃度雪櫻姬白錠5盒(30顆/盒)</td>
               <td class="num">NT$21,454</td>
               <td class="num">9</td>
               <td class="num">NT$2,383</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="16" width="11" height="4" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="36" y="16" width="11" height="4" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="16" width="11" height="4" fill="#388e3cbb" rx="1"><title>1月: NT$2,730</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>3月: NT$4,466</title></rect><rect x="36" y="16" width="11" height="4" fill="#388e3cbb" rx="1"><title>4月: NT$2,533</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$11,725</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">23</td>
               <td class="sku-name">【LARGAN 大立美】關健立克10盒_大立光集團所屬(30顆/盒)</td>
               <td class="num">NT$21,130</td>
               <td class="num">3</td>
               <td class="num">NT$7,043</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">1.0%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="11" height="10" fill="#388e3cbb" rx="1"><title>1月: NT$7,110</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>3月: NT$14,020</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">1.0%</span></div></td>
             </tr><tr>
               <td class="rank r3">24</td>
               <td class="sku-name">【LARGAN 大立美】攝守立克3盒_大立光集團所屬(30顆/盒)</td>
               <td class="num">NT$20,610</td>
               <td class="num">8</td>
               <td class="num">NT$2,576</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="6" width="11" height="14" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="6" width="11" height="14" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="11" height="7" fill="#388e3cbb" rx="1"><title>1月: NT$2,652</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="6" width="11" height="14" fill="#388e3cbb" rx="1"><title>3月: NT$5,260</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$7,458</title></rect><rect x="48" y="6" width="11" height="14" fill="#388e3cbb" rx="1"><title>5月: NT$5,240</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">25</td>
               <td class="sku-name">【LARGAN 大立美】晶亮立克7盒_大立光集團所屬(30顆/盒)</td>
               <td class="num">NT$19,010</td>
               <td class="num">4</td>
               <td class="num">NT$4,752</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="2" width="11" height="18" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.9%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>1月: NT$9,910</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="2" width="11" height="18" fill="#388e3cbb" rx="1"><title>3月: NT$9,100</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.9%</span></div></td>
             </tr><tr>
               <td class="rank r3">26</td>
               <td class="sku-name">【iVENOR】紫孅果8盒(30顆/盒)</td>
               <td class="num">NT$17,493</td>
               <td class="num">5</td>
               <td class="num">NT$3,498</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.8%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$17,493</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.8%</span></div></td>
             </tr><tr>
               <td class="rank r3">27</td>
               <td class="sku-name">【PP 石墨烯】石墨烯魔塑強力腰夾1入(護腰 保護腰椎 穩固支撐)</td>
               <td class="num">NT$15,592</td>
               <td class="num">6</td>
               <td class="num">NT$2,598</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="48" y="16" width="11" height="4" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td><span class="badge ok" style="font-size:10px">✓ 推薦</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>4月: NT$12,832</title></rect><rect x="48" y="16" width="11" height="4" fill="#388e3cbb" rx="1"><title>5月: NT$2,760</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">28</td>
               <td class="sku-name">【PP 石墨烯】石墨烯粒線修復女內褲4件(購物一姐斯容愛用推薦)</td>
               <td class="num">NT$15,046</td>
               <td class="num">4</td>
               <td class="num">NT$3,761</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>1月: -</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>4月: -</title></rect><rect x="48" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>5月: NT$15,046</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">29</td>
               <td class="sku-name">【PP 石墨烯】石墨烯Y字領集中修復內衣3件(購物一姐斯容推薦)</td>
               <td class="num">NT$14,538</td>
               <td class="num">4</td>
               <td class="num">NT$3,634</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="11" width="11" height="9" fill="#388e3cbb" rx="1"/><rect x="36" y="12" width="11" height="8" fill="#388e3cbb" rx="1"/><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.7%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>1月: NT$7,660</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="11" width="11" height="9" fill="#388e3cbb" rx="1"><title>3月: NT$3,458</title></rect><rect x="36" y="12" width="11" height="8" fill="#388e3cbb" rx="1"><title>4月: NT$3,420</title></rect><rect x="48" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>5月: -</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.7%</span></div></td>
             </tr><tr>
               <td class="rank r3">30</td>
               <td class="sku-name">【PP 石墨烯】石墨烯打卡褲_九分褲2件(愛莉莎莎代言推薦)</td>
               <td class="num">NT$14,120</td>
               <td class="num">3</td>
               <td class="num">NT$4,706</td>
-              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"/><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/><rect x="36" y="2" width="11" height="18" fill="#388e3cbb" rx="1"/><rect x="48" y="1" width="11" height="19" fill="#388e3cbb" rx="1"/><rect x="60" y="18" width="11" height="2" fill="#388e3cbb" rx="1"/></svg><span class="bar-pct">0.6%</span></div></td>
+              <td><span class="badge win" style="font-size:10px">💰 高客單</span></td>
+              <td><div style="display:flex;align-items:center;gap:6px"><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="11" height="20" fill="#388e3cbb" rx="1"><title>1月: NT$4,880</title></rect><rect x="12" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>2月: -</title></rect><rect x="24" y="18" width="11" height="2" fill="#388e3cbb" rx="1"><title>3月: -</title></rect><rect x="36" y="2" width="11" height="18" fill="#388e3cbb" rx="1"><title>4月: NT$4,580</title></rect><rect x="48" y="1" width="11" height="19" fill="#388e3cbb" rx="1"><title>5月: NT$4,660</title></rect><rect x="60" y="18" width="11" height="2" fill="#c8c8c8" rx="1"><title>6月: -</title></rect></svg><span class="bar-pct">0.6%</span></div></td>
             </tr></tbody></table>
         </div>
         <p class="note">月度趨勢：每格代表一個月（1月→6月），高度代表當月相對銷售量</p>
