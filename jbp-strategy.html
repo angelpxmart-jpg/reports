@@ -193,7 +193,7 @@ a{color:#13227f}
           <div class="card-title">月度營收趨勢</div>
           <div class="chart-wrap"><canvas id="chart-cbh"></canvas></div>
           <script>
-            const momPlugin={id:'mom',afterDatasetsDraw(chart){const ctx=chart.ctx;const ds=chart.data.datasets[0];const meta=chart.getDatasetMeta(0);meta.data.forEach((bar,i)=>{if(i===0||i===5)return;const prev=ds.data[i-1],curr=ds.data[i];if(!prev)return;const pct=((curr-prev)/prev*100).toFixed(1);const lbl=(pct>0?'+':'')+pct+'%';ctx.save();ctx.fillStyle=pct>0?'#388e3c':'#e53935';ctx.font='bold 11px "Noto Sans TC",sans-serif';ctx.textAlign='center';ctx.fillText(lbl,bar.x,bar.y-8);ctx.restore();});}};
+            const momPlugin={id:'mom',afterDatasetsDraw(chart){const ctx=chart.ctx;const ds=chart.data.datasets[0];const meta=chart.getDatasetMeta(0);meta.data.forEach((bar,i)=>{if(i===0||i===5)return;const prev=ds.data[i-1],curr=ds.data[i];if(!prev)return;const pct=((curr-prev)/prev*100).toFixed(1);const lbl=(pct>0?'+':'')+pct+'%';const inside=bar.y<30;ctx.save();ctx.fillStyle=inside?'rgba(20,34,127,0.85)':(pct>0?'#388e3c':'#e53935');ctx.font='bold 11px "Noto Sans TC",sans-serif';ctx.textAlign='center';ctx.fillText(lbl,bar.x,inside?bar.y+15:bar.y-7);ctx.restore();});}};
             new Chart(document.getElementById('chart-cbh'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[2744994, 1710703, 3457533, 2964049, 3418847, 132646],backgroundColor:'#13227f22',borderColor:'#13227f',borderWidth:2,borderRadius:4}]},
