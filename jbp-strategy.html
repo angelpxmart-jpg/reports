@@ -60,6 +60,12 @@ a{color:#13227f}
 .bar-fill{height:8px;border-radius:2px;min-width:4px}
 .bar-pct{font-size:12px;color:#757575;white-space:nowrap}
 
+/* Goal bar */
+.goal-row{display:flex;align-items:center;gap:8px;margin:6px 0 2px}
+.goal-bar-bg{flex:1;height:6px;background:#e0e0e0;border-radius:3px;overflow:hidden}
+.goal-bar-fill{height:100%;border-radius:3px;transition:width .3s}
+.goal-pct{font-size:12px;font-weight:700;white-space:nowrap;min-width:36px}
+
 /* Definition tip */
 .def-tip{font-size:11px;font-weight:400;color:#757575;margin-left:10px;background:#f7f8fc;padding:2px 8px;border-radius:10px;border:1px solid #e0e0e0}
 
@@ -117,9 +123,29 @@ a{color:#13227f}
   
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-label">三廠商合計營收</div><div class="kpi-val" style="color:#13227f">NT$28.8M</div><div class="kpi-sub">1月～6月累積</div></div>
-      <div class="kpi-card"><div class="kpi-label">跨境豐收（美妝）</div><div class="kpi-val">NT$14.4M</div><div class="kpi-sub">50% 佔比</div></div>
-      <div class="kpi-card"><div class="kpi-label">金盛世紙業（日用）</div><div class="kpi-val">NT$12.2M</div><div class="kpi-sub">42% 佔比</div></div>
-      <div class="kpi-card"><div class="kpi-label">壹伍壹拾（保健）</div><div class="kpi-val">NT$2.2M</div><div class="kpi-sub">8% 佔比</div></div>
+      <div class="kpi-card">
+        <div class="kpi-label">跨境豐收（美妝）　廣告預算 400萬</div>
+        <div class="kpi-val">NT$14.4M</div>
+        <div class="goal-row">
+              <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:20%;background:#e65100"></div></div>
+              <span class="goal-pct" style="color:#e65100">20%</span>
+            </div>
+            <div class="kpi-sub">業績目標 NT$7,200萬 ｜ 已達成 20%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">金盛世紙業（日用）　廣告預算 400萬</div>
+        <div class="kpi-val">NT$12.2M</div>
+        <div class="goal-row">
+              <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:15%;background:#e65100"></div></div>
+              <span class="goal-pct" style="color:#e65100">15%</span>
+            </div>
+            <div class="kpi-sub">業績目標 NT$8,000萬 ｜ 已達成 15%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">壹伍壹拾（保健）　廣告預算 待填入</div>
+        <div class="kpi-val">NT$2.2M</div>
+        <div class="kpi-sub">業績目標：待填入</div>
+      </div>
     </div>
   <div class="card">
     <div class="card-title">月度營收趨勢比較（堆疊柱狀圖）</div>
