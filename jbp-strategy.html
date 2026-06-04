@@ -17,7 +17,7 @@ function momPlugin(arr,col){
       const bH=yS.getPixelForValue(0)-bar.y;
       ctx.font='bold 11px sans-serif';ctx.textAlign='center';
       if(bH>=24){
-        ctx.fillStyle=col||'#1a1a1a';
+        ctx.fillStyle=v<0?'#dc2626':(col||'#1a1a1a');
         ctx.textBaseline='top';ctx.fillText(lbl,bar.x,bar.y+5);
       }else{
         ctx.fillStyle=v>=0?'#16a34a':'#dc2626';
