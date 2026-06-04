@@ -6,6 +6,23 @@
 <title>JBP 外投廣告策略報表 2026-06-04</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script>
+function momPlugin(arr){
+  return{id:'mom',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0).data,yS=chart.scales.y;
+    ctx.save();
+    meta.forEach((bar,i)=>{
+      const v=arr[i];if(v===null||v===undefined)return;
+      const lbl=(v>0?'+':'')+v+'%';
+      const bH=yS.getPixelForValue(0)-bar.y;
+      ctx.font='bold 10px sans-serif';ctx.textAlign='center';
+      if(bH>=22){ctx.fillStyle='rgba(255,255,255,.88)';ctx.textBaseline='top';ctx.fillText(lbl,bar.x,bar.y+4);}
+      else{ctx.fillStyle=v>=0?'#2e7d32':'#c62828';ctx.textBaseline='bottom';ctx.fillText(lbl,bar.x,bar.y-3);}
+    });
+    ctx.restore();
+  }};
+}
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans TC',sans-serif;background:#f7f8fc;color:#1a1a1a;font-size:14px}
@@ -84,6 +101,8 @@ a{color:#13227f}
 .ad-seasonal{background:#fce4ec;color:#880e4f}
 .ad-none{background:#f8f9fa;color:#9e9e9e}
 .ad-pending{background:#f0f0f0;color:#bdbdbd;font-style:italic}
+.ad-legend-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11px;color:#666;padding:8px 12px;background:#f7f8fc;border-radius:8px;margin-bottom:8px;border:1px solid #e8eaf0}
+.ad-legend-row .sep{color:#ccc;margin:0 2px}
 .note{font-size:11px;color:#bdbdbd;margin-top:12px;font-style:italic}
 
 /* Campaign */
@@ -193,7 +212,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-cbh'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[2744994, 1710703, 3457533, 2964049, 3418847, 132646],backgroundColor:'#13227f22',borderColor:'#13227f',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin([null,-38,102,-14,15,-96])]
             });
           </script>
         </div>
@@ -211,6 +231,16 @@ a{color:#13227f}
       </div>
 
       <div class="card">
+        <div class="ad-legend-row">
+          <strong>廣告建議說明：</strong>
+          <span class="ad-badge ad-main">🎯 主打</span>趨勢成長×有聲量或符合檔期
+          <span class="sep">·</span>
+          <span class="ad-badge ad-buzz">📣 討論度</span>社群/評價有明顯聲量
+          <span class="sep">·</span>
+          <span class="ad-badge ad-seasonal">📅 檔期</span>符合618/夏天/父親節
+          <span class="sep">·</span>
+          <span class="ad-badge ad-trend">📈 趨勢</span>3→4→5月銷量連續成長
+        </div>
         <div class="card-title">Top 30 SKU 排行（依總營收，1月～6月）
           <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
         </div>
@@ -513,7 +543,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-gsj'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[1954035, 1521395, 3894310, 2764906, 2004293, 88179],backgroundColor:'#e4001122',borderColor:'#e40011',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin([null,-22,156,-29,-28,-96])]
             });
           </script>
         </div>
@@ -531,6 +562,16 @@ a{color:#13227f}
       </div>
 
       <div class="card">
+        <div class="ad-legend-row">
+          <strong>廣告建議說明：</strong>
+          <span class="ad-badge ad-main">🎯 主打</span>趨勢成長×有聲量或符合檔期
+          <span class="sep">·</span>
+          <span class="ad-badge ad-buzz">📣 討論度</span>社群/評價有明顯聲量
+          <span class="sep">·</span>
+          <span class="ad-badge ad-seasonal">📅 檔期</span>符合618/夏天/父親節
+          <span class="sep">·</span>
+          <span class="ad-badge ad-trend">📈 趨勢</span>3→4→5月銷量連續成長
+        </div>
         <div class="card-title">Top 30 SKU 排行（依總營收，1月～6月）
           <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
         </div>
@@ -827,7 +868,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-yfl'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[426454, 153356, 332314, 479212, 751105, 41142],backgroundColor:'#388e3c22',borderColor:'#388e3c',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}}
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin([null,-64,117,44,57,-95])]
             });
           </script>
         </div>
@@ -845,6 +887,16 @@ a{color:#13227f}
       </div>
 
       <div class="card">
+        <div class="ad-legend-row">
+          <strong>廣告建議說明：</strong>
+          <span class="ad-badge ad-main">🎯 主打</span>趨勢成長×有聲量或符合檔期
+          <span class="sep">·</span>
+          <span class="ad-badge ad-buzz">📣 討論度</span>社群/評價有明顯聲量
+          <span class="sep">·</span>
+          <span class="ad-badge ad-seasonal">📅 檔期</span>符合618/夏天/父親節
+          <span class="sep">·</span>
+          <span class="ad-badge ad-trend">📈 趨勢</span>3→4→5月銷量連續成長
+        </div>
         <div class="card-title">Top 30 SKU 排行（依總營收，1月～6月）
           <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
         </div>
