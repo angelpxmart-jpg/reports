@@ -164,6 +164,11 @@ a{color:#13227f}
 .campaign-sup{font-size:12px;font-weight:700;margin-bottom:8px;color:#1a1a1a}
 .campaign-list{padding-left:16px;font-size:12px;color:#444;line-height:1.8}
 
+/* 月份活動標籤列 */
+.campaign-strip{display:flex;justify-content:space-between;gap:6px;margin-top:10px;padding:8px 12px;background:#f0f3fb;border-radius:8px;border:1px solid #d8ddf0}
+.cs-tag{flex:1;text-align:center;font-size:11px;font-weight:600;color:#13227f;background:#fff;padding:4px 6px;border-radius:8px;border:1px solid #c5cbee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-m{display:block;font-size:10px;font-weight:400;color:#9ca3af;margin-bottom:1px}
+
 /* Footer */
 .footer{text-align:center;font-size:11px;color:#bdbdbd;margin-top:32px;padding-top:16px;border-top:1px solid #eeeeee}
 </style>
@@ -228,9 +233,9 @@ a{color:#13227f}
       options:{responsive:true,maintainAspectRatio:false,
         plugins:{legend:{position:'top'},annotation:{annotations:{ev0:evAnno('6月','618年中大促','#1565c0')}},},
         scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}
-      },
-      plugins:[campaignPlugin(["年貨節","新年&38女神","全民享購節","好事節&55","全民抗漲節","618年中大促"],'#13227f')]
+      }
     });</script>
+    <div class="campaign-strip"><span class="cs-tag"><span class="cs-m">1月</span>年貨節</span><span class="cs-tag"><span class="cs-m">2月</span>新年&38女神</span><span class="cs-tag"><span class="cs-m">3月</span>全民享購節</span><span class="cs-tag"><span class="cs-m">4月</span>好事節&55</span><span class="cs-tag"><span class="cs-m">5月</span>全民抗漲節</span><span class="cs-tag"><span class="cs-m">6月</span>618年中大促</span></div>
   </div>
 </div>
 
