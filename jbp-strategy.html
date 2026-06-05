@@ -97,10 +97,19 @@ a{color:#13227f}
 .note{font-size:11px;color:#bdbdbd;margin-top:12px;font-style:italic}
 
 /* 廣告優先 Badge */
-.pri-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px;white-space:nowrap}
+.pri-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px;white-space:nowrap;cursor:help}
 .pri-high{background:#dcfce7;color:#15803d}
 .pri-mid{background:#dbeafe;color:#1d4ed8}
 .pri-vol{background:#f3f4f6;color:#6b7280}
+.pri-sub{font-size:10px;color:#9ca3af;margin-top:3px}
+
+/* 品牌分析欄分隔 */
+.brand-sep{border-left:2px solid #e8eaf0!important}
+
+/* 欄位說明 ⓘ 圖示 */
+.th-info{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;background:#e8eaf0;color:#5c6bc0;border-radius:50%;font-size:9px;cursor:help;margin-left:3px;font-weight:700;vertical-align:middle;position:relative;font-style:normal}
+.th-info::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:400;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:999}
+.th-info:hover::after{opacity:1}
 
 /* 衰退預警 */
 .decline-card{border-left:4px solid #f59e0b}
@@ -237,60 +246,76 @@ a{color:#13227f}
       </div>
 
       <div class="card">
-        <div class="card-title">品牌廣告優先分析
-          <span class="def-tip">均客單 ≥ NT$1,500 → 高優先 ｜ ≥ NT$800 → 建議 ｜ ↑ 近期上升趨勢</span>
+        <div class="card-title">品牌廣告優先分析</div>
+        <div class="ad-legend-row" style="margin-bottom:12px">
+          <strong>廣告優先說明：</strong>
+          <span class="pri-badge pri-high">⭐ 高優先</span>均客單 ≥ NT$1,500
+          <span class="sep">·</span>
+          <span class="pri-badge pri-mid">建議</span>NT$800 ～ 1,499
+          <span class="sep">·</span>
+          <span class="pri-badge pri-vol">走量</span>均客單 ＜ NT$800
+          <span class="sep">·</span>
+          <span style="color:#16a34a;font-weight:700">↑</span> 近期有上升趨勢（加分）
         </div>
         <div style="overflow-x:auto">
         <table class="data-table">
-          <thead><tr><th>品牌</th><th>累積營收</th><th>佔比</th><th>均客單</th><th>銷售量</th><th>近期趨勢</th><th>廣告優先</th></tr></thead>
+          <thead><tr>
+            <th>品牌</th>
+            <th>累積營收 <span class="th-info" data-tip="期間（1月、2月、3月、4月、5月）所有訂單銷售金額加總">ⓘ</span></th>
+            <th class="brand-sep">佔比 <span class="th-info" data-tip="該品牌營收 ÷ 廠商期間總營收">ⓘ</span></th>
+            <th>均客單 <span class="th-info" data-tip="累積營收 ÷ 銷售量，即消費者平均每筆訂單花多少錢">ⓘ</span></th>
+            <th>銷售量 <span class="th-info" data-tip="期間成交件數總和">ⓘ</span></th>
+            <th>月度趨勢 <span class="th-info" data-tip="各月份（1月、2月、3月、4月、5月）銷售金額，柱越高代表當月銷售越多">ⓘ</span></th>
+            <th>廣告優先 <span class="th-info" data-tip="依均客單高低判斷廣告投放優先序，hover 各品牌可看詳細說明">ⓘ</span></th>
+          </tr></thead>
           <tbody><tr>
               <td class="brand-name-cell">SHISEIDO 資生堂</td>
               <td class="num">NT$4,637,402</td>
-              <td class="num">32%</td>
-              <td class="num" style="font-weight:700">NT$1,990</td>
+              <td class="num brand-sep">32%</td>
+              <td class="num">NT$1,990</td>
               <td class="num">2,330</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="5" width="13" height="15" fill="#13227faa" rx="1"/><rect x="14" y="13" width="13" height="7" fill="#13227faa" rx="1"/><rect x="28" y="1" width="13" height="19" fill="#13227faa" rx="1"/><rect x="42" y="0" width="13" height="20" fill="#13227faa" rx="1"/><rect x="56" y="2" width="13" height="18" fill="#13227faa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$1,990，高於 NT$1,500 門檻，建議優先分配廣告預算">⭐ 高優先</span><div class="pri-sub">均客單 NT$1,990</div></td>
             </tr><tr>
               <td class="brand-name-cell">ESTEE LAUDER 雅詩蘭黛</td>
               <td class="num">NT$1,036,713</td>
-              <td class="num">7%</td>
-              <td class="num" style="font-weight:700">NT$2,474</td>
+              <td class="num brand-sep">7%</td>
+              <td class="num">NT$2,474</td>
               <td class="num">419</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先 <span style="color:#16a34a;font-weight:900">↑</span></span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="13" height="10" fill="#13227faa" rx="1"/><rect x="14" y="12" width="13" height="8" fill="#13227faa" rx="1"/><rect x="28" y="5" width="13" height="15" fill="#13227faa" rx="1"/><rect x="42" y="11" width="13" height="9" fill="#13227faa" rx="1"/><rect x="56" y="0" width="13" height="20" fill="#13227faa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$2,474，高於 NT$1,500 門檻，建議優先分配廣告預算，且近期有上升趨勢">⭐ 高優先 ↑</span><div class="pri-sub">均客單 NT$2,474</div></td>
             </tr><tr>
               <td class="brand-name-cell">cle de peau BEAUTE 肌膚之鑰</td>
               <td class="num">NT$724,942</td>
-              <td class="num">5%</td>
-              <td class="num" style="font-weight:700">NT$1,082</td>
+              <td class="num brand-sep">5%</td>
+              <td class="num">NT$1,082</td>
               <td class="num">670</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-mid">建議 <span style="color:#16a34a;font-weight:900">↑</span></span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="8" width="13" height="12" fill="#13227faa" rx="1"/><rect x="14" y="11" width="13" height="9" fill="#13227faa" rx="1"/><rect x="28" y="2" width="13" height="18" fill="#13227faa" rx="1"/><rect x="42" y="5" width="13" height="15" fill="#13227faa" rx="1"/><rect x="56" y="0" width="13" height="20" fill="#13227faa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-mid" title="均客單 NT$1,082，介於 NT$800～1,499，建議酌量投放，且近期有上升趨勢">建議 ↑</span><div class="pri-sub">均客單 NT$1,082</div></td>
             </tr><tr>
               <td class="brand-name-cell">LA ROCHE-POSAY 理膚寶水</td>
               <td class="num">NT$671,385</td>
-              <td class="num">5%</td>
-              <td class="num" style="font-weight:700">NT$960</td>
+              <td class="num brand-sep">5%</td>
+              <td class="num">NT$960</td>
               <td class="num">699</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-mid">建議</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="1" width="13" height="19" fill="#13227faa" rx="1"/><rect x="14" y="11" width="13" height="9" fill="#13227faa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#13227faa" rx="1"/><rect x="42" y="6" width="13" height="14" fill="#13227faa" rx="1"/><rect x="56" y="7" width="13" height="13" fill="#13227faa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-mid" title="均客單 NT$960，介於 NT$800～1,499，建議酌量投放">建議</span><div class="pri-sub">均客單 NT$960</div></td>
             </tr><tr>
               <td class="brand-name-cell">LANCOME 蘭蔻</td>
               <td class="num">NT$616,234</td>
-              <td class="num">4%</td>
-              <td class="num" style="font-weight:700">NT$2,455</td>
+              <td class="num brand-sep">4%</td>
+              <td class="num">NT$2,455</td>
               <td class="num">251</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先 <span style="color:#16a34a;font-weight:900">↑</span></span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="4" width="13" height="16" fill="#13227faa" rx="1"/><rect x="14" y="11" width="13" height="9" fill="#13227faa" rx="1"/><rect x="28" y="6" width="13" height="14" fill="#13227faa" rx="1"/><rect x="42" y="9" width="13" height="11" fill="#13227faa" rx="1"/><rect x="56" y="0" width="13" height="20" fill="#13227faa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$2,455，高於 NT$1,500 門檻，建議優先分配廣告預算，且近期有上升趨勢">⭐ 高優先 ↑</span><div class="pri-sub">均客單 NT$2,455</div></td>
             </tr><tr>
               <td class="brand-name-cell">SISLEY 希思黎</td>
               <td class="num">NT$522,851</td>
-              <td class="num">4%</td>
-              <td class="num" style="font-weight:700">NT$3,112</td>
+              <td class="num brand-sep">4%</td>
+              <td class="num">NT$3,112</td>
               <td class="num">168</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="13" height="20" fill="#13227faa" rx="1"/><rect x="14" y="13" width="13" height="7" fill="#13227faa" rx="1"/><rect x="28" y="5" width="13" height="15" fill="#13227faa" rx="1"/><rect x="42" y="10" width="13" height="10" fill="#13227faa" rx="1"/><rect x="56" y="13" width="13" height="7" fill="#13227faa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$3,112，高於 NT$1,500 門檻，建議優先分配廣告預算">⭐ 高優先</span><div class="pri-sub">均客單 NT$3,112</div></td>
             </tr></tbody>
         </table>
         </div>
@@ -670,60 +695,76 @@ a{color:#13227f}
       </div>
 
       <div class="card">
-        <div class="card-title">品牌廣告優先分析
-          <span class="def-tip">均客單 ≥ NT$1,500 → 高優先 ｜ ≥ NT$800 → 建議 ｜ ↑ 近期上升趨勢</span>
+        <div class="card-title">品牌廣告優先分析</div>
+        <div class="ad-legend-row" style="margin-bottom:12px">
+          <strong>廣告優先說明：</strong>
+          <span class="pri-badge pri-high">⭐ 高優先</span>均客單 ≥ NT$1,500
+          <span class="sep">·</span>
+          <span class="pri-badge pri-mid">建議</span>NT$800 ～ 1,499
+          <span class="sep">·</span>
+          <span class="pri-badge pri-vol">走量</span>均客單 ＜ NT$800
+          <span class="sep">·</span>
+          <span style="color:#16a34a;font-weight:700">↑</span> 近期有上升趨勢（加分）
         </div>
         <div style="overflow-x:auto">
         <table class="data-table">
-          <thead><tr><th>品牌</th><th>累積營收</th><th>佔比</th><th>均客單</th><th>銷售量</th><th>近期趨勢</th><th>廣告優先</th></tr></thead>
+          <thead><tr>
+            <th>品牌</th>
+            <th>累積營收 <span class="th-info" data-tip="期間（1月、2月、3月、4月、5月）所有訂單銷售金額加總">ⓘ</span></th>
+            <th class="brand-sep">佔比 <span class="th-info" data-tip="該品牌營收 ÷ 廠商期間總營收">ⓘ</span></th>
+            <th>均客單 <span class="th-info" data-tip="累積營收 ÷ 銷售量，即消費者平均每筆訂單花多少錢">ⓘ</span></th>
+            <th>銷售量 <span class="th-info" data-tip="期間成交件數總和">ⓘ</span></th>
+            <th>月度趨勢 <span class="th-info" data-tip="各月份（1月、2月、3月、4月、5月）銷售金額，柱越高代表當月銷售越多">ⓘ</span></th>
+            <th>廣告優先 <span class="th-info" data-tip="依均客單高低判斷廣告投放優先序，hover 各品牌可看詳細說明">ⓘ</span></th>
+          </tr></thead>
           <tbody><tr>
               <td class="brand-name-cell">CONSOFY</td>
               <td class="num">NT$5,189,814</td>
-              <td class="num">42%</td>
-              <td class="num" style="font-weight:700">NT$756</td>
+              <td class="num brand-sep">42%</td>
+              <td class="num">NT$756</td>
               <td class="num">6,863</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-vol">走量</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="10" width="13" height="10" fill="#e40011aa" rx="1"/><rect x="14" y="12" width="13" height="8" fill="#e40011aa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#e40011aa" rx="1"/><rect x="42" y="3" width="13" height="17" fill="#e40011aa" rx="1"/><rect x="56" y="10" width="13" height="10" fill="#e40011aa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-vol" title="均客單 NT$756，低於 NT$800，走量策略為主，廣告 ROI 相對較低">走量</span><div class="pri-sub">均客單 NT$756</div></td>
             </tr><tr>
               <td class="brand-name-cell">倍潔雅</td>
               <td class="num">NT$2,835,499</td>
-              <td class="num">23%</td>
-              <td class="num" style="font-weight:700">NT$590</td>
+              <td class="num brand-sep">23%</td>
+              <td class="num">NT$590</td>
               <td class="num">4,805</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-vol">走量</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="13" height="9" fill="#e40011aa" rx="1"/><rect x="14" y="13" width="13" height="7" fill="#e40011aa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#e40011aa" rx="1"/><rect x="42" y="8" width="13" height="12" fill="#e40011aa" rx="1"/><rect x="56" y="9" width="13" height="11" fill="#e40011aa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-vol" title="均客單 NT$590，低於 NT$800，走量策略為主，廣告 ROI 相對較低">走量</span><div class="pri-sub">均客單 NT$590</div></td>
             </tr><tr>
               <td class="brand-name-cell">柔芙</td>
               <td class="num">NT$2,244,053</td>
-              <td class="num">18%</td>
-              <td class="num" style="font-weight:700">NT$581</td>
+              <td class="num brand-sep">18%</td>
+              <td class="num">NT$581</td>
               <td class="num">3,857</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-vol">走量</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="13" height="9" fill="#e40011aa" rx="1"/><rect x="14" y="14" width="13" height="6" fill="#e40011aa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#e40011aa" rx="1"/><rect x="42" y="7" width="13" height="13" fill="#e40011aa" rx="1"/><rect x="56" y="12" width="13" height="8" fill="#e40011aa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-vol" title="均客單 NT$581，低於 NT$800，走量策略為主，廣告 ROI 相對較低">走量</span><div class="pri-sub">均客單 NT$581</div></td>
             </tr><tr>
               <td class="brand-name-cell">怡柔</td>
               <td class="num">NT$1,232,405</td>
-              <td class="num">10%</td>
-              <td class="num" style="font-weight:700">NT$946</td>
+              <td class="num brand-sep">10%</td>
+              <td class="num">NT$946</td>
               <td class="num">1,302</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-mid">建議</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="12" width="13" height="8" fill="#e40011aa" rx="1"/><rect x="14" y="13" width="13" height="7" fill="#e40011aa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#e40011aa" rx="1"/><rect x="42" y="11" width="13" height="9" fill="#e40011aa" rx="1"/><rect x="56" y="13" width="13" height="7" fill="#e40011aa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-mid" title="均客單 NT$946，介於 NT$800～1,499，建議酌量投放">建議</span><div class="pri-sub">均客單 NT$946</div></td>
             </tr><tr>
               <td class="brand-name-cell">唯潔雅</td>
               <td class="num">NT$444,307</td>
-              <td class="num">4%</td>
-              <td class="num" style="font-weight:700">NT$482</td>
+              <td class="num brand-sep">4%</td>
+              <td class="num">NT$482</td>
               <td class="num">921</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-vol">走量</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="13" height="20" fill="#e40011aa" rx="1"/><rect x="14" y="9" width="13" height="11" fill="#e40011aa" rx="1"/><rect x="28" y="2" width="13" height="18" fill="#e40011aa" rx="1"/><rect x="42" y="12" width="13" height="8" fill="#e40011aa" rx="1"/><rect x="56" y="8" width="13" height="12" fill="#e40011aa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-vol" title="均客單 NT$482，低於 NT$800，走量策略為主，廣告 ROI 相對較低">走量</span><div class="pri-sub">均客單 NT$482</div></td>
             </tr><tr>
               <td class="brand-name-cell">PASEO</td>
               <td class="num">NT$153,501</td>
-              <td class="num">1%</td>
-              <td class="num" style="font-weight:700">NT$531</td>
+              <td class="num brand-sep">1%</td>
+              <td class="num">NT$531</td>
               <td class="num">289</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-vol">走量</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="11" width="13" height="9" fill="#e40011aa" rx="1"/><rect x="14" y="8" width="13" height="12" fill="#e40011aa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#e40011aa" rx="1"/><rect x="42" y="4" width="13" height="16" fill="#e40011aa" rx="1"/><rect x="56" y="5" width="13" height="15" fill="#e40011aa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-vol" title="均客單 NT$531，低於 NT$800，走量策略為主，廣告 ROI 相對較低">走量</span><div class="pri-sub">均客單 NT$531</div></td>
             </tr></tbody>
         </table>
         </div>
@@ -1103,60 +1144,76 @@ a{color:#13227f}
       </div>
 
       <div class="card">
-        <div class="card-title">品牌廣告優先分析
-          <span class="def-tip">均客單 ≥ NT$1,500 → 高優先 ｜ ≥ NT$800 → 建議 ｜ ↑ 近期上升趨勢</span>
+        <div class="card-title">品牌廣告優先分析</div>
+        <div class="ad-legend-row" style="margin-bottom:12px">
+          <strong>廣告優先說明：</strong>
+          <span class="pri-badge pri-high">⭐ 高優先</span>均客單 ≥ NT$1,500
+          <span class="sep">·</span>
+          <span class="pri-badge pri-mid">建議</span>NT$800 ～ 1,499
+          <span class="sep">·</span>
+          <span class="pri-badge pri-vol">走量</span>均客單 ＜ NT$800
+          <span class="sep">·</span>
+          <span style="color:#16a34a;font-weight:700">↑</span> 近期有上升趨勢（加分）
         </div>
         <div style="overflow-x:auto">
         <table class="data-table">
-          <thead><tr><th>品牌</th><th>累積營收</th><th>佔比</th><th>均客單</th><th>銷售量</th><th>近期趨勢</th><th>廣告優先</th></tr></thead>
+          <thead><tr>
+            <th>品牌</th>
+            <th>累積營收 <span class="th-info" data-tip="期間（1月、2月、3月、4月、5月）所有訂單銷售金額加總">ⓘ</span></th>
+            <th class="brand-sep">佔比 <span class="th-info" data-tip="該品牌營收 ÷ 廠商期間總營收">ⓘ</span></th>
+            <th>均客單 <span class="th-info" data-tip="累積營收 ÷ 銷售量，即消費者平均每筆訂單花多少錢">ⓘ</span></th>
+            <th>銷售量 <span class="th-info" data-tip="期間成交件數總和">ⓘ</span></th>
+            <th>月度趨勢 <span class="th-info" data-tip="各月份（1月、2月、3月、4月、5月）銷售金額，柱越高代表當月銷售越多">ⓘ</span></th>
+            <th>廣告優先 <span class="th-info" data-tip="依均客單高低判斷廣告投放優先序，hover 各品牌可看詳細說明">ⓘ</span></th>
+          </tr></thead>
           <tbody><tr>
               <td class="brand-name-cell">PP 石墨烯</td>
               <td class="num">NT$769,413</td>
-              <td class="num">35%</td>
-              <td class="num" style="font-weight:700">NT$3,419</td>
+              <td class="num brand-sep">35%</td>
+              <td class="num">NT$3,419</td>
               <td class="num">225</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先 <span style="color:#16a34a;font-weight:900">↑</span></span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="0" width="13" height="20" fill="#388e3caa" rx="1"/><rect x="14" y="16" width="13" height="4" fill="#388e3caa" rx="1"/><rect x="28" y="13" width="13" height="7" fill="#388e3caa" rx="1"/><rect x="42" y="12" width="13" height="8" fill="#388e3caa" rx="1"/><rect x="56" y="2" width="13" height="18" fill="#388e3caa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$3,419，高於 NT$1,500 門檻，建議優先分配廣告預算，且近期有上升趨勢">⭐ 高優先 ↑</span><div class="pri-sub">均客單 NT$3,419</div></td>
             </tr><tr>
               <td class="brand-name-cell">亞馬生醫</td>
               <td class="num">NT$417,632</td>
-              <td class="num">19%</td>
-              <td class="num" style="font-weight:700">NT$3,314</td>
+              <td class="num brand-sep">19%</td>
+              <td class="num">NT$3,314</td>
               <td class="num">126</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="13" width="13" height="7" fill="#388e3caa" rx="1"/><rect x="14" y="16" width="13" height="4" fill="#388e3caa" rx="1"/><rect x="28" y="7" width="13" height="13" fill="#388e3caa" rx="1"/><rect x="42" y="0" width="13" height="20" fill="#388e3caa" rx="1"/><rect x="56" y="1" width="13" height="19" fill="#388e3caa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$3,314，高於 NT$1,500 門檻，建議優先分配廣告預算">⭐ 高優先</span><div class="pri-sub">均客單 NT$3,314</div></td>
             </tr><tr>
               <td class="brand-name-cell">飲后</td>
               <td class="num">NT$366,174</td>
-              <td class="num">17%</td>
-              <td class="num" style="font-weight:700">NT$2,457</td>
+              <td class="num brand-sep">17%</td>
+              <td class="num">NT$2,457</td>
               <td class="num">149</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先 <span style="color:#16a34a;font-weight:900">↑</span></span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="18" width="13" height="2" fill="#388e3caa" rx="1"/><rect x="14" y="18" width="13" height="2" fill="#388e3caa" rx="1"/><rect x="28" y="18" width="13" height="2" fill="#388e3caa" rx="1"/><rect x="42" y="13" width="13" height="7" fill="#388e3caa" rx="1"/><rect x="56" y="0" width="13" height="20" fill="#388e3caa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$2,457，高於 NT$1,500 門檻，建議優先分配廣告預算，且近期有上升趨勢">⭐ 高優先 ↑</span><div class="pri-sub">均客單 NT$2,457</div></td>
             </tr><tr>
               <td class="brand-name-cell">LARGAN 大立美</td>
               <td class="num">NT$365,802</td>
-              <td class="num">17%</td>
-              <td class="num" style="font-weight:700">NT$3,418</td>
+              <td class="num brand-sep">17%</td>
+              <td class="num">NT$3,418</td>
               <td class="num">107</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="2" width="13" height="18" fill="#388e3caa" rx="1"/><rect x="14" y="13" width="13" height="7" fill="#388e3caa" rx="1"/><rect x="28" y="0" width="13" height="20" fill="#388e3caa" rx="1"/><rect x="42" y="8" width="13" height="12" fill="#388e3caa" rx="1"/><rect x="56" y="11" width="13" height="9" fill="#388e3caa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$3,418，高於 NT$1,500 門檻，建議優先分配廣告預算">⭐ 高優先</span><div class="pri-sub">均客單 NT$3,418</div></td>
             </tr><tr>
               <td class="brand-name-cell">iVENOR</td>
               <td class="num">NT$237,484</td>
-              <td class="num">11%</td>
-              <td class="num" style="font-weight:700">NT$2,827</td>
+              <td class="num brand-sep">11%</td>
+              <td class="num">NT$2,827</td>
               <td class="num">84</td>
-              <td style="text-align:center"><span style="color:#9ca3af">—</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先</span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="15" width="13" height="5" fill="#388e3caa" rx="1"/><rect x="14" y="14" width="13" height="6" fill="#388e3caa" rx="1"/><rect x="28" y="13" width="13" height="7" fill="#388e3caa" rx="1"/><rect x="42" y="0" width="13" height="20" fill="#388e3caa" rx="1"/><rect x="56" y="6" width="13" height="14" fill="#388e3caa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$2,827，高於 NT$1,500 門檻，建議優先分配廣告預算">⭐ 高優先</span><div class="pri-sub">均客單 NT$2,827</div></td>
             </tr><tr>
               <td class="brand-name-cell">日南製藥</td>
               <td class="num">NT$27,078</td>
-              <td class="num">1%</td>
-              <td class="num" style="font-weight:700">NT$2,256</td>
+              <td class="num brand-sep">1%</td>
+              <td class="num">NT$2,256</td>
               <td class="num">12</td>
-              <td style="text-align:center"><span style="color:#16a34a;font-weight:700">↑</span></td>
-              <td style="text-align:center"><span class="pri-badge pri-high">⭐ 高優先 <span style="color:#16a34a;font-weight:900">↑</span></span></td>
+              <td><svg width="72" height="20" style="display:block;flex-shrink:0"><rect x="0" y="17" width="13" height="3" fill="#388e3caa" rx="1"/><rect x="14" y="18" width="13" height="2" fill="#388e3caa" rx="1"/><rect x="28" y="15" width="13" height="5" fill="#388e3caa" rx="1"/><rect x="42" y="18" width="13" height="2" fill="#388e3caa" rx="1"/><rect x="56" y="0" width="13" height="20" fill="#388e3caa" rx="1"/></svg></td>
+              <td style="text-align:center"><span class="pri-badge pri-high" title="均客單 NT$2,256，高於 NT$1,500 門檻，建議優先分配廣告預算，且近期有上升趨勢">⭐ 高優先 ↑</span><div class="pri-sub">均客單 NT$2,256</div></td>
             </tr></tbody>
         </table>
         </div>
