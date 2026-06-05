@@ -60,13 +60,22 @@ a{color:#13227f}
 
 /* Supplier block */
 .supplier-block{margin-bottom:40px}
-.supplier-header{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:18px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.07);flex-wrap:wrap;gap:12px}
+.supplier-header{background:#fff;border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.sup-identity{margin-bottom:16px}
 .sup-cat{font-size:11px;font-weight:700;color:#757575;text-transform:uppercase;letter-spacing:.5px}
-.sup-name{font-size:20px;font-weight:700;color:#1a1a1a;margin-top:2px}
-.sup-kpi-row{display:flex;gap:20px;flex-wrap:wrap}
-.sup-kpi{text-align:right}
-.sup-kpi-label{font-size:11px;color:#757575}
-.sup-kpi-val{font-size:20px;font-weight:700}
+.sup-name{font-size:22px;font-weight:700;color:#1a1a1a;margin-top:2px}
+.sup-kpi-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:700px){.sup-kpi-cards{grid-template-columns:repeat(2,1fr)}}
+.sup-kpi-card{background:#f7f8fc;border-radius:8px;padding:14px 16px;border:1px solid #e8eaf0}
+.sup-kpi-card-label{font-size:11px;color:#757575;font-weight:600;margin-bottom:6px;letter-spacing:.3px}
+.sup-kpi-card-val{font-size:22px;font-weight:700;line-height:1.2;margin-bottom:4px}
+.sup-kpi-card-sub{font-size:11px;color:#9ca3af}
+.sup-kpi-conc-bar{margin-top:8px}
+.sup-kpi-conc-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.sup-kpi-conc-lbl{font-size:10px;color:#757575;width:30px;flex-shrink:0}
+.sup-kpi-conc-bg{flex:1;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden}
+.sup-kpi-conc-fill{height:100%;border-radius:3px}
+.sup-kpi-conc-pct{font-size:10px;font-weight:700;color:#555;width:28px;text-align:right;flex-shrink:0}
 
 /* Table */
 .data-table{width:100%;border-collapse:collapse;font-size:13px}
@@ -203,18 +212,41 @@ a{color:#13227f}
 
     <div class="supplier-block" id="sec-cbh">
       <div class="supplier-header" style="border-left:5px solid #13227f">
-        <div>
+        <div class="sup-identity">
           <span class="sup-cat">💄 美妝</span>
           <h2 class="sup-name">跨境豐收</h2>
         </div>
-        <div class="sup-kpi-row">
-          <div class="sup-kpi"><div class="sup-kpi-label">總營收</div><div class="sup-kpi-val" style="color:#13227f">NT$14.4M</div></div>
-          <div class="sup-kpi"><div class="sup-kpi-label">總訂單數</div><div class="sup-kpi-val">9,163</div></div>
-          <div class="sup-kpi"><div class="sup-kpi-label">均客單</div><div class="sup-kpi-val">NT$1,574</div></div>
-          <div class="sup-kpi">
-            <div class="sup-kpi-label">SKU 種類 / 集中度</div>
-            <div class="sup-kpi-val" style="font-size:16px">394 個</div>
-            <div style="font-size:11px;color:#9ca3af;margin-top:2px">Top5 35% ｜ Top10 47%</div>
+        <div class="sup-kpi-cards">
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">總營收</div>
+            <div class="sup-kpi-card-val" style="color:#13227f">NT$14.4M</div>
+            <div class="sup-kpi-card-sub">1月～5月累積</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">總訂單數</div>
+            <div class="sup-kpi-card-val">9,163</div>
+            <div class="sup-kpi-card-sub">筆</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">均客單</div>
+            <div class="sup-kpi-card-val">NT$1,574</div>
+            <div class="sup-kpi-card-sub">每筆訂單平均花費</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">SKU 種類 / 集中度</div>
+            <div class="sup-kpi-card-val" style="font-size:18px">394 個</div>
+            <div class="sup-kpi-conc-bar">
+              <div class="sup-kpi-conc-row">
+                <span class="sup-kpi-conc-lbl">Top5</span>
+                <div class="sup-kpi-conc-bg"><div class="sup-kpi-conc-fill" style="width:35%;background:#13227f88"></div></div>
+                <span class="sup-kpi-conc-pct">35%</span>
+              </div>
+              <div class="sup-kpi-conc-row">
+                <span class="sup-kpi-conc-lbl">Top10</span>
+                <div class="sup-kpi-conc-bg"><div class="sup-kpi-conc-fill" style="width:47%;background:#13227f44"></div></div>
+                <span class="sup-kpi-conc-pct">47%</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -652,18 +684,41 @@ a{color:#13227f}
     </div>
     <div class="supplier-block" id="sec-gsj">
       <div class="supplier-header" style="border-left:5px solid #e40011">
-        <div>
+        <div class="sup-identity">
           <span class="sup-cat">🧻 日用</span>
           <h2 class="sup-name">金盛世紙業</h2>
         </div>
-        <div class="sup-kpi-row">
-          <div class="sup-kpi"><div class="sup-kpi-label">總營收</div><div class="sup-kpi-val" style="color:#e40011">NT$12.2M</div></div>
-          <div class="sup-kpi"><div class="sup-kpi-label">總訂單數</div><div class="sup-kpi-val">18,563</div></div>
-          <div class="sup-kpi"><div class="sup-kpi-label">均客單</div><div class="sup-kpi-val">NT$658</div></div>
-          <div class="sup-kpi">
-            <div class="sup-kpi-label">SKU 種類 / 集中度</div>
-            <div class="sup-kpi-val" style="font-size:16px">56 個</div>
-            <div style="font-size:11px;color:#9ca3af;margin-top:2px">Top5 77% ｜ Top10 91%</div>
+        <div class="sup-kpi-cards">
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">總營收</div>
+            <div class="sup-kpi-card-val" style="color:#e40011">NT$12.2M</div>
+            <div class="sup-kpi-card-sub">1月～5月累積</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">總訂單數</div>
+            <div class="sup-kpi-card-val">18,563</div>
+            <div class="sup-kpi-card-sub">筆</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">均客單</div>
+            <div class="sup-kpi-card-val">NT$658</div>
+            <div class="sup-kpi-card-sub">每筆訂單平均花費</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">SKU 種類 / 集中度</div>
+            <div class="sup-kpi-card-val" style="font-size:18px">56 個</div>
+            <div class="sup-kpi-conc-bar">
+              <div class="sup-kpi-conc-row">
+                <span class="sup-kpi-conc-lbl">Top5</span>
+                <div class="sup-kpi-conc-bg"><div class="sup-kpi-conc-fill" style="width:77%;background:#e4001188"></div></div>
+                <span class="sup-kpi-conc-pct">77%</span>
+              </div>
+              <div class="sup-kpi-conc-row">
+                <span class="sup-kpi-conc-lbl">Top10</span>
+                <div class="sup-kpi-conc-bg"><div class="sup-kpi-conc-fill" style="width:91%;background:#e4001144"></div></div>
+                <span class="sup-kpi-conc-pct">91%</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1101,18 +1156,41 @@ a{color:#13227f}
     </div>
     <div class="supplier-block" id="sec-yfl">
       <div class="supplier-header" style="border-left:5px solid #388e3c">
-        <div>
+        <div class="sup-identity">
           <span class="sup-cat">💊 保健</span>
           <h2 class="sup-name">壹伍壹拾</h2>
         </div>
-        <div class="sup-kpi-row">
-          <div class="sup-kpi"><div class="sup-kpi-label">總營收</div><div class="sup-kpi-val" style="color:#388e3c">NT$2.2M</div></div>
-          <div class="sup-kpi"><div class="sup-kpi-label">總訂單數</div><div class="sup-kpi-val">703</div></div>
-          <div class="sup-kpi"><div class="sup-kpi-label">均客單</div><div class="sup-kpi-val">NT$3,106</div></div>
-          <div class="sup-kpi">
-            <div class="sup-kpi-label">SKU 種類 / 集中度</div>
-            <div class="sup-kpi-val" style="font-size:16px">88 個</div>
-            <div style="font-size:11px;color:#9ca3af;margin-top:2px">Top5 44% ｜ Top10 60%</div>
+        <div class="sup-kpi-cards">
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">總營收</div>
+            <div class="sup-kpi-card-val" style="color:#388e3c">NT$2.2M</div>
+            <div class="sup-kpi-card-sub">1月～5月累積</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">總訂單數</div>
+            <div class="sup-kpi-card-val">703</div>
+            <div class="sup-kpi-card-sub">筆</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">均客單</div>
+            <div class="sup-kpi-card-val">NT$3,106</div>
+            <div class="sup-kpi-card-sub">每筆訂單平均花費</div>
+          </div>
+          <div class="sup-kpi-card">
+            <div class="sup-kpi-card-label">SKU 種類 / 集中度</div>
+            <div class="sup-kpi-card-val" style="font-size:18px">88 個</div>
+            <div class="sup-kpi-conc-bar">
+              <div class="sup-kpi-conc-row">
+                <span class="sup-kpi-conc-lbl">Top5</span>
+                <div class="sup-kpi-conc-bg"><div class="sup-kpi-conc-fill" style="width:44%;background:#388e3c88"></div></div>
+                <span class="sup-kpi-conc-pct">44%</span>
+              </div>
+              <div class="sup-kpi-conc-row">
+                <span class="sup-kpi-conc-lbl">Top10</span>
+                <div class="sup-kpi-conc-bg"><div class="sup-kpi-conc-fill" style="width:60%;background:#388e3c44"></div></div>
+                <span class="sup-kpi-conc-pct">60%</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
