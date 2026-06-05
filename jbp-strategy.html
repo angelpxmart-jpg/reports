@@ -6,6 +6,7 @@
 <title>JBP 外投廣告策略報表 2026-06-05</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 <script>
 function momPlugin(arr,col){
   return{id:'mom',afterDatasetsDraw(chart){
@@ -26,6 +27,33 @@ function momPlugin(arr,col){
     });
     ctx.restore();
   }};
+}
+function campaignPlugin(arr,color){
+  return{id:'campaign',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0).data,yS=chart.scales.y;
+    const baseline=yS.getPixelForValue(0);
+    ctx.save();
+    meta.forEach((bar,i)=>{
+      const lbl=arr[i];if(!lbl)return;
+      const bW=bar.width||40,tH=13,tY=baseline-tH-3;
+      ctx.font='bold 8px sans-serif';
+      const tW=Math.min(ctx.measureText(lbl).width+8,bW-4);
+      const rx=bar.x-tW/2;
+      ctx.fillStyle='rgba(255,255,255,0.9)';ctx.strokeStyle=color+'cc';ctx.lineWidth=1;
+      ctx.beginPath();
+      if(ctx.roundRect)ctx.roundRect(rx,tY,tW,tH,2);else ctx.rect(rx,tY,tW,tH);
+      ctx.fill();ctx.stroke();
+      ctx.fillStyle=color;ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.save();ctx.beginPath();ctx.rect(rx+1,tY+1,tW-2,tH-2);ctx.clip();
+      ctx.fillText(lbl,bar.x,tY+tH/2);ctx.restore();
+    });
+    ctx.restore();
+  }};
+}
+function evAnno(month,label,color){
+  return{type:'line',xMin:month,xMax:month,borderColor:color+'66',borderWidth:1.5,borderDash:[4,4],
+    label:{display:true,content:label,position:'start',font:{size:10},color:color,
+      backgroundColor:'rgba(255,255,255,0.9)',padding:{x:4,y:2},borderRadius:3}};
 }
 </script>
 <style>
@@ -198,7 +226,7 @@ a{color:#13227f}
         ]
       },
       options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:'top'}},
+        plugins:{legend:{position:'top'},annotation:{annotations:{ev0:evAnno('6月','618年中大促','#1565c0')}},},
         scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}
       }
     });</script>
@@ -257,8 +285,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-cbh'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[2744994, 1710703, 3457533, 2964049, 3418847, 132646],backgroundColor:'#13227f22',borderColor:'#13227f',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
-              plugins:[momPlugin([null,-38,102,-14,15,-96],'#13227f')]
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},annotation:{annotations:{ev0:evAnno('6月','618年中大促','#1565c0')}},},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin([null,-38,102,-14,15,-96],'#13227f'),campaignPlugin(["年貨節","新年&38女神","全民享購節","好事節&55","全民抗漲節","618年中大促"],'#13227f')]
             });
           </script>
         </div>
@@ -817,8 +845,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-gsj'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[1954035, 1521395, 3894310, 2764906, 2004293, 88179],backgroundColor:'#e4001122',borderColor:'#e40011',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
-              plugins:[momPlugin([null,-22,156,-29,-28,-96],'#e40011')]
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},annotation:{annotations:{ev0:evAnno('6月','618年中大促','#1565c0')}},},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin([null,-22,156,-29,-28,-96],'#e40011'),campaignPlugin(["年貨節","新年&38女神","全民享購節","好事節&55","全民抗漲節","618年中大促"],'#e40011')]
             });
           </script>
         </div>
@@ -1321,8 +1349,8 @@ a{color:#13227f}
             new Chart(document.getElementById('chart-yfl'),{
               type:'bar',
               data:{labels:['1月', '2月', '3月', '4月', '5月', '6月'],datasets:[{label:'月營收',data:[426454, 153356, 332314, 479212, 751105, 41142],backgroundColor:'#388e3c22',borderColor:'#388e3c',borderWidth:2,borderRadius:4}]},
-              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
-              plugins:[momPlugin([null,-64,117,44,57,-95],'#388e3c')]
+              options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},annotation:{annotations:{ev0:evAnno('6月','618年中大促','#1565c0')}},},scales:{y:{ticks:{callback:v=>v>=1000000?'$'+(v/1000000).toFixed(1)+'M':'$'+v.toLocaleString()}}}},
+              plugins:[momPlugin([null,-64,117,44,57,-95],'#388e3c'),campaignPlugin(["年貨節","新年&38女神","全民享購節","好事節&55","全民抗漲節","618年中大促"],'#388e3c')]
             });
           </script>
         </div>
@@ -1842,7 +1870,7 @@ a{color:#13227f}
           <div>
             <div class="campaign-name">618年中大促 <span class="tag-active">進行中</span></div>
             <div class="campaign-period">📅 06/05 ～ 06/25</div>
-            <div class="campaign-key">🎫 滿5000折500・滿15000折1500・週末神券600</div>
+            <div class="campaign-key">🎫 618暖身滿6000折300・正式滿8000折500・夜貓88折（每日20-22點）</div>
           </div>
         </div>
         <div class="campaign-grid">
@@ -1909,7 +1937,7 @@ a{color:#13227f}
 </div>
 
 <div class="footer">
-  JBP 廣告策略報表 v1.5 · 產製時間：2026-06-05 · 資料來源：全電商 BI（廠商銷售及上架資料）
+  JBP 廣告策略報表 v1.6 · 產製時間：2026-06-05 · 資料來源：全電商 BI（廠商銷售及上架資料）
 </div>
 
 </div>
