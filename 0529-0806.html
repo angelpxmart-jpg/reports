@@ -131,6 +131,22 @@
   /* FOOTER */
   footer { text-align: center; font-size: 12px; color: var(--muted); padding: 32px; }
 
+  /* === 月度時間軸 & 今日速覽 === */
+  .today-hero { margin-bottom: 16px; border-radius: 14px; padding: 20px 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; border: 2px solid transparent; }
+  .ptl-wrap { position: relative; padding-top: 22px; margin-bottom: 8px; }
+  .ptl-bar { display: flex; border-radius: 8px; overflow: hidden; height: 44px; border: 1px solid var(--hairline); }
+  .ptl-seg { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden; }
+  .ptl-seg-name { font-size: 11px; font-weight: 700; white-space: nowrap; padding: 0 4px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  .ptl-seg-date { font-size: 9px; opacity: .65; }
+  .ptl-needle-wrap { position: absolute; top: 0; bottom: 0; width: 2px; pointer-events: none; }
+  .ptl-needle-label { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--red); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 9999px; white-space: nowrap; }
+  .ptl-needle { position: absolute; top: 19px; bottom: 0; left: 0; width: 2px; background: var(--red); border-radius: 1px; }
+  .ptl-dates { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 4px; padding: 0 2px; }
+  .today-events-wrap { margin-bottom: 24px; }
+  .today-events-title { font-size: 13px; font-weight: 700; color: var(--slate); margin-bottom: 8px; }
+  .today-events-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .today-event-chip { padding: 6px 12px; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+
   /* ACCORDION */
   details { margin-bottom: 8px; }
   details > summary { cursor: pointer; font-weight: 700; font-size: 16px; color: var(--blue); padding: 12px 0; border-bottom: 1px solid var(--hairline); list-style: none; display: flex; align-items: center; gap: 8px; }
@@ -161,6 +177,18 @@
   <div class="page-title">全站活動機制解析</div>
   <div class="page-sub">資料來源：Google Drive 活動辦法 PDF（17 份）｜ 分析角度：活動機制 × 消費者行為 × 供應商建議</div>
 
+  <!-- ===== 今日速覽 ===== -->
+  <div id="today-hero" class="today-hero"></div>
+  <div class="ptl-wrap">
+    <div class="ptl-bar" id="ptl-bar"></div>
+    <div class="ptl-needle-wrap" id="ptl-needle-wrap" style="display:none;">
+      <div class="ptl-needle-label"></div>
+      <div class="ptl-needle"></div>
+    </div>
+    <div class="ptl-dates"><span>5/29</span><span>6/26</span><span>7/10</span><span>8/6</span></div>
+  </div>
+  <div id="today-events" class="today-events-wrap"></div>
+
   <!-- 三檔概覽 -->
   <div class="section">
     <div class="section-title">三檔全站活動總覽</div>
@@ -188,7 +216,7 @@
       </div>
     </div>
 
-    <div class="callout callout-brand" style="margin-bottom:12px;"><strong>時間軸</strong> — 今天（6/4）正處於 618 暖身期第一天，全站活動 + 品牌箱購活動同步啟動。</div>
+    <div id="static-timeline-note" class="callout callout-brand" style="margin-bottom:12px;"></div>
     <div class="timeline">
       <div class="tl-phase phase-pre">
         <div class="tl-label">618 前導</div>
@@ -1133,6 +1161,209 @@
 </div>
 
 <footer>全聯全電商內部分析用途 ｜ Claude Code 產出 ｜ 2026-06-04 更新版</footer>
+
+<script>
+(function() {
+  function D(y,m,d) { return new Date(y, m-1, d); }
+
+  var PHASES = [
+    { key:'pre',  name:'618 前導期', sub:'領券觀望，廣告保守',
+      start:D(2026,5,29), end:D(2026,6,4),
+      bg:'#eef0fa', color:'#13227f', border:'#9fa8da',
+      events:[
+        '📋 消費者主要在領券、觀望，下單意願低',
+        '⚠️ 廣告轉換率最低，維持基本曝光即可',
+        '💡 素材主打「預領抵用券，暖身期即可用」',
+        '🎟️ 預領抵用券：滿5,000折500 ～ 滿30,000折3,000',
+      ]
+    },
+    { key:'warm', name:'618 暖身期', sub:'第一波爆單',
+      start:D(2026,6,5), end:D(2026,6,11),
+      bg:'#dce4ff', color:'#13227f', border:'#7986cb',
+      events:[
+        '✅ 預領抵用券今起可用（暖身／正式期通用）',
+        '🌙 每日 20:00–21:59 夜貓88折（最高折288元）',
+        '💰 暖身神券：滿6,000折300 ／ 滿15,000折600',
+        '💳 全支付：滿1,680送618點',
+        '📦 品牌箱購啟動：黑松、太古、維達、康那香、金百利、金盛世',
+        '🎯 廣告策略：夜間20:00後重點投放，ROI最佳',
+      ]
+    },
+    { key:'main', name:'618 正式期', sub:'🔥 全年最高峰',
+      start:D(2026,6,12), end:D(2026,6,18),
+      bg:'#13227f', color:'#ffffff', border:'#13227f',
+      events:[
+        '🔥 500元神券：滿8,000折500',
+        '⬆️ 夜貓88折升級：每日20:00–21:59，最高折400元',
+        '🎯 嬌聯品牌箱購（6/13–6/19）：滿2,999贈2,000點',
+        '🏆 6/18 最高峰：13–18點每小時閃券（1折，限68份）',
+        '💡 廣告策略：全力投放，預算集中本週',
+      ]
+    },
+    { key:'back', name:'618 返場期', sub:'清券收尾',
+      start:D(2026,6,19), end:D(2026,6,25),
+      bg:'#c5cae9', color:'#283593', border:'#9fa8da',
+      events:[
+        '📌 返場神券：滿10,000折1,000',
+        '⚠️ 整體力道趨弱，主要消化前期領的抵用券',
+        '📦 康那香活動恢復（排除正式期後重新上線）',
+        '💡 廣告策略：僅保留高客單（滿10,000以上）商品廣告',
+      ]
+    },
+    { key:'77',   name:'77 好運節', sub:'高客單短衝',
+      start:D(2026,6,26), end:D(2026,7,9),
+      bg:'#fff3e0', color:'#bf360c', border:'#ffcc80',
+      events:[
+        '💳 大額抵用券即領即用：滿15,000折1,500 ／ 滿50,000折5,000',
+        '⚡ 7/3–7/9 每日12/15/20點閃購（限177份，7折最高588）',
+        '🎉 7/7–7/8 77主題日：滿7,777折777',
+        '📅 週末三層神券：滿1,500折100 ／ 滿12,000折600 ／ 滿22,000折1,200',
+        '⚠️ 平日廣告效益低，主攻週末與閃購時段',
+      ]
+    },
+    { key:'app',  name:'APP 全新體驗', sub:'週期型高回報',
+      start:D(2026,7,10), end:D(2026,8,6),
+      bg:'#e8f5e9', color:'#1b5e20', border:'#a5d6a7',
+      events:[
+        '🌱 首十日神券：滿2,500折150（7/10–7/19）',
+        '📅 每週三500神券：7/15, 7/22, 7/29, 8/5（滿5,000折500）',
+        '📅 每個週末三層神券：100 ／ 600 ／ 1,200元',
+        '⚡ 7/20起 每日10/15/20點閃購（限300份，85折最高200）',
+        '🟢 足球爭霸戰積分持續至8/2（每滿60元1積分）',
+        '💡 廣告策略：固定週三／週末節奏，7/20後加強',
+      ]
+    },
+  ];
+
+  var SPECIAL = {
+    '2026-06-12': ['🔥 正式期今日啟動！500元神券開放（滿8,000）', '⬆️ 夜貓88折升級最高折400元（20:00–21:59）'],
+    '2026-06-13': ['🎯 嬌聯品牌箱購今日啟動（至6/19）：滿2,999贈2,000點'],
+    '2026-06-18': ['🏆 今天是全年最高峰！13:00–18:00每小時閃券（1折，限68份）', '⬆️ 夜貓88折最高折400元（20:00–21:59）', '⭐ 建議全天保持APP通知開啟'],
+    '2026-06-19': ['📌 返場期今日開始，嬌聯品牌箱購最後一天', '📦 康那香折扣活動今日恢復'],
+    '2026-07-03': ['⚡ 77好運節閃購券今日啟動：每日12/15/20點，限177份，7折最高588'],
+    '2026-07-07': ['🎉 77主題日第一天！滿7,777折777，全站氣氛最熱', '⚡ 閃購券每日12/15/20點（限177份，7折）'],
+    '2026-07-08': ['🎉 77主題日最後一天！把握今日：滿7,777折777'],
+    '2026-07-10': ['🌱 APP全新體驗今日啟動！首十日神券：滿2,500折150'],
+    '2026-07-15': ['📅 今天是07檔週三500神券日（滿5,000折500）'],
+    '2026-07-20': ['⚡ 閃購券今日啟動：每日10/15/20點，限300份，85折最高200'],
+    '2026-07-22': ['📅 今天是07檔週三500神券日（滿5,000折500）', '💰 金百利／金盛世點數回饋日'],
+    '2026-07-29': ['📅 今天是07檔週三500神券日（滿5,000折500）'],
+    '2026-08-05': ['📅 今天是07檔最後一個週三500神券日（滿5,000折500）'],
+  };
+
+  function today() { var t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
+  function toKey(d) { return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function pad(n) { return n<10?'0'+n:n; }
+  function diff(a,b) { return Math.round((b-a)/86400000); }
+
+  var now = today();
+  var nowKey = toKey(now);
+  var totalStart = PHASES[0].start;
+  var totalEnd = PHASES[PHASES.length-1].end;
+  var totalDays = diff(totalStart, totalEnd) + 1;
+
+  var curPhase = null, nextPhase = null;
+  for (var i=0; i<PHASES.length; i++) {
+    if (now >= PHASES[i].start && now <= PHASES[i].end) {
+      curPhase = PHASES[i];
+      nextPhase = PHASES[i+1] || null;
+      break;
+    }
+    if (now < PHASES[i].start && !nextPhase) nextPhase = PHASES[i];
+  }
+
+  // ── TODAY HERO ───────────────────────────────────────────
+  var hero = document.getElementById('today-hero');
+  if (hero) {
+    if (now < totalStart) {
+      hero.style.cssText = 'background:var(--surface);border:2px solid var(--hairline);border-radius:14px;padding:20px 24px;';
+      hero.innerHTML = '<div style="color:var(--slate);font-size:15px;">活動尚未開始，倒數 <strong>'+diff(now,totalStart)+'</strong> 天（2026/5/29 起）</div>';
+    } else if (now > totalEnd) {
+      hero.style.cssText = 'background:var(--surface);border:2px solid var(--hairline);border-radius:14px;padding:20px 24px;';
+      hero.innerHTML = '<div style="color:var(--slate);font-size:15px;">本季活動已全數結束（截至 2026/8/6）</div>';
+    } else if (curPhase) {
+      var phaseDay = diff(curPhase.start, now) + 1;
+      var phaseTotal = diff(curPhase.start, curPhase.end) + 1;
+      var daysLeft = diff(now, curPhase.end);
+      var nextInfo = '';
+      if (nextPhase) {
+        var d2n = diff(now, nextPhase.start);
+        nextInfo = d2n <= 1 ? '→ 明天進入 <strong>'+nextPhase.name+'</strong>' : '→ <strong>'+d2n+'</strong> 天後進入 '+nextPhase.name;
+      }
+      var dateLabel = (curPhase.start.getMonth()+1)+'/'+curPhase.start.getDate()+'～'+(curPhase.end.getMonth()+1)+'/'+curPhase.end.getDate();
+      hero.style.cssText = 'background:'+curPhase.bg+';border:2px solid '+curPhase.border+';border-radius:14px;padding:20px 24px;color:'+curPhase.color+';display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:16px;';
+      hero.innerHTML =
+        '<div style="flex:1;min-width:180px;">'+
+          '<div style="font-size:11px;font-weight:700;letter-spacing:.8px;opacity:.6;margin-bottom:2px;">現在是</div>'+
+          '<div style="font-size:26px;font-weight:700;line-height:1.2;margin-bottom:4px;">'+curPhase.name+'</div>'+
+          '<div style="font-size:14px;opacity:.8;">'+curPhase.sub+'</div>'+
+          '<div style="font-size:12px;opacity:.65;margin-top:8px;">'+dateLabel+'（共'+phaseTotal+'天）</div>'+
+          (nextInfo ? '<div style="font-size:12px;opacity:.6;margin-top:4px;">'+nextInfo+'</div>' : '')+
+        '</div>'+
+        '<div style="text-align:right;min-width:80px;">'+
+          '<div style="font-size:54px;font-weight:700;line-height:1;">'+daysLeft+'</div>'+
+          '<div style="font-size:13px;opacity:.7;margin-top:2px;">天後結束</div>'+
+          '<div style="font-size:12px;opacity:.55;margin-top:6px;">今天第 '+phaseDay+' / '+phaseTotal+' 天</div>'+
+        '</div>';
+    }
+  }
+
+  // ── PROPORTIONAL TIMELINE ────────────────────────────────
+  var ptlBar = document.getElementById('ptl-bar');
+  if (ptlBar) {
+    for (var j=0; j<PHASES.length; j++) {
+      var p = PHASES[j];
+      var days = diff(p.start, p.end) + 1;
+      var pct = (days / totalDays * 100).toFixed(2);
+      var isActive = curPhase && curPhase.key === p.key;
+      var seg = document.createElement('div');
+      seg.className = 'ptl-seg';
+      seg.style.cssText = 'width:'+pct+'%;background:'+p.bg+';color:'+p.color+';'+(isActive ? 'box-shadow:inset 0 0 0 3px rgba(0,0,0,.18);' : '');
+      var showDate = days > 7;
+      seg.innerHTML = '<span class="ptl-seg-name" style="font-size:'+(days<=7?'9px':'11px')+'">'+p.name+'</span>'+(showDate ? '<span class="ptl-seg-date">'+(p.start.getMonth()+1)+'/'+(p.start.getDate())+'–'+(p.end.getMonth()+1)+'/'+(p.end.getDate())+'</span>' : '');
+      ptlBar.appendChild(seg);
+    }
+  }
+
+  var needle = document.getElementById('ptl-needle-wrap');
+  if (needle && now >= totalStart && now <= totalEnd) {
+    var elapsed = diff(totalStart, now);
+    var pct2 = (elapsed / (totalDays-1) * 100).toFixed(2);
+    needle.style.cssText = 'display:block;position:absolute;top:0;bottom:0;width:2px;left:calc('+pct2+'% - 1px);pointer-events:none;';
+    var lbl = needle.querySelector('.ptl-needle-label');
+    if (lbl) lbl.textContent = '今天 '+(now.getMonth()+1)+'/'+(now.getDate());
+  }
+
+  // ── TODAY EVENTS ─────────────────────────────────────────
+  var evEl = document.getElementById('today-events');
+  if (evEl && curPhase) {
+    var specials = SPECIAL[nowKey] || [];
+    var combined = specials.slice();
+    curPhase.events.forEach(function(e) {
+      if (!combined.some(function(c){ return c.slice(0,6)===e.slice(0,6); })) combined.push(e);
+    });
+    var chipBg = specials.length ? curPhase.border : 'rgba(0,0,0,.06)';
+    var chips = combined.map(function(e, idx) {
+      var isSp = idx < specials.length;
+      return '<div class="today-event-chip" style="background:'+(isSp?curPhase.border:'rgba(0,0,0,.05)')+';color:'+curPhase.color+';'+(isSp?'font-weight:700;border:1px solid '+curPhase.border+';':'')+'">'+(isSp?'⭐ ':'')+e+'</div>';
+    }).join('');
+    evEl.innerHTML = '<div class="today-events-title">📌 今日速覽</div><div class="today-events-grid">'+chips+'</div>';
+  }
+
+  // ── UPDATE SECTION CALLOUT ────────────────────────────────
+  var stn = document.getElementById('static-timeline-note');
+  if (stn) {
+    if (curPhase) {
+      var phaseDay2 = diff(curPhase.start, now) + 1;
+      var daysLeft2 = diff(now, curPhase.end);
+      var dateStr = (now.getMonth()+1)+'/'+(now.getDate());
+      stn.innerHTML = '<strong>時間軸</strong> — 今天（'+dateStr+'）是 <strong>'+curPhase.name+'</strong> 第'+phaseDay2+'天，還剩 <strong>'+daysLeft2+'</strong> 天。'+curPhase.sub+'。';
+    } else {
+      stn.innerHTML = '<strong>時間軸</strong> — 請參考上方月度時間軸。';
+    }
+  }
+})();
+</script>
 
 </body>
 </html>
