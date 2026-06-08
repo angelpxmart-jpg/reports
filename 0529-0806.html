@@ -176,23 +176,22 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
   <div class="today-inner">
     <div class="today-left">
       <div>
-        <div class="today-date">2026 年 6 月 5 日（週五）</div>
+        <div class="today-date" id="dyn-date">2026 年 6 月 5 日（週五）</div>
         <div class="today-date-sub">📅 今日速覽</div>
       </div>
-      <div class="today-status">🔥 618 暖身期開始 · 第 1 天（06/05–06/11）</div>
+      <div class="today-status" id="dyn-status">🔥 618 暖身期開始 · 第 1 天（06/05–06/11）</div>
       <div class="today-counts">
-        <div class="today-count"><div class="today-count-num">8</div><div class="today-count-label">618 進行天數</div></div>
-        <div class="today-count"><div class="today-count-num">20</div><div class="today-count-label">距 618 主場</div></div>
-        <div class="today-count"><div class="today-count-num">21</div><div class="today-count-label">距 77 好運節</div></div>
-        <div class="today-count"><div class="today-count-num">35</div><div class="today-count-label">距 07 檔</div></div>
+        <div class="today-count"><div class="today-count-num" id="cnt-days">8</div><div class="today-count-label">618 進行天數</div></div>
+        <div class="today-count"><div class="today-count-num" id="cnt-618">20</div><div class="today-count-label">距 618 主場</div></div>
+        <div class="today-count"><div class="today-count-num" id="cnt-77">21</div><div class="today-count-label">距 77 好運節</div></div>
+        <div class="today-count"><div class="today-count-num" id="cnt-07">35</div><div class="today-count-label">距 07 檔</div></div>
       </div>
     </div>
-    <div class="today-actions">
+    <div class="today-actions" id="dyn-actions">
       <div class="today-actions-title">⚡ 今日行動建議</div>
       <div class="today-action"><div class="today-action-dot"></div><div>領「暖身300神券」（滿6,000折300）+ 「暖身600神券」（滿15,000折600）</div></div>
       <div class="today-action"><div class="today-action-dot"></div><div>今晚 20:00–21:59 夜貓88折，滿1,000最高折288元</div></div>
       <div class="today-action"><div class="today-action-dot"></div><div>全支付滿1,680送618福利點（8/5匯入）</div></div>
-      <div class="today-action"><div class="today-action-dot"></div><div>本週末6/6–6/7 可購iPhone17享800點（限全支付）</div></div>
     </div>
   </div>
 </div>
@@ -201,7 +200,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
 <div id="timeline">
   <div class="section-header">
     <div class="section-title">月度時間軸</div>
-    <div class="section-sub">紅線 = 今日（6/5）</div>
+    <div class="section-sub" id="tl-sub">紅線 = 今日（6/5）</div>
   </div>
   <div class="timeline-wrap">
     <!-- 時間軸：absolute 定位，共69天（5/29~8/6）= 100% -->
@@ -211,7 +210,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
         <!-- 日期標籤列 -->
         <div style="position:relative;height:20px;margin-bottom:8px;font-size:11px;color:#bdbdbd">
           <span style="position:absolute;left:0%;color:#e40011;font-weight:700">5/29</span>
-          <span style="position:absolute;left:10.1%;transform:translateX(-50%);color:#e40011;font-weight:700">6/5 ▼</span>
+          <span id="tl-date-label" style="position:absolute;left:10.1%;transform:translateX(-50%);color:#e40011;font-weight:700">6/5 ▼</span>
           <span style="position:absolute;left:20.3%;transform:translateX(-50%)">6/12</span>
           <span style="position:absolute;left:30.4%;transform:translateX(-50%)">6/19</span>
           <span style="position:absolute;left:40.6%;transform:translateX(-50%)">6/26</span>
@@ -234,8 +233,8 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
           </div>
 
           <!-- 今日線 -->
-          <div style="position:absolute;left:10.1%;top:0;bottom:0;width:2px;background:#e40011;z-index:10"></div>
-          <div style="position:absolute;left:10.1%;top:0;font-size:10px;color:#e40011;font-weight:700;white-space:nowrap;transform:translateX(-50%);padding:1px 4px;background:#e40011;color:#fff;border-radius:3px">今日</div>
+          <div id="tl-line" style="position:absolute;left:10.1%;top:0;bottom:0;width:2px;background:#e40011;z-index:10"></div>
+          <div id="tl-label" style="position:absolute;left:10.1%;top:0;font-size:10px;font-weight:700;white-space:nowrap;transform:translateX(-50%);padding:1px 4px;background:#e40011;color:#fff;border-radius:3px">今日</div>
 
           <!-- Row 1 (top=28): 618 5/29→6/25：left=0%, width=39.1% -->
           <div style="position:absolute;top:28px;left:0%;width:39.1%;height:30px;background:#13227f;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">618 年中大促（6-1檔）05/29–06/25</div>
@@ -339,21 +338,21 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
     <table>
       <thead><tr><th style="width:90px">階段</th><th style="width:130px">時間</th><th>主要神券</th><th>閃購券</th><th>全支付加碼</th></tr></thead>
       <tbody>
-        <tr>
+        <tr id="row-qiandao">
           <td>前導期</td>
           <td>05/29–06/04</td>
           <td>★200（滿3,000折200）<br>LINE好友送168元（滿1,000）</td>
           <td>每日00點 滿1.5萬折1,000（限800）<br>每日10/15/20點 5折（限68份）</td>
           <td>—</td>
         </tr>
-        <tr>
-          <td class="hl">暖身期<br><small style="color:#e40011;font-weight:700">← 今日</small></td>
-          <td class="hl">06/05–06/11</td>
-          <td class="hl">★300（滿6,000）<br>★600（滿15,000）<br>100元指定日（滿1,500）</td>
-          <td class="hl">每日12/15/20點 68折（限10份）</td>
-          <td class="hl">滿1,680送618點（8/5贈）</td>
+        <tr id="row-nuanshen">
+          <td>暖身期</td>
+          <td>06/05–06/11</td>
+          <td>★300（滿6,000）<br>★600（滿15,000）<br>100元指定日（滿1,500）</td>
+          <td>每日12/15/20點 68折（限10份）</td>
+          <td>滿1,680送618點（8/5贈）</td>
         </tr>
-        <tr>
+        <tr id="row-zhengshi">
           <td>正式檔期</td>
           <td>06/12–06/18</td>
           <td>★500（滿8,000）<br>★168一日（6/17 23:00起）</td>
@@ -371,7 +370,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
           </td>
           <td>—</td>
         </tr>
-        <tr>
+        <tr id="row-fanchang">
           <td>返場期</td>
           <td>06/19–06/25</td>
           <td>★600返場（滿15,000）<br>100元指定日（滿1,500）</td>
@@ -685,5 +684,92 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
 </div>
 
 </div>
+
+<script>
+(function(){
+  var today = new Date(); today.setHours(0,0,0,0);
+  var WD = ['日','一','二','三','四','五','六'];
+  function d(y,m,day){ var dt=new Date(y,m-1,day); dt.setHours(0,0,0,0); return dt; }
+  function diff(a,b){ return Math.round((b-a)/86400000); }
+
+  var START    = d(2026,5,29);
+  var D618_END = d(2026,6,25); // 618 期間結束
+  var D77      = d(2026,6,26); // 77 好運節開始
+  var D07      = d(2026,7,10); // 07 檔開始
+  var TOTAL    = diff(START, d(2026,8,6)); // 69
+
+  function getPhase(){
+    if(today < START)              return {key:'before',   icon:'📅', label:'活動尚未開始'};
+    if(today <= d(2026,6,4))       return {key:'qiandao',  icon:'📢', label:'6-1檔 前導期'};
+    if(today <= d(2026,6,11))      return {key:'nuanshen', icon:'🔥', label:'618 暖身期'};
+    if(today <= d(2026,6,18))      return {key:'zhengshi', icon:'🚀', label:'618 正式檔期'};
+    if(today <= d(2026,6,25))      return {key:'fanchang', icon:'↩️', label:'618 返場期'};
+    if(today <= d(2026,7,9))       return {key:'s62',      icon:'🍀', label:'77 好運節'};
+    if(today <= d(2026,8,6))       return {key:'s07',      icon:'📱', label:'07檔 APP全新體驗'};
+    return                                {key:'ended',    icon:'✅', label:'三檔活動已全數結束'};
+  }
+
+  var ACTIONS = {
+    before:   ['活動即將開始，關注全聯電商最新消息','提前規劃購物清單與廣告投放排程'],
+    qiandao:  ['領 LINE 好友券（滿1,000折168元），截止至6/11','每日00點搶「閃購券」（滿15,000折1,000，限800份）','大額抵用券（5K–100K折）前導領取中，建議提前佈局'],
+    nuanshen: ['領「暖身300神券」（滿6,000折300）+「暖身600神券」（滿15,000折600）','今晚 20:00–21:59 夜貓88折，滿1,000最高折288元','全支付滿1,680送618福利點（8/5匯入）'],
+    zhengshi: ['領「500神券」（滿8,000折500）','每日10點閃購9折（限1,618份），提前準備購物車','今晚 20:00–21:59 夜貓88折，滿1,000最高折400元'],
+    fanchang: ['領「600返場神券」（滿15,000折600）','週末全支付滿1,500送1,000點，適合箱購衝刺','確認 618 剩餘神券使用期限'],
+    s62:      ['領週末「600/1200神券」（滿12,000/22,000折）','7/3起每日12/15/20點搶「7折閃購券」（限177份/時段）','7/7–7/8「77神券」滿7,777折777元，鎖定大單機會'],
+    s07:      ['新加入 LINE 好友，領「200神券」（滿999元）全期可用','每週三（7/15、7/22、7/29、8/5）領「500神券」（滿5,000元）','週末全支付每滿1,500送1,000點，最高疊加10,000點'],
+    ended:    ['本波三檔活動已全數結束','建議覆盤本波廣告投報率（ROAS）數據','準備下一波活動廣告提案素材']
+  };
+
+  var phase = getPhase();
+
+  // 日期文字
+  var el = document.getElementById('dyn-date');
+  if(el) el.textContent = today.getFullYear()+' 年 '+(today.getMonth()+1)+' 月 '+today.getDate()+' 日（週'+WD[today.getDay()]+'）';
+
+  // 狀態 badge
+  el = document.getElementById('dyn-status');
+  if(el){
+    var label = phase.icon+' '+phase.label;
+    if(phase.key==='nuanshen') label += ' · 第'+(diff(d(2026,6,5),today)+1)+'天（06/05–06/11）';
+    el.textContent = label;
+  }
+
+  // 倒數數字
+  el = document.getElementById('cnt-days'); if(el) el.textContent = Math.max(0, diff(START,today)+1);
+  el = document.getElementById('cnt-618');  if(el) el.textContent = Math.max(0, diff(today,D618_END));
+  el = document.getElementById('cnt-77');   if(el) el.textContent = Math.max(0, diff(today,D77));
+  el = document.getElementById('cnt-07');   if(el) el.textContent = Math.max(0, diff(today,D07));
+
+  // 今日行動建議
+  el = document.getElementById('dyn-actions');
+  if(el){
+    var acts = ACTIONS[phase.key] || ACTIONS.ended;
+    el.innerHTML = '<div class="today-actions-title">⚡ 今日行動建議</div>' +
+      acts.map(function(a){ return '<div class="today-action"><div class="today-action-dot"></div><div>'+a+'</div></div>'; }).join('');
+  }
+
+  // 時間軸紅線位置
+  var dayIdx = diff(START, today);
+  var pct = Math.max(0, Math.min(100, dayIdx/TOTAL*100)).toFixed(1)+'%';
+
+  el = document.getElementById('tl-line');       if(el) el.style.left = pct;
+  el = document.getElementById('tl-label');      if(el) el.style.left = pct;
+  el = document.getElementById('tl-date-label'); if(el){ el.style.left = pct; el.textContent = (today.getMonth()+1)+'/'+today.getDate()+' ▼'; }
+  el = document.getElementById('tl-sub');        if(el) el.textContent = '紅線 = 今日（'+(today.getMonth()+1)+'/'+today.getDate()+'）';
+
+  // 表格「← 今日」高亮
+  var rowMap = {qiandao:'row-qiandao', nuanshen:'row-nuanshen', zhengshi:'row-zhengshi', fanchang:'row-fanchang'};
+  var rowId = rowMap[phase.key];
+  if(rowId){
+    var row = document.getElementById(rowId);
+    if(row){
+      var tds = row.querySelectorAll('td');
+      for(var i=0;i<tds.length;i++) tds[i].classList.add('hl');
+      var firstTd = tds[0];
+      if(firstTd){ var br=document.createElement('br'); var sm=document.createElement('small'); sm.style.cssText='color:#e40011;font-weight:700'; sm.textContent='← 今日'; firstTd.appendChild(br); firstTd.appendChild(sm); }
+    }
+  }
+})();
+</script>
 </body>
 </html>
