@@ -2084,7 +2084,7 @@ function switchMonth(key, month, btn) {
       var mRev = (JSON.parse(row.getAttribute('data-monthly-rev'))[month] || 0);
       var mQty = (JSON.parse(row.getAttribute('data-monthly-qty'))[month] || 0);
       var mAov = mQty > 0 ? Math.round(mRev / mQty) : 0;
-      var mPct = vTotal > 0 ? Math.round(mRev * 10 / vTotal) / 10 : 0;
+      var mPct = vTotal > 0 ? Math.round(mRev * 1000 / vTotal) / 10 : 0;
       row.querySelector('.sku-rev').textContent = mRev > 0 ? 'NT$' + mRev.toLocaleString() : '—';
       row.querySelector('.sku-qty').textContent = mQty > 0 ? mQty.toLocaleString() : '—';
       row.querySelector('.sku-aov').textContent = mAov > 0 ? 'NT$' + mAov.toLocaleString() : '—';
