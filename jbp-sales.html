@@ -439,7 +439,7 @@ a{color:#13227f}
           <span class="sep">·</span>兩個條件均符合時同時顯示
         </div>
         <div class="card-title">Top 30 SKU 排行
-          <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
+          <span class="def-tip">全期：該品項累積營收 ÷ 廠商期間總營收　月份 tab：當月此品項營收 ÷ 廠商當月總營收</span>
         </div>
         <div class="month-tab-row">
           <button class="mtab mtab-active" onclick="switchMonth('cbh','all',this)">全期</button>
@@ -1018,7 +1018,7 @@ a{color:#13227f}
           <span class="sep">·</span>兩個條件均符合時同時顯示
         </div>
         <div class="card-title">Top 30 SKU 排行
-          <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
+          <span class="def-tip">全期：該品項累積營收 ÷ 廠商期間總營收　月份 tab：當月此品項營收 ÷ 廠商當月總營收</span>
         </div>
         <div class="month-tab-row">
           <button class="mtab mtab-active" onclick="switchMonth('gsj','all',this)">全期</button>
@@ -1541,7 +1541,7 @@ a{color:#13227f}
           <span class="sep">·</span>兩個條件均符合時同時顯示
         </div>
         <div class="card-title">Top 30 SKU 排行
-          <span class="def-tip">營收佔比 = 該品項累積營收 ÷ 此廠商期間總營收</span>
+          <span class="def-tip">全期：該品項累積營收 ÷ 廠商期間總營收　月份 tab：當月此品項營收 ÷ 廠商當月總營收</span>
         </div>
         <div class="month-tab-row">
           <button class="mtab mtab-active" onclick="switchMonth('yfl','all',this)">全期</button>
@@ -2084,7 +2084,7 @@ function switchMonth(key, month, btn) {
       var mRev = (JSON.parse(row.getAttribute('data-monthly-rev'))[month] || 0);
       var mQty = (JSON.parse(row.getAttribute('data-monthly-qty'))[month] || 0);
       var mAov = mQty > 0 ? Math.round(mRev / mQty) : 0;
-      var mPct = vTotal > 0 ? Math.round(mRev * 10 / vTotal) / 10 : 0;
+      var mPct = vTotal > 0 ? Math.round(mRev * 1000 / vTotal) / 10 : 0;
       row.querySelector('.sku-rev').textContent = mRev > 0 ? 'NT$' + mRev.toLocaleString() : '—';
       row.querySelector('.sku-qty').textContent = mQty > 0 ? mQty.toLocaleString() : '—';
       row.querySelector('.sku-aov').textContent = mAov > 0 ? 'NT$' + mAov.toLocaleString() : '—';
