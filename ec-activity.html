@@ -169,6 +169,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
     <a href="#s08">08檔</a>
     <a href="#s91">9-1檔</a>
     <a href="#s92">9-2檔</a>
+    <a href="#s10">10檔</a>
     <a href="#brand">箱購</a>
     <a href="#ad">廣告建議</a>
   </div>
@@ -193,6 +194,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
         <div class="today-count"><div class="today-count-num" id="cnt-08">35</div><div class="today-count-label">距 08 檔</div></div>
         <div class="today-count"><div class="today-count-num" id="cnt-91">63</div><div class="today-count-label">距 9-1 檔</div></div>
         <div class="today-count"><div class="today-count-num" id="cnt-92">70</div><div class="today-count-label">距 9-2 檔</div></div>
+        <div class="today-count"><div class="today-count-num" id="cnt-10">31</div><div class="today-count-label">距 10 檔</div></div>
       </div>
     </div>
     <div class="today-actions" id="dyn-actions">
@@ -211,71 +213,74 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
     <div class="section-sub" id="tl-sub">紅線 = 今日（7/3）</div>
   </div>
   <div class="timeline-wrap">
-    <!-- 時間軸：共125天（5/29~10/01）= 100% -->
-    <!-- 各日期佔比：5/29=0%, 6/12=11.2%, 6/26=22.4%, 7/10=33.6%, 7/24=44.8%, 8/7=56.0%, 8/21=67.2%, 9/3=77.6%, 9/11=84.0%, 10/01=100% -->
+    <!-- 時間軸：共153天（5/29~10/29）= 100% -->
+    <!-- 各日期佔比：5/29=0%, 6/12=9.2%, 6/26=18.3%, 7/10=27.5%, 7/24=36.6%, 8/7=45.8%, 8/21=54.9%, 9/3=63.4%, 9/11=68.6%, 10/01=81.7%, 10/29=100% -->
     <div style="overflow-x:auto">
       <div style="min-width:820px">
         <!-- 日期標籤列 -->
         <div style="position:relative;height:20px;margin-bottom:8px;font-size:11px;color:#bdbdbd">
           <span style="position:absolute;left:0%;color:#e40011;font-weight:700">5/29</span>
-          <span id="tl-date-label" style="position:absolute;left:28%;transform:translateX(-50%);color:#e40011;font-weight:700">7/3 ▼</span>
-          <span style="position:absolute;left:22.4%;transform:translateX(-50%)">6/26</span>
-          <span style="position:absolute;left:33.6%;transform:translateX(-50%)">7/10</span>
-          <span style="position:absolute;left:44.8%;transform:translateX(-50%)">7/24</span>
-          <span style="position:absolute;left:56%;transform:translateX(-50%)">8/7</span>
-          <span style="position:absolute;left:67.2%;transform:translateX(-50%)">8/21</span>
-          <span style="position:absolute;left:77.6%;transform:translateX(-50%)">9/3</span>
-          <span style="position:absolute;left:84%;transform:translateX(-50%)">9/11</span>
-          <span style="position:absolute;right:0%;text-align:right">10/1</span>
+          <span id="tl-date-label" style="position:absolute;left:62.7%;transform:translateX(-50%);color:#e40011;font-weight:700">9/1 ▼</span>
+          <span style="position:absolute;left:18.3%;transform:translateX(-50%)">6/26</span>
+          <span style="position:absolute;left:27.5%;transform:translateX(-50%)">7/10</span>
+          <span style="position:absolute;left:36.6%;transform:translateX(-50%)">7/24</span>
+          <span style="position:absolute;left:45.8%;transform:translateX(-50%)">8/7</span>
+          <span style="position:absolute;left:54.9%;transform:translateX(-50%)">8/21</span>
+          <span style="position:absolute;left:63.4%;transform:translateX(-50%)">9/3</span>
+          <span style="position:absolute;left:68.6%;transform:translateX(-50%)">9/11</span>
+          <span style="position:absolute;left:81.7%;transform:translateX(-50%)">10/1</span>
+          <span style="position:absolute;right:0%;text-align:right">10/29</span>
         </div>
 
         <!-- 格線底部 -->
         <div style="position:relative;height:270px">
           <!-- 格線 -->
           <div style="position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none">
-            <div style="position:absolute;left:11.2%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:22.4%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:33.6%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:44.8%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:56%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:67.2%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:77.6%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
-            <div style="position:absolute;left:84%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:9.2%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:18.3%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:27.5%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:36.6%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:45.8%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:54.9%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:63.4%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:68.6%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
+            <div style="position:absolute;left:81.7%;top:0;bottom:0;width:1px;background:#f0f0f0"></div>
           </div>
 
           <!-- 今日線 -->
-          <div id="tl-line" style="position:absolute;left:28%;top:0;bottom:0;width:2px;background:#e40011;z-index:10"></div>
-          <div id="tl-label" style="position:absolute;left:28%;top:0;font-size:10px;font-weight:700;white-space:nowrap;transform:translateX(-50%);padding:1px 4px;background:#e40011;color:#fff;border-radius:3px">今日</div>
+          <div id="tl-line" style="position:absolute;left:62.7%;top:0;bottom:0;width:2px;background:#e40011;z-index:10"></div>
+          <div id="tl-label" style="position:absolute;left:62.7%;top:0;font-size:10px;font-weight:700;white-space:nowrap;transform:translateX(-50%);padding:1px 4px;background:#e40011;color:#fff;border-radius:3px">今日</div>
 
-          <!-- Row 1 (top=28): 618 5/29→6/25：left=0%, width=21.6% -->
-          <div style="position:absolute;top:28px;left:0%;width:21.6%;height:30px;background:#13227f;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">618 年中大促（6-1檔）05/29–06/25</div>
+          <!-- Row 1 (top=28): 618 5/29→6/25：left=0%, width=17.6% (27/153) -->
+          <div style="position:absolute;top:28px;left:0%;width:17.6%;height:30px;background:#13227f;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">618 年中大促（6-1檔）05/29–06/25</div>
 
-          <!-- Row 1b (top=66): 首購活動 07/01→12/31（時間軸截至10/01）：left=26.4%, width=73.6% -->
-          <div style="position:absolute;top:66px;left:26.4%;width:73.6%;height:26px;background:#f9a825;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="【破萬福利點等你拿】首購贈250點＋推薦親友最高10,000點 07/01–12/31">🎁 首購＋推薦親友活動 07/01–12/31（全檔期適用）→</div>
+          <!-- Row 1b (top=66): 首購活動 07/01→（截至10/29末）：left=21.6% (33/153), width=78.4% -->
+          <div style="position:absolute;top:66px;left:21.6%;width:78.4%;height:26px;background:#f9a825;border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="【破萬福利點等你拿】首購贈250點＋推薦親友最高10,000點 07/01–12/31">🎁 首購＋推薦親友活動 07/01–12/31（全檔期適用）→</div>
 
-          <!-- Row 2 (top=104): 77好運節 6/26→7/9：left=22.4%, width=10.4% -->
-          <div style="position:absolute;top:104px;left:22.4%;width:10.4%;height:30px;background:#3d4fa0;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">77好運節（6-2）06/26–07/09</div>
+          <!-- Row 2 (top=104): 77好運節 6/26→7/9：left=18.3% (28/153), width=8.5% (13/153) -->
+          <div style="position:absolute;top:104px;left:18.3%;width:8.5%;height:30px;background:#3d4fa0;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">77好運節（6-2）06/26–07/09</div>
 
-          <!-- Row 3 (top=142): 07檔 left=33.6% w=21.6% | 08檔 left=56% w=21.6% | 9-1 left=78.4% w=5.6% | 9-2 left=84% w=16% -->
-          <div style="position:absolute;top:142px;left:33.6%;width:21.6%;height:30px;background:#13227f;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">APP全新體驗（07檔）07/10–08/06</div>
-          <div style="position:absolute;top:142px;left:56%;width:21.6%;height:30px;background:#7b1fa2;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">慶中元（08檔）08/07–09/03</div>
-          <div style="position:absolute;top:142px;left:78.4%;width:5.6%;height:30px;background:#2e7d32;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden" title="9-1 99划算節 09/04–09/10">99划算</div>
-          <div style="position:absolute;top:142px;left:84%;width:16%;height:30px;background:#1976d2;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="9-2 全民購物節 09/11–10/01">全民購物節（9-2）09/11–10/01</div>
+          <!-- Row 3 (top=142): 07=27.5%w17.6% | 08=45.8%w17.6% | 9-1=64.1%w4.6% | 9-2=68.6%w13.1% | 10=82.4%w17.6% -->
+          <div style="position:absolute;top:142px;left:27.5%;width:17.6%;height:30px;background:#13227f;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">APP全新體驗（07檔）07/10–08/06</div>
+          <div style="position:absolute;top:142px;left:45.8%;width:17.6%;height:30px;background:#7b1fa2;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">慶中元（08檔）08/07–09/03</div>
+          <div style="position:absolute;top:142px;left:64.1%;width:4.6%;height:30px;background:#2e7d32;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden" title="9-1 99划算節 09/04–09/10">99划算</div>
+          <div style="position:absolute;top:142px;left:68.6%;width:13.1%;height:30px;background:#1976d2;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="9-2 全民購物節 09/11–10/01">全民購物節（9-2）09/11–10/01</div>
+          <div style="position:absolute;top:142px;left:82.4%;width:17.6%;height:30px;background:#e65100;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="10檔 全民回饋月+家家+雙11預跑 10/02–10/29">全民回饋月（10檔）10/02–10/29</div>
 
-          <!-- Row 4 (top=180): 暖身 left=5.6% w=4.8% | 正式 left=11.2% w=4.8% -->
-          <div style="position:absolute;top:180px;left:5.6%;width:4.8%;height:26px;background:#f57c00;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden">暖身 6/5–6/11</div>
-          <div style="position:absolute;top:180px;left:11.2%;width:4.8%;height:26px;background:#e40011;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden">正式 6/12–18</div>
+          <!-- Row 4 (top=180): 暖身 left=4.6%(7/153) w=3.9%(6/153) | 正式 left=9.2%(14/153) w=3.9%(6/153) -->
+          <div style="position:absolute;top:180px;left:4.6%;width:3.9%;height:26px;background:#f57c00;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden">暖身 6/5–6/11</div>
+          <div style="position:absolute;top:180px;left:9.2%;width:3.9%;height:26px;background:#e40011;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden">正式 6/12–18</div>
 
-          <!-- Row 5 (top=214): 0611直播 left=10.4% w=2.4% | 618寵粉 left=11.2% w=7.2% -->
-          <div style="position:absolute;top:214px;left:10.4%;width:2.4%;height:26px;background:#00796b;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden">📺 0611</div>
-          <div style="position:absolute;top:214px;left:11.2%;width:7.2%;height:26px;background:#388e3c;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;padding:0 6px">618寵粉直播 6/12–21</div>
+          <!-- Row 5 (top=214): 0611直播 left=8.5%(13/153) w=2.0%(3/153) | 618寵粉 left=9.2%(14/153) w=5.9%(9/153) -->
+          <div style="position:absolute;top:214px;left:8.5%;width:2.0%;height:26px;background:#00796b;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden">📺 0611</div>
+          <div style="position:absolute;top:214px;left:9.2%;width:5.9%;height:26px;background:#388e3c;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;padding:0 6px">618寵粉直播 6/12–21</div>
 
           <!-- Row 6 (top=248): iPhone 各週末 -->
-          <div style="position:absolute;top:248px;left:6.4%;width:1.6%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/6–6/7">📱</div>
-          <div style="position:absolute;top:248px;left:12%;width:1.6%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/13–6/14">📱</div>
-          <div style="position:absolute;top:248px;left:15.2%;width:1.6%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/17–6/18">📱</div>
-          <div style="position:absolute;top:248px;left:17.6%;width:1.6%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/20–6/21">📱</div>
-          <div style="position:absolute;top:248px;left:5.6%;font-size:10px;color:#1565c0;white-space:nowrap">← iPhone 17 特惠週末</div>
+          <div style="position:absolute;top:248px;left:5.2%;width:1.3%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/6–6/7">📱</div>
+          <div style="position:absolute;top:248px;left:9.8%;width:1.3%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/13–6/14">📱</div>
+          <div style="position:absolute;top:248px;left:12.4%;width:1.3%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/17–6/18">📱</div>
+          <div style="position:absolute;top:248px;left:14.4%;width:1.3%;height:22px;background:#1565c0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff" title="6/20–6/21">📱</div>
+          <div style="position:absolute;top:248px;left:4.6%;font-size:10px;color:#1565c0;white-space:nowrap">← iPhone 17 特惠週末</div>
         </div>
       </div>
     </div>
@@ -292,6 +297,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
       <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#444"><span style="width:12px;height:12px;background:#f57c00;border-radius:3px;display:inline-block"></span>暖身期</span>
       <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#444"><span style="width:12px;height:12px;background:#00796b;border-radius:3px;display:inline-block"></span>直播</span>
       <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#444"><span style="width:12px;height:12px;background:#1565c0;border-radius:3px;display:inline-block"></span>iPhone17特惠</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#444"><span style="width:12px;height:12px;background:#e65100;border-radius:3px;display:inline-block"></span>10檔 全民回饋月</span>
     </div>
   </div>
 </div>
@@ -393,6 +399,22 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
       </div>
     </div>
     <div class="period-highlight">週三★200神券（09/16、09/23、09/30）+ 週末★100/500神券</div>
+  </div>
+  <div class="period-card">
+    <div class="period-badge" style="background:#e65100;color:#fff">🏠 新增</div>
+    <div class="period-name">10檔 全民回饋月</div>
+    <div class="period-dates">2026/10/02（五）– 10/29（四）</div>
+    <div class="period-stats">
+      <a href="#s10" class="period-stat link">
+        <div class="period-stat-num">7</div>
+        <div class="period-stat-label">活動項目 ↓</div>
+      </a>
+      <div class="period-stat">
+        <div class="period-stat-num">28</div>
+        <div class="period-stat-label">檔期天數</div>
+      </div>
+    </div>
+    <div class="period-highlight">10/09–10/10 家家購物節：85折 × 4時段 + 200神券 + 全支付每2,000送1,000點三層疊加</div>
   </div>
 </div>
 
@@ -728,7 +750,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
 <div id="s08">
   <div class="section-header">
     <div class="section-title">08檔 慶中元</div>
-    <div class="section-sub">2026/08/07–09/03 · 三階段每日折扣 + 週三/週末多層神券 + 全支付週末贈點（V2 更新 7/23：每日券領用規則與全支付週末贈點資訊更新 · V3 更新 8/27：全支付週末贈點日上限 10,000→5,000；全支付週末日期修正 08/22–23、08/29–30）</div>
+    <div class="section-sub">2026/08/07–09/03 · 三階段每日折扣 + 週三/週末多層神券 + 全支付週末贈點（V2 更新 7/23：每日券領用規則與全支付週末贈點資訊更新 · V3 更新 8/27：全支付週末贈點日上限 10,000→5,000 · V2 PDF 補充 09/01：折扣碼【拜中元就上全電商】確認；全支付日期修正為 08/22–27 共 6 天）</div>
   </div>
 
   <div class="table-wrap" style="margin-bottom:24px">
@@ -738,12 +760,12 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
         <tr><td>免運費</td><td>08/07–09/03</td><td>—</td><td>0元（一般/門市/廠配）</td><td>快配399免運，未滿收80元</td></tr>
         <tr><td>每日折扣券①</td><td>08/07–08/13 每日00點</td><td>滿1,000</td><td>折150元</td><td>指定頁籤天天領券；無限量，每會員每日1張</td></tr>
         <tr class="hl"><td><b>每日折扣券②</b><span class="tag-new">限量</span></td><td>08/14–08/20 每日10點</td><td>滿1,000</td><td>88折（最高折288元）</td><td>指定頁籤天天領券；每日限量500份，先搶先贏</td></tr>
-        <tr><td>每日折扣券③</td><td>08/21–08/27 每日</td><td>滿1,000</td><td>85折（最高折288元）</td><td>指定頁籤天天領券＋輸入折扣碼；每日限量500份，先用先贏</td></tr>
+        <tr><td>每日折扣券③</td><td>08/21–08/27 每日</td><td>滿1,000</td><td>85折（最高折288元）</td><td>指定頁籤天天領券＋輸入折扣碼【拜中元就上全電商】；每日限量500份，先用先贏</td></tr>
         <tr><td>中元加碼★100補貼神券</td><td>08/21–08/30</td><td>滿2,000</td><td>折100</td><td>不限定付款方式；不可累折，每筆限用1張折價券</td></tr>
         <tr class="hl"><td><b>週三加碼★200神券</b></td><td>08/12、08/19、08/26、09/02 週三</td><td>滿3,000</td><td>折200</td><td>每週三固定加碼</td></tr>
         <tr><td>週末加碼★500神券</td><td>08/08–09、08/15–16、08/22–23、08/29–30</td><td>滿15,000</td><td>折500</td><td>各檔週末；活動期間限用3次</td></tr>
         <tr><td>週末樂購天★100神券</td><td>08/08–09、08/15–16、08/22–23、08/29–30</td><td>滿1,500</td><td>折100</td><td>各檔週末；活動期間限用3次</td></tr>
-        <tr class="hl"><td><b>週末全支付贈點</b></td><td>08/08–09、08/15–16、08/22–23、08/29–30</td><td>每滿2,000</td><td>送1,000點（可累贈，日上限5,000）</td><td>贈點日 2026/10/07；排除 iPhone 16 / iPhone 17 系列與指定限制品項</td></tr>
+        <tr class="hl"><td><b>週末全支付贈點</b></td><td>08/08–09、08/15–16、08/22–27（6天）</td><td>每滿2,000</td><td>送1,000點（可累贈，日上限5,000）</td><td>贈點日 2026/10/07；排除 iPhone 16 / iPhone 17 系列與指定限制品項</td></tr>
       </tbody>
     </table>
   </div>
@@ -754,7 +776,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
       <ul class="ac-list">
         <li><strong>三階段每日折扣</strong>：固定折150（8/7–13）→ 每日10點限量88折（8/14–20）→ 限量85折折扣碼（8/21–27），層層升溫</li>
         <li><strong>週三定期神券</strong>：每週三滿3,000折200，製造週中購買節奏</li>
-        <li><strong>週末三層疊加</strong>：500神券（15,000）+ 100神券（1,500）+ 全支付每2,000送千點（日上限5,000），共4個週末（08/08–09、08/15–16、08/22–23、08/29–30）</li>
+        <li><strong>週末三層疊加</strong>：500神券（15,000）+ 100神券（1,500）+ 全支付每2,000送千點（日上限5,000）；全支付適用 08/08–09、08/15–16、08/22–27（6天，延伸至週四）</li>
         <li><strong>中元節補貼</strong>：8/21–8/30 額外100神券（滿2,000），搭季節主題行銷</li>
         <li><strong>LINE好友推薦（封閉持續）</strong>：07/10起全期適用，推薦3位新好友→ 折100元，跨檔期拉新機制</li>
       </ul>
@@ -765,7 +787,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
         <li><strong>8/7–8/13</strong>：無限量固定券，引流新客與中低客單消費</li>
         <li><strong>8/14起</strong>：每日10點限量500份88折搶購，製造每天定時爆量</li>
         <li><strong>週三</strong>：200神券（3,000門檻）引發週三前備貨行為</li>
-        <li><strong>週末全支付</strong>：箱購大戶集中爆發，多筆累積衝上限5,000點；4個週末均可觸發</li>
+        <li><strong>週末全支付</strong>：箱購大戶集中爆發，多筆累積衝上限5,000點；08/22–27 延長6天（含週三08/26可疊200神券）</li>
       </ul>
     </div>
     <div class="analysis-card">
@@ -773,7 +795,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
       <ul class="ac-list">
         <li><strong>8/7 開檔</strong>：穩定投放，固定券無限量，均衡帶流量</li>
         <li><strong>8/13（週三前一天）</strong>：加強推送，提醒週三200神券，吸引中高客單備貨</li>
-        <li><strong>週末前24h</strong>：主力出擊，三層疊加為最高CP值時段（4個週末：08/08–09、08/15–16、08/22–23、08/29–30）</li>
+        <li><strong>週末前24h</strong>：主力出擊，三層疊加為最高CP值時段；全支付贈點延伸至 08/22–27（6天），含 08/26 週三200神券可加碼操作</li>
         <li><strong>8/21起</strong>：搭中元主題素材，中元補貼+折扣碼雙重誘因</li>
       </ul>
     </div>
@@ -882,6 +904,59 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
   </div>
 </div>
 
+<!-- ===== 10 ===== -->
+<div id="s10">
+  <div class="section-header">
+    <div class="section-title">10檔 全民回饋月＋家家＋雙11預跑</div>
+    <div class="section-sub">2026/10/02（五）–10/29（四）· 三階段：家家購物節（10/9–10）→ LINE拉霸（10/14–31）→ 雙11預跑（10/23–29）（V1 2026-09-01）</div>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:24px">
+    <table>
+      <thead><tr><th>活動</th><th>時間</th><th>門檻</th><th>回饋</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr><td>免運費</td><td>10/02–10/29</td><td>—</td><td>0元（一般/門市/廠配）</td><td>快配滿399免運，未滿收80元</td></tr>
+        <tr class="hl"><td><b>每日95折閃購券</b><span class="tag-new">限量</span></td><td>10/02–10/11 每日10/16點</td><td>滿1,000</td><td>95折（最高折100元）</td><td>每時段限量100份，先搶先贏</td></tr>
+        <tr class="hl"><td><b>家家購物節 每日85折閃購券</b><span class="tag-new">限量</span></td><td>10/09–10/10 每日10/15/18/20點</td><td>滿1,000</td><td>85折（最高折300元）</td><td>每時段限量399份，先搶先贏</td></tr>
+        <tr><td>家家購物節★200加碼神券</td><td>10/09–10/10</td><td>滿3,000</td><td>折200元</td><td>不可累折，限用一張折價券</td></tr>
+        <tr class="hl"><td><b>家家購物節★全支付每滿2,000送1,000點</b></td><td>10/09–10/10</td><td>每滿2,000</td><td>送1,000福利點（上限5,000點/日）</td><td>贈點日：2026/11/04（三）</td></tr>
+        <tr><td>LINE好友限定★拉霸抽券</td><td>10/14–10/31</td><td>滿888 / 滿2,000</td><td>折200（滿888）/ 折150（滿2,000）</td><td>隨機抽獎非人人有獎，當天 23:59 前使用</td></tr>
+        <tr class="hl"><td><b>雙11預跑閃購券</b><span class="tag-new">限量</span></td><td>10/23–10/29 每日11/23點</td><td>滿1,500 / 滿15,000</td><td>折111 / 折1,111</td><td>每時段限量111份，效期至 11/11 23:59</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="analysis-grid">
+    <div class="analysis-card">
+      <div class="ac-head"><div class="ac-icon ic-blue">📋</div><div class="ac-title">機制總覽</div></div>
+      <ul class="ac-list">
+        <li><strong>三大主軸</strong>：家家購物節（10/9–10）→ LINE拉霸（10/14–31）→ 雙11預跑（10/23–29），節奏感強</li>
+        <li><strong>家家購物節</strong>：85折閃購 × 4時段（限399份）+ 200神券（3,000）+ 全支付每2,000送1,000點（上限5,000點），三層疊加；為本檔最強時段</li>
+        <li><strong>雙11預跑</strong>：效期可跨至 11/11 使用，引導消費者提前儲券備戰雙11</li>
+        <li><strong>LINE拉霸</strong>：滿888折200（高CP），隨機抽獎，非人人有獎，增加每日互動回訪黏著度</li>
+      </ul>
+    </div>
+    <div class="analysis-card">
+      <div class="ac-head"><div class="ac-icon ic-orange">🧠</div><div class="ac-title">消費者行為</div></div>
+      <ul class="ac-list">
+        <li><strong>10/09–10/10</strong>：家家購物節為全檔高峰，85折 + 200神券 + 全支付贈點三層刺激，適合大客單衝刺</li>
+        <li><strong>全支付每2,000送1,000點</strong>（上限5,000點/日）：引導消費者把每日消費推至 10,000 元（5次滿額）</li>
+        <li><strong>10/14起 LINE拉霸</strong>：門檻低（888元），引發日常回訪購買行為</li>
+        <li><strong>雙11預跑券</strong>：效期至 11/11，有儲券衝動，適合鎖定高客單消費者預備雙11</li>
+      </ul>
+    </div>
+    <div class="analysis-card">
+      <div class="ac-head"><div class="ac-icon ic-teal">🎯</div><div class="ac-title">廣告操作建議</div></div>
+      <ul class="ac-list">
+        <li><strong>10/02開檔</strong>：全力衝刺，搶首波免運 + 每日兩時段95折閃購流量</li>
+        <li><strong>10/08預熱</strong>：提前告知隔日「家家購物節」85折 × 4時段，引導加購物車</li>
+        <li><strong>10/09–10</strong>：最高CP值，主力投放；全支付客群重點觸達（每2,000送1,000點，大單高達5,000點）</li>
+        <li><strong>10/22預熱</strong>：告知雙11預跑券明日開跑（效期至11/11），引導高客單消費者提前行動</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <!-- ===== 廣告建議總表 ===== -->
 <div id="ad">
   <div class="section-header">
@@ -925,7 +1000,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
         <tr style="background:#f3e5f5"><td>08/07–08/13</td><td>🏮 08檔開跑 · 固定折扣</td><td>每日滿1,000折150（無限量）</td><td><span class="pw pw-mid">中（穩定投放）</span></td><td>1,000元</td></tr>
         <tr style="background:#f3e5f5"><td>08/12 週三</td><td>首週三加碼</td><td>滿3,000折200神券 · 週末500/100神券 + 全支付贈點</td><td><span class="pw pw-high">高</span></td><td>3,000 / 15,000元</td></tr>
         <tr style="background:#f3e5f5"><td>08/14–08/20</td><td>限量88折 · 每日10點</td><td>每日限量500份88折（最高288元）· 週三200 · 週末三層</td><td><span class="pw pw-high">高（10點前預熱）</span></td><td>1,000元</td></tr>
-        <tr style="background:#f3e5f5"><td>08/21–08/27</td><td>折扣碼85折 · 中元衝刺</td><td>限量500份85折 + 中元補貼100神券（滿2,000）· 週三200 · 全支付贈點延伸6天</td><td><span class="pw pw-top">最高（節慶主題）</span></td><td>2,000 / 3,000元</td></tr>
+        <tr style="background:#f3e5f5"><td>08/21–08/27</td><td>折扣碼【拜中元就上全電商】85折 · 中元衝刺</td><td>限量500份85折 + 中元補貼100神券（滿2,000）· 週三200 · 全支付贈點延伸6天</td><td><span class="pw pw-top">最高（節慶主題）</span></td><td>2,000 / 3,000元</td></tr>
         <tr style="background:#f3e5f5"><td>08/28–09/03</td><td>08檔收尾</td><td>週末08/29–30 500/100神券 · 週三09/02加碼200神券</td><td><span class="pw pw-mid">中</span></td><td>3,000 / 15,000元</td></tr>
         <tr style="background:#e8f5e9"><td>09/04–09/10</td><td>🎉 9-1檔 99划算節開跑</td><td>全檔免運 + 100補貼神券（滿1,800）+ 每日四時段85折閃購（10/15/18/20點，限399份）</td><td><span class="pw pw-high">高</span></td><td>1,800元</td></tr>
         <tr style="background:#e8f5e9"><td>09/05–09/06</td><td>週末三層疊加</td><td>500神券（13,000）+ 100神券（1,500）+ 100補貼神券（1,800）三層可疊</td><td><span class="pw pw-top">最高</span></td><td>13,000元</td></tr>
@@ -934,6 +1009,10 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
         <tr style="background:#e3f2fd"><td>09/12–13、09/19–20、09/26–27</td><td>週末雙層神券</td><td>500神券（13,000）+ 100神券（1,500）可疊加</td><td><span class="pw pw-top">最高</span></td><td>13,000元</td></tr>
         <tr style="background:#e3f2fd"><td>09/16、09/23、09/30 週三</td><td>週三加碼★200神券</td><td>滿3,000折200，每週三固定加碼（共3次）</td><td><span class="pw pw-high">高</span></td><td>3,000元</td></tr>
         <tr style="background:#fff0e0"><td>09/26–27</td><td>🏮 中秋節前夕週末</td><td>雙層神券 + 節慶備貨潮，為全民購物節最高流量週末</td><td><span class="pw pw-top">衝刺</span></td><td>13,000元</td></tr>
+        <tr style="background:#fbe9e7"><td>10/02–10/08</td><td>🎉 10檔開跑 · 每日兩時段95折閃購</td><td>全檔免運 + 每日10/16點 95折閃購（限量100份/時段，滿1,000）</td><td><span class="pw pw-high">高（開檔）</span></td><td>1,000元</td></tr>
+        <tr style="background:#fbe9e7"><td>10/09–10/10</td><td>🏠 家家購物節（本檔最強）</td><td>85折閃購 × 4時段（限399份）+ 200神券（3,000）+ 全支付每2,000送1,000點（上限5,000點）</td><td><span class="pw pw-top">最高</span></td><td>3,000 / 10,000元</td></tr>
+        <tr style="background:#fbe9e7"><td>10/14–10/22</td><td>🎰 LINE好友拉霸抽券</td><td>滿888折200 + 滿2,000折150（隨機抽獎，非人人有獎）</td><td><span class="pw pw-mid">中（互動黏著）</span></td><td>888元</td></tr>
+        <tr style="background:#fbe9e7"><td>10/23–10/29</td><td>🎯 雙11預跑閃購（效期跨至11/11）</td><td>每日11/23點各限量111份：滿1,500折111 + 滿15,000折1,111（效期至11/11）</td><td><span class="pw pw-top">衝刺（雙11蓄力）</span></td><td>1,500 / 15,000元</td></tr>
       </tbody>
     </table>
   </div>
@@ -996,17 +1075,18 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
 
 <!-- FOOTER -->
 <div style="margin-top:40px;padding-top:20px;border-top:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-  <div style="font-size:12px;color:#bdbdbd">全電商全站活動解析 · v11 · 2026/07/23 更新（08檔 V2：每日券領用規則與全支付週末贈點資訊更新）</div>
+  <div style="font-size:12px;color:#bdbdbd">全電商全站活動解析 · v13 · 2026/09/01 更新（新增 10 檔：全民回饋月+家家+雙11預跑 10/02–10/29；時間軸延伸至 10/29）</div>
   <div style="display:flex;gap:6px;flex-wrap:wrap">
     <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">6-1 V3</span>
     <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">6-2 V2</span>
-    <span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 9px;border-radius:9999px">07檔 V3 🆕</span>
-    <span style="background:#f3e5f5;color:#7b1fa2;font-size:11px;padding:2px 9px;border-radius:9999px">08檔 V2 🆕</span>
+    <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">07檔 V3</span>
+    <span style="background:#f3e5f5;color:#7b1fa2;font-size:11px;padding:2px 9px;border-radius:9999px">08檔 V2</span>
     <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">直播×2</span>
     <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">iPhone特惠</span>
-    <span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 9px;border-radius:9999px">全支付首購 🆕</span>
-    <span style="background:#e8f5e9;color:#2e7d32;font-size:11px;padding:2px 9px;border-radius:9999px">9-1檔 V1 🆕</span>
-    <span style="background:#e3f2fd;color:#1976d2;font-size:11px;padding:2px 9px;border-radius:9999px">9-2檔 V1 🆕</span>
+    <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">全支付首購</span>
+    <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">9-1檔 V1</span>
+    <span style="background:#eef0fa;color:#13227f;font-size:11px;padding:2px 9px;border-radius:9999px">9-2檔 V1</span>
+    <span style="background:#fbe9e7;color:#e65100;font-size:11px;padding:2px 9px;border-radius:9999px">10檔 V1 🆕</span>
   </div>
 </div>
 
@@ -1026,7 +1106,8 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
   var D08      = d(2026,8,7);  // 08 檔開始
   var D91      = d(2026,9,4);  // 9-1 檔開始
   var D92      = d(2026,9,11); // 9-2 檔開始
-  var TOTAL    = diff(START, d(2026,10,1)); // 125天
+  var D10      = d(2026,10,2); // 10 檔開始
+  var TOTAL    = diff(START, d(2026,10,29)); // 153天
 
   function getPhase(){
     if(today < START)              return {key:'before',   icon:'📅', label:'活動尚未開始'};
@@ -1039,7 +1120,8 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
     if(today <= d(2026,9,3))       return {key:'s08',      icon:'🏮', label:'08檔 慶中元'};
     if(today <= d(2026,9,10))      return {key:'s91',      icon:'🎉', label:'9-1檔 99划算節'};
     if(today <= d(2026,10,1))      return {key:'s92',      icon:'🛒', label:'9-2檔 全民購物節'};
-    return                                {key:'ended',    icon:'✅', label:'9-2 檔活動結束，請準備下一波'};
+    if(today <= d(2026,10,29))     return {key:'s10',      icon:'🏠', label:'10檔 全民回饋月＋家家＋雙11預跑'};
+    return                                {key:'ended',    icon:'✅', label:'10 檔活動結束，請準備雙11'};
   }
 
   var ACTIONS = {
@@ -1053,7 +1135,8 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
     s08:      ['領每日折扣券（開檔前兩週為固定折150，無限量）','週末三層疊加：500神券（15,000）+ 100神券（1,500）+ 全支付每2,000送1,000點','週三固定領200神券（滿3,000折200），計畫中高客單購買'],
     s91:      ['每日10/15/18/20點各有一波85折閃購（限399份），提前備好購物車','週末09/05–06三層疊加：500神券（13,000）+ 100神券（1,500）+ 補貼100神券（1,800）','09/08提前預熱「09/09神秘碼日」：隔天輸入折扣碼【99全電商】最高折999元'],
     s92:      ['每日09/11–10/01 每天10點搶95折閃購券（限量1,000份，滿1,000折最高100元）','週三固定領200神券（09/16、09/23、09/30 滿3,000折200），計畫週三前備貨','週末雙層疊加：500神券（13,000）+ 100神券（1,500），09/26–27中秋前夕為最強週末'],
-    ended:    ['09檔活動已全數結束','建議覆盤本波廣告投報率（ROAS）數據','準備下一波活動廣告提案素材']
+    s10:      ['10/09–10/10 家家購物節：每日10/15/18/20點搶85折閃購（限399份）+ 200神券（3,000）+ 全支付每2,000送1,000點，三層疊加全力衝刺','使用全支付結帳：家家購物節單日最高可得5,000福利點（需消費10,000元），適合大客單','10/22預熱告知：雙11預跑券10/23起每日11/23點各限111份（效期至11/11），引導高客單消費者提前行動'],
+    ended:    ['10檔活動已全數結束','建議覆盤本波廣告投報率（ROAS）數據','準備雙11活動廣告提案素材']
   };
 
   var phase = getPhase();
@@ -1078,6 +1161,7 @@ td.hl{background:#eef0fa!important;color:#13227f;font-weight:700}
   el = document.getElementById('cnt-08');   if(el) el.textContent = Math.max(0, diff(today,D08));
   el = document.getElementById('cnt-91');   if(el) el.textContent = Math.max(0, diff(today,D91));
   el = document.getElementById('cnt-92');   if(el) el.textContent = Math.max(0, diff(today,D92));
+  el = document.getElementById('cnt-10');   if(el) el.textContent = Math.max(0, diff(today,D10));
 
   // 今日行動建議
   el = document.getElementById('dyn-actions');
