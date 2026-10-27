@@ -19,6 +19,11 @@ header .tag{font-size:13px;opacity:.85;letter-spacing:.5px}
 header h1{margin:4px 0 6px;font-size:26px;line-height:1.3}
 header .meta{font-size:13px;opacity:.85}
 h2{font-size:20px;margin:36px 0 12px;padding-left:12px;border-left:4px solid var(--blue)}
+.snav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;background:#fff;padding:10px 0;margin:20px 0 0;border-bottom:1px solid var(--line);scrollbar-width:none}
+.snav::-webkit-scrollbar{display:none}
+.snav a{flex:none;font-size:13px;color:var(--blue);background:var(--blue-light);border-radius:999px;padding:4px 12px;text-decoration:none}
+.snav a.on{background:var(--blue);color:#fff}
+h2{scroll-margin-top:64px}
 h3{font-size:16px;margin:20px 0 8px}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:#fff}
@@ -114,7 +119,9 @@ footer li{margin:2px 0}
   <div class="card"><div class="lb">跨境券使用</div><div class="split"><div><span class="wv">第一波</span><b>73<small>次</small></b></div><div><span class="wv">第二波</span><b>169<small>次</small></b></div></div><div class="sub">折 7,300｜16,900 元<br>第二波次數待確認</div></div>
 </div>
 
-<h2>活動設定</h2>
+<nav class="snav" id="snav"><a href="#s0">活動設定</a><a href="#s1">1 觸及</a><a href="#s2">2 銷售</a><a href="#s3">3 疊券</a><a href="#s4">4 價格帶</a><a href="#s5">5 品牌</a><a href="#s6">6 會員輪廓</a><a href="#s7">7 時段</a><a href="#s8">8 APM</a><a href="#s9">9 Insight</a><a href="#s10">10 11/5</a></nav>
+
+<h2 id="s0">活動設定</h2>
 <div class="tw"><table class="txt">
 <tr><th>項目</th><th>第一波</th><th>第二波</th></tr>
 <tr><td>期間</td><td>10/15（四）–10/16（五）</td><td>10/22（四）–10/23（五）</td></tr>
@@ -128,7 +135,7 @@ footer li{margin:2px 0}
 </table></div>
 <div class="callout"><b>券的性質：</b>兩張都是行銷現折，限跨境品項、<b>所有人都能用</b>，不限 SMS 名單，也可以和其他券一起用。所以訂單沒辦法只拆出 SMS／APP Push 名單帶來的成效：第 1 段看推播的點擊和 UTM 追蹤，第 2 段起看跨境整體多賣了多少。</div>
 
-<h2>1. SMS／APP Push 觸及成效</h2>
+<h2 id="s1">1. SMS／APP Push 觸及成效</h2>
 <h3>第一波（10/15 發送）</h3>
 <div class="tw"><table>
 <tr><th>管道</th><th>預估人數</th><th>發送數</th><th>點擊數</th><th>點擊率</th><th>預估點擊率</th><th>訂單（張）</th><th>轉換率</th><th>收益（元）</th></tr>
@@ -141,7 +148,7 @@ footer li{margin:2px 0}
 <h3>第二波（10/22 發送）</h3>
 <div class="pending"><b>待補：</b>SMS（10,000 人，12:00）、PxPay（14:00）、PxGo（15:00）的發送數、點擊、UTM 訂單與收益，來源同第一波（自媒體版位商品曝光提報「SMS簡訊」「APP Push 推播」分頁）。補上後可以判斷「加車／瀏覽未購」名單是不是比沉睡舊客好。</div>
 
-<h2>2. 銷售成效</h2>
+<h2 id="s2">2. 銷售成效</h2>
 <div class="chart">
   <div class="legend"><span><i style="background:var(--blue-mid)"></i>第一波</span><span><i style="background:var(--blue)"></i>第二波</span><span><i style="background:var(--blue-4)"></i>非活動日</span><span><i style="background:#e0e0e0"></i>全站大檔／會員日（不列入基準）</span><span><i style="background:none;border-top:2px dashed #757575;height:0;border-radius:0;vertical-align:3px"></i>非活動日基準 10.90 萬元</span></div>
   <svg id="daily" viewBox="0 0 1000 300" width="100%" role="img" aria-label="跨境 10/1 到 10/26 每日業績長條圖"></svg>
@@ -163,7 +170,7 @@ footer li{margin:2px 0}
 <div class="callout ok"><b>粗估投報（推估）：</b>第一波券折 7,300 元，增量約 5.6 萬元，大約 7.7 倍。第二波券檔記錄折 16,900 元，增量 12–21 萬元，大約 7–12 倍。兩波一共折了 24,200 元，占折價贈點預算 14 萬元的 17%。這些都是跟基準日比出來的，沒有扣掉其他因素，也沒有算美妝日、會員日券的成本。</div>
 <div class="callout warn"><b>第二波用券次數待確認：</b>券檔記錄 PMC0026640 在 10/22 用 89 次、10/23 用 79 次、10/24 用 1 次。但跨境商品原價滿 1,500 元的訂單只有 64 張、45 張，照理最多只能用這麼多次（第一波就對得上：10/15 48 張、45 次；10/16 29 張、28 次）。取消單、多品項重複計算都已經排除，差額原因要請後台確認。上面的增量分析用的是訂單資料，不受影響；投報用的是券檔金額，如果實際次數比較少，投報會更高。</div>
 
-<h2>3. 疊券與折扣率</h2>
+<h2 id="s3">3. 疊券與折扣率</h2>
 <div class="tw"><table>
 <tr><th>項目</th><th>10/15（四）</th><th>10/16（五）</th><th>10/22（四）</th><th>10/23（五）</th></tr>
 <tr><td>用跨境券的訂單（推估）</td><td>47</td><td>28</td><td>64</td><td>43</td></tr>
@@ -174,7 +181,7 @@ footer li{margin:2px 0}
 </table></div>
 <div class="callout warn"><b>10/22 折扣率超過 10/19 設定的上限：</b>當時決定接受週四折扣率 6–8%，超過 8% 就要重新評估能不能併用。10/22 是 8.4%，主要是會員日券（滿 999 折 200）也能疊。折扣 ≥ 300 元的訂單從 10/15 的 18 張增加到 31 張，占用券訂單的 48%。另外，第一波週五幾乎沒人疊券，第二波週五卻有 86% 疊券，因為全站購物車滿 1500 折 100 從 10/23 開始每天大量使用。</div>
 
-<h2>4. 客單價與價格帶</h2>
+<h2 id="s4">4. 客單價與價格帶</h2>
 <div class="tw"><table>
 <tr><th>跨境原價（每張訂單）</th><th>非活動日</th><th>第一波</th><th>第二波</th></tr>
 <tr><td>1,000 元以下</td><td>27.5%</td><td>23.8%</td><td>18.6%</td></tr>
@@ -188,7 +195,7 @@ footer li{margin:2px 0}
 </table></div>
 <p style="font-size:14px;color:var(--ink2)">兩波都把 1,000–1,499 元的訂單往上推（20.8% 降到 13% 左右）。第一波主要推到剛過門檻的 1,500–1,999 元；第二波則多出 3,000 元以上的大單（占 33%，平常 21%）。件數沒有增加，業績成長來自「買更貴、更大的組合」，不是多買幾件。</p>
 
-<h2>5. 賣得好的品牌與品項</h2>
+<h2 id="s5">5. 賣得好的品牌與品項</h2>
 <div class="two">
 <div class="tw"><table>
 <tr><th>第一波品牌</th><th>業績（元）</th><th>占比</th><th>平常 2 天</th></tr>
@@ -221,7 +228,7 @@ footer li{margin:2px 0}
 </table></div>
 <p style="font-size:14px;color:var(--ink2)">第一波品項前三：百優 2 入組 8 組、20,335 元；SK-II 光蘊恆璨淨斑精華 2 瓶、11,338 元；蘭蔻永生玫瑰肽金眼霜 4 個、9,576 元。第二波百優改由 4 入組帶頭（14 組，2 入組也有 12 組），推文案點名資生堂之後，客人往大包裝買。</p>
 
-<h2>6. 購買會員輪廓（277 位不重複會員）</h2>
+<h2 id="s6">6. 購買會員輪廓（277 位不重複會員）</h2>
 <div class="tw"><table>
 <tr><th>項目</th><th>第一波</th><th>第二波</th><th>兩波合計</th></tr>
 <tr><td>購買會員</td><td>123 人</td><td>154 人</td><td>277 人</td></tr>
@@ -250,7 +257,7 @@ footer li{margin:2px 0}
 </ul>
 <div class="callout warn"><b>品牌、通路占比只當參考：</b>原始輪廓分析也列了這群會員的品牌與通路占比（例如第一波資生堂 13.5%、善美的 11.8%，通路電商 62.5%、超市 31.9%）。這些數字包含超市、量販和非跨境品牌，看起來是這群會員在其他期間或其他通路的消費，範圍沒有說明，所以沒有拿來和第 5 段的活動購買比較。</div>
 
-<h2>7. 時段：第二波推播後下午多賣 4.9 萬元，第一波推播後沒有反應</h2>
+<h2 id="s7">7. 時段：第二波推播後下午多賣 4.9 萬元，第一波推播後沒有反應</h2>
 <div class="chart">
   <div class="legend"><span><i style="background:var(--blue-4)"></i>10/15 第一波</span><span><i style="background:var(--blue)"></i>10/22 第二波</span><span style="color:var(--slate)">比非活動週四平均（10/1、10/8）多賣的跨境業績，單位萬元</span></div>
   <div class="hgrid">
@@ -275,7 +282,7 @@ footer li{margin:2px 0}
 </div>
 </details>
 
-<h2>8. 商品轉換率漏斗（APM）</h2>
+<h2 id="s8">8. 商品轉換率漏斗（APM）</h2>
 <h3>第一波（10/15–10/16）</h3>
 <div class="tw"><table>
 <tr><th>專櫃美妝（10/15–10/16）</th><th>SKU 數</th><th>瀏覽</th><th>加車</th><th>購買</th><th>加車率</th><th>車後購買率</th><th>成交率</th><th>每次瀏覽收益（元）</th></tr>
@@ -286,7 +293,7 @@ footer li{margin:2px 0}
 <h3>第二波（10/22–10/23）</h3>
 <div class="pending"><b>待補：</b>APM「購物行為轉換率 by 商品」10/22–10/23。主要看跨境車後購買率是否高於第一波的 25.7%，以及加車未購名單回來以後，加車率有沒有變化。</div>
 
-<h2>9. Insight</h2>
+<h2 id="s9">9. Insight</h2>
 <ol class="ins">
   <li><b class="t">第二波明顯比第一波強，而且週五撐得住</b>第二波兩天比基準多 20.9 萬元（+96%），扣掉會員日影響後保守估計也有 12–15 萬元，約是第一波 5.6 萬元的 2–3 倍。第一波週五只回到平常水準；第二波週五 18.6 萬元，跟同樣有全站滿 1500 折 100 的週末比，仍多 44%。</li>
   <li><b class="t">換受眾、換文案的方向是對的（待 UTM 確認）</b>第二波從沉睡舊客改發加車／瀏覽未購，文案改成「限時 2 天、結帳直接折」，並點名資生堂、SK-II、蘭蔻。推播後 13–16 點就有反應，點名的品牌也正是成長最多的品牌。但會員日同一天，要等第二波 SMS／APP Push 的 UTM 數字才能確認。</li>
@@ -296,7 +303,7 @@ footer li{margin:2px 0}
   <li><b class="t">兩波買家零重疊，277 人可以當雙 11 再行銷名單</b>兩波各自觸及一批買家（123 人、154 人），每人約買 1 張。這群人以 30–59 歲女性為主、76% 開通全支付。雙 11 可以對這 277 人推資生堂大包裝、ACE 眼霜等延伸品，管道以 PxPay 優先（名單能否匯出投放待確認）。</li>
 </ol>
 
-<h2>10. 11/5 是否發送：決策參考</h2>
+<h2 id="s10">10. 11/5 是否發送：決策參考</h2>
 <div class="tw"><table class="txt">
 <tr><th>選項</th><th>做法</th><th>好處</th><th>風險</th></tr>
 <tr><td><b>A 照第二波發</b></td><td>同受眾邏輯（加車／瀏覽未購），滿 1,500 折 100，可併用</td><td>第二波已證明有效；資生堂、SK-II 正在熱</td><td>疊上鋪底滿 2,000 贈 1,000 點（約 5%），用券訂單折扣率可能超過 10%</td></tr>
@@ -319,6 +326,13 @@ footer li{margin:2px 0}
 </div>
 
 <script>
+(function(){
+  var nav=document.getElementById('snav'),links=[].slice.call(nav.querySelectorAll('a')),hs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function upd(){var cur=0;hs.forEach(function(h,i){if(h.getBoundingClientRect().top<90)cur=i});
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+    var on=links[cur];if(on.offsetLeft<nav.scrollLeft||on.offsetLeft+on.offsetWidth>nav.scrollLeft+nav.clientWidth)nav.scrollLeft=on.offsetLeft-16;}
+  window.addEventListener('scroll',upd,{passive:true});upd();
+})();
 (function(){
   var ns='http://www.w3.org/2000/svg';
   function mk(svg){return function(n,a){var e=document.createElementNS(ns,n);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e}}
