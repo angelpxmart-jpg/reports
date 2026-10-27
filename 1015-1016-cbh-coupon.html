@@ -57,6 +57,8 @@ table.txt td:first-child{white-space:nowrap}
 table.eq{table-layout:fixed}
 table.eq th,table.eq td{white-space:normal;word-break:break-word;text-align:center}
 table.eq th:first-child,table.eq td:first-child{text-align:left}
+td.sk{text-align:left;color:var(--slate);font-variant-numeric:tabular-nums}
+table.num th:nth-child(2){text-align:left}
 table.num td:first-child{font-variant-numeric:tabular-nums;color:var(--slate)}
 td.red{color:var(--red);font-weight:700}
 td.mute{color:var(--slate)}
@@ -171,8 +173,7 @@ footer li{margin:2px 0}
 <tr class="sep"><td>非活動日基準（日均）</td><td>108,953</td><td>54.1</td><td>27.3</td><td>2,013</td><td colspan="2">10/1–10/26 扣掉全站大檔（10/7、10/9、10/10）、會員日（10/20、10/21）和兩波活動日，共 17 天</td></tr>
 </table></div>
 <div class="callout warn"><b>第二波的干擾要扣掉：</b>10/22 同時是會員日（全站滿 999 折 200）。10/20、10/21 只有會員日、沒有跨境券，跨境業績分別比同星期的非活動日多 4.9 萬元、1.8 萬元。扣掉這部分，10/22 的增量大約剩 6–9 萬元。10/23 改用同樣有全站滿 1500 折 100 的 10/24–10/26 當比較基準，增量約 5.7 萬元。<b>所以第二波保守估計多賣約 12–15 萬元</b>，介在這個數字和直接比基準的 20.9 萬元之間。</div>
-<div class="callout ok"><b>粗估投報（推估）：</b>第一波券折 7,300 元，增量約 5.6 萬元，大約 7.7 倍。第二波券檔記錄折 16,900 元，增量 12–21 萬元，大約 7–12 倍。兩波一共折了 24,200 元，占折價贈點預算 14 萬元的 17%。這些都是跟基準日比出來的，沒有扣掉其他因素，也沒有算美妝日、會員日券的成本。</div>
-<div class="callout warn"><b>第二波用券次數待確認：</b>券檔記錄 PMC0026640 在 10/22 用 89 次、10/23 用 79 次、10/24 用 1 次。但跨境商品原價滿 1,500 元的訂單只有 64 張、45 張，照理最多只能用這麼多次（第一波就對得上：10/15 48 張、45 次；10/16 29 張、28 次）。取消單、多品項重複計算都已經排除，差額原因要請後台確認。上面的增量分析用的是訂單資料，不受影響；投報用的是券檔金額，如果實際次數比較少，投報會更高。</div>
+<div class="callout warn"><b>第二波用券次數待確認：</b>券檔記錄 PMC0026640 在 10/22 用 89 次、10/23 用 79 次、10/24 用 1 次。但跨境商品原價滿 1,500 元的訂單只有 64 張、45 張，照理最多只能用這麼多次（第一波就對得上：10/15 48 張、45 次；10/16 29 張、28 次）。取消單、多品項重複計算都已經排除，差額原因要請後台確認。上面的增量分析用的是訂單資料，不受影響。</div>
 
 <h2 id="s3">3. 疊券與折扣率</h2>
 <div class="tw"><table class="eq"><colgroup><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>
@@ -230,66 +231,66 @@ footer li{margin:2px 0}
 </ol>
 <div class="tw"><table class="num">
 <tr><th>SKU</th><th style="text-align:left">品項</th><th>第一波件數</th><th>第一波業績（元）</th><th>第二波件數</th><th>第二波業績（元）</th></tr>
-<tr><td>00344045</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 4入組(航空版)</td><td>1</td><td>4,999</td><td>14</td><td>64,896</td></tr>
-<tr><td>00232440</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 2入組(航空版)</td><td>8</td><td>20,335</td><td>12</td><td>29,678</td></tr>
-<tr><td>00210612</td><td style="text-align:left">Kiehl's 契爾氏 激光極淨白淡斑精華 115ml(航空版)</td><td>3</td><td>7,097</td><td>6</td><td>12,192</td></tr>
-<tr><td>00456922</td><td style="text-align:left">SK-II 光蘊恆璨淨斑精華 75ml(航空版)</td><td>2</td><td>11,338</td><td>1</td><td>5,289</td></tr>
-<tr><td>00207791</td><td style="text-align:left">Elizabeth Arden 21天霜 75ml 3入組(航空版)</td><td>3</td><td>3,316</td><td>12</td><td>12,554</td></tr>
-<tr><td>00446375</td><td style="text-align:left">Elizabeth Arden 艾地苯高效橙燦精華2.0 50ml 2入組(航空版)</td><td>4</td><td>8,816</td><td>3</td><td>6,248</td></tr>
-<tr><td>00302080</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td><td>1</td><td>2,451</td><td>5</td><td>12,219</td></tr>
-<tr><td>00389967</td><td style="text-align:left">Diptyque 淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td><td>2</td><td>9,198</td><td>1</td><td>4,499</td></tr>
-<tr><td>00228772</td><td style="text-align:left">CHANEL 香奈兒 超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td><td>4</td><td>5,811</td><td>5</td><td>6,873</td></tr>
-<tr><td>00450517</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 加贈10ml*2入(航空版)</td><td>4</td><td>6,980</td><td>2</td><td>3,340</td></tr>
+<tr><td class="sk">00344045</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 4入組(航空版)</td><td>1</td><td>4,999</td><td>14</td><td>64,896</td></tr>
+<tr><td class="sk">00232440</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 2入組(航空版)</td><td>8</td><td>20,335</td><td>12</td><td>29,678</td></tr>
+<tr><td class="sk">00210612</td><td style="text-align:left">Kiehl's 契爾氏 激光極淨白淡斑精華 115ml(航空版)</td><td>3</td><td>7,097</td><td>6</td><td>12,192</td></tr>
+<tr><td class="sk">00456922</td><td style="text-align:left">SK-II 光蘊恆璨淨斑精華 75ml(航空版)</td><td>2</td><td>11,338</td><td>1</td><td>5,289</td></tr>
+<tr><td class="sk">00207791</td><td style="text-align:left">Elizabeth Arden 21天霜 75ml 3入組(航空版)</td><td>3</td><td>3,316</td><td>12</td><td>12,554</td></tr>
+<tr><td class="sk">00446375</td><td style="text-align:left">Elizabeth Arden 艾地苯高效橙燦精華2.0 50ml 2入組(航空版)</td><td>4</td><td>8,816</td><td>3</td><td>6,248</td></tr>
+<tr><td class="sk">00302080</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td><td>1</td><td>2,451</td><td>5</td><td>12,219</td></tr>
+<tr><td class="sk">00389967</td><td style="text-align:left">Diptyque 淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td><td>2</td><td>9,198</td><td>1</td><td>4,499</td></tr>
+<tr><td class="sk">00228772</td><td style="text-align:left">CHANEL 香奈兒 超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td><td>4</td><td>5,811</td><td>5</td><td>6,873</td></tr>
+<tr><td class="sk">00450517</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 加贈10ml*2入(航空版)</td><td>4</td><td>6,980</td><td>2</td><td>3,340</td></tr>
 </table></div>
 <details class="more"><summary>看全部 46 個品項</summary>
 <div class="tw"><table class="num">
 <tr><th>SKU</th><th style="text-align:left">品項</th><th>第一波件數</th><th>第一波業績（元）</th><th>第二波件數</th><th>第二波業績（元）</th></tr>
-<tr><td>00344045</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 4入組(航空版)</td><td>1</td><td>4,999</td><td>14</td><td>64,896</td></tr>
-<tr><td>00232440</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 2入組(航空版)</td><td>8</td><td>20,335</td><td>12</td><td>29,678</td></tr>
-<tr><td>00210612</td><td style="text-align:left">Kiehl's 契爾氏 激光極淨白淡斑精華 115ml(航空版)</td><td>3</td><td>7,097</td><td>6</td><td>12,192</td></tr>
-<tr><td>00456922</td><td style="text-align:left">SK-II 光蘊恆璨淨斑精華 75ml(航空版)</td><td>2</td><td>11,338</td><td>1</td><td>5,289</td></tr>
-<tr><td>00207791</td><td style="text-align:left">Elizabeth Arden 21天霜 75ml 3入組(航空版)</td><td>3</td><td>3,316</td><td>12</td><td>12,554</td></tr>
-<tr><td>00446375</td><td style="text-align:left">Elizabeth Arden 艾地苯高效橙燦精華2.0 50ml 2入組(航空版)</td><td>4</td><td>8,816</td><td>3</td><td>6,248</td></tr>
-<tr><td>00302080</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td><td>1</td><td>2,451</td><td>5</td><td>12,219</td></tr>
-<tr><td>00389967</td><td style="text-align:left">Diptyque 淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td><td>2</td><td>9,198</td><td>1</td><td>4,499</td></tr>
-<tr><td>00228772</td><td style="text-align:left">CHANEL 香奈兒 超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td><td>4</td><td>5,811</td><td>5</td><td>6,873</td></tr>
-<tr><td>00450517</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 加贈10ml*2入(航空版)</td><td>4</td><td>6,980</td><td>2</td><td>3,340</td></tr>
-<tr><td>00443770</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻ACE眼霜 15ml(航空版)</td><td>7</td><td>8,932</td><td>1</td><td>1,209</td></tr>
-<tr><td>00299974</td><td style="text-align:left">LA ROCHE-POSAY 理膚寶水 B5+全面修復霜100ml 2入組 #無盒版(航空版)</td><td>8</td><td>7,707</td><td>2</td><td>1,820</td></tr>
-<tr><td>00450043</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 特潤超導全方位修護露 100ml 加贈7ml*4入 小棕瓶特惠組(航空版)</td><td>2</td><td>6,142</td><td>1</td><td>2,950</td></tr>
-<tr><td>00213095</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 四入組(航空版)</td><td>3</td><td>2,997</td><td>7</td><td>6,045</td></tr>
-<tr><td>00443759</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻霜(豐潤版) 50ml 拉提神霜(航空版)</td><td>3</td><td>5,134</td><td>2</td><td>3,411</td></tr>
-<tr><td>00208334</td><td style="text-align:left">YSL 超模光感精華水氣墊 12g(多款任選 航空版)</td><td>3</td><td>4,901</td><td>2</td><td>3,480</td></tr>
-<tr><td>00427608</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 2入組 小紅瓶(航空版)</td><td>1</td><td>2,999</td><td>2</td><td>5,340</td></tr>
-<tr><td>00261006</td><td style="text-align:left">Diptyque 淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)</td><td>1</td><td>4,190</td><td>1</td><td>4,090</td></tr>
-<tr><td>00367374</td><td style="text-align:left">Aesop 詠香水 50ml(航空版)</td><td>1</td><td>3,686</td><td>1</td><td>3,680</td></tr>
-<tr><td>00231146</td><td style="text-align:left">Guerlain 嬌蘭 皇家蜂王乳平衡油精華 50ml(航空版)</td><td>1</td><td>2,509</td><td>2</td><td>4,799</td></tr>
-<tr><td>00220857</td><td style="text-align:left">CLARINS 克蘭詩 黃金雙萃精華 50ml(航空版)</td><td>2</td><td>4,674</td><td>1</td><td>2,337</td></tr>
-<tr><td>00437582</td><td style="text-align:left">cle de peau BEAUTE 肌膚之鑰 光采無瑕妝前凝霜 37ml 2入組(航空版)</td><td>1</td><td>2,232</td><td>2</td><td>4,489</td></tr>
-<tr><td>00300833</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml(航空版)</td><td>2</td><td>2,639</td><td>3</td><td>3,970</td></tr>
-<tr><td>00317342</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 6入組(航空版)</td><td>3</td><td>3,980</td><td>1</td><td>1,360</td></tr>
-<tr><td>00411658</td><td style="text-align:left">LANCOME 蘭蔻 超未來肌因冰珠亮眼粹 20ml(航空版)</td><td>1</td><td>1,689</td><td>2</td><td>3,340</td></tr>
-<tr><td>00480407</td><td style="text-align:left">YSL 夢幻冰藍氣墊粉餅 14g(航空版)</td><td>1</td><td>2,584</td><td>1</td><td>2,431</td></tr>
-<tr><td>00518315</td><td style="text-align:left">BIODANCE 面膜 1盒4入(多款任選 航空版)</td><td>9</td><td>4,448</td><td>1</td><td>499</td></tr>
-<tr><td>00285222</td><td style="text-align:left">LANCOME 蘭蔻 全新超輕盈UV水凝露 50ml(航空版)</td><td>2</td><td>3,298</td><td>1</td><td>1,567</td></tr>
-<tr><td>00221401</td><td style="text-align:left">L'Occitane 歐舒丹 草本洗髮乳/潤髮乳 500ml (淨涼/修護/強韌/平衡)(多款任選 航空版)</td><td>4</td><td>3,196</td><td>2</td><td>1,501</td></tr>
-<tr><td>00372695</td><td style="text-align:left">SK-II 光蘊輕透CC霜 30g SPF 50+ PA++++(公司貨)</td><td>2</td><td>3,055</td><td>1</td><td>1,577</td></tr>
-<tr><td>00520251</td><td style="text-align:left">BIODANCE 面膜 1盒4入 2入組(多款任選 航空版)</td><td>4</td><td>3,632</td><td>1</td><td>951</td></tr>
-<tr><td>00488692</td><td style="text-align:left">MALIN+GOETZ 淡香精 50ml (佛手柑/大麻草/草莓)(多款任選  航空版)</td><td>1</td><td>2,290</td><td>1</td><td>2,175</td></tr>
-<tr><td>00371223</td><td style="text-align:left">SUQQU 晶采柔艷頰彩 6.4g(多款任選 航空版)</td><td>2</td><td>2,633</td><td>1</td><td>1,350</td></tr>
-<tr><td>00517203</td><td style="text-align:left">AVEDA 肯夢 蘊活煥欣豐盈菁華 150ml (效期2027/11)(航空版)</td><td>1</td><td>1,350</td><td>2</td><td>2,551</td></tr>
-<tr><td>00466558</td><td style="text-align:left">SHISEIDO 資生堂 保濕潔膚皂 125ml(航空版)</td><td>3</td><td>1,797</td><td>3</td><td>1,722</td></tr>
-<tr><td>00347973</td><td style="text-align:left">CLARINS 克蘭詩 全效緊緻眼霜 7ml 三入組(航空版)</td><td>1</td><td>840</td><td>3</td><td>2,452</td></tr>
-<tr><td>00256931</td><td style="text-align:left">LA MER 海洋拉娜 修護唇霜 9g(航空版)</td><td>1</td><td>1,480</td><td>1</td><td>1,480</td></tr>
-<tr><td>00239059</td><td style="text-align:left">COSME DECORTE 黛珂 UV COMFORT 極效光無痕素顏霜 30ml(多款任選 航空版)</td><td>2</td><td>1,165</td><td>3</td><td>1,791</td></tr>
-<tr><td>00451879</td><td style="text-align:left">SHISEIDO 資生堂  激抗痕亮采緊緻乳 100ml (輕盈版/豐潤版)(多款任選 航空版)</td><td>1</td><td>1,309</td><td>1</td><td>1,350</td></tr>
-<tr><td>00371919</td><td style="text-align:left">ACQUA DI PARMA 帕爾瑪之水 藍色地中海系列 桃金孃加州桂 30ml 中性淡香水(航空版)</td><td>1</td><td>1,310</td><td>1</td><td>1,310</td></tr>
-<tr><td>00302072</td><td style="text-align:left">Elizabeth Arden  21天霜 75ml 2入組(航空版)</td><td>2</td><td>1,700</td><td>1</td><td>850</td></tr>
-<tr><td>00284605</td><td style="text-align:left">Elizabeth Arden 綠茶香水身體乳 500ml(航空版)</td><td>2</td><td>798</td><td>4</td><td>1,296</td></tr>
-<tr><td>00507087</td><td style="text-align:left">Aesop 賦活芳香護手霜 75ml 中文字(航空版)</td><td>1</td><td>511</td><td>3</td><td>1,468</td></tr>
-<tr><td>00217760</td><td style="text-align:left">GIORGIO ARMANI 亞曼尼 高級訂製淡香水花園 7.5ml(多款任選 航空版)</td><td>2</td><td>1,278</td><td>1</td><td>639</td></tr>
-<tr><td>00480419</td><td style="text-align:left">BYREDO 無人之境淡香精 12ml(航空版)</td><td>1</td><td>821</td><td>1</td><td>818</td></tr>
-<tr><td>00295980</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 粉持久天生美肌乖乖乳 15ml 4入組(航空版)</td><td>2</td><td>1,020</td><td>1</td><td>411</td></tr>
+<tr><td class="sk">00344045</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 4入組(航空版)</td><td>1</td><td>4,999</td><td>14</td><td>64,896</td></tr>
+<tr><td class="sk">00232440</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 2入組(航空版)</td><td>8</td><td>20,335</td><td>12</td><td>29,678</td></tr>
+<tr><td class="sk">00210612</td><td style="text-align:left">Kiehl's 契爾氏 激光極淨白淡斑精華 115ml(航空版)</td><td>3</td><td>7,097</td><td>6</td><td>12,192</td></tr>
+<tr><td class="sk">00456922</td><td style="text-align:left">SK-II 光蘊恆璨淨斑精華 75ml(航空版)</td><td>2</td><td>11,338</td><td>1</td><td>5,289</td></tr>
+<tr><td class="sk">00207791</td><td style="text-align:left">Elizabeth Arden 21天霜 75ml 3入組(航空版)</td><td>3</td><td>3,316</td><td>12</td><td>12,554</td></tr>
+<tr><td class="sk">00446375</td><td style="text-align:left">Elizabeth Arden 艾地苯高效橙燦精華2.0 50ml 2入組(航空版)</td><td>4</td><td>8,816</td><td>3</td><td>6,248</td></tr>
+<tr><td class="sk">00302080</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td><td>1</td><td>2,451</td><td>5</td><td>12,219</td></tr>
+<tr><td class="sk">00389967</td><td style="text-align:left">Diptyque 淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td><td>2</td><td>9,198</td><td>1</td><td>4,499</td></tr>
+<tr><td class="sk">00228772</td><td style="text-align:left">CHANEL 香奈兒 超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td><td>4</td><td>5,811</td><td>5</td><td>6,873</td></tr>
+<tr><td class="sk">00450517</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 加贈10ml*2入(航空版)</td><td>4</td><td>6,980</td><td>2</td><td>3,340</td></tr>
+<tr><td class="sk">00443770</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻ACE眼霜 15ml(航空版)</td><td>7</td><td>8,932</td><td>1</td><td>1,209</td></tr>
+<tr><td class="sk">00299974</td><td style="text-align:left">LA ROCHE-POSAY 理膚寶水 B5+全面修復霜100ml 2入組 #無盒版(航空版)</td><td>8</td><td>7,707</td><td>2</td><td>1,820</td></tr>
+<tr><td class="sk">00450043</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 特潤超導全方位修護露 100ml 加贈7ml*4入 小棕瓶特惠組(航空版)</td><td>2</td><td>6,142</td><td>1</td><td>2,950</td></tr>
+<tr><td class="sk">00213095</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 四入組(航空版)</td><td>3</td><td>2,997</td><td>7</td><td>6,045</td></tr>
+<tr><td class="sk">00443759</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻霜(豐潤版) 50ml 拉提神霜(航空版)</td><td>3</td><td>5,134</td><td>2</td><td>3,411</td></tr>
+<tr><td class="sk">00208334</td><td style="text-align:left">YSL 超模光感精華水氣墊 12g(多款任選 航空版)</td><td>3</td><td>4,901</td><td>2</td><td>3,480</td></tr>
+<tr><td class="sk">00427608</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 2入組 小紅瓶(航空版)</td><td>1</td><td>2,999</td><td>2</td><td>5,340</td></tr>
+<tr><td class="sk">00261006</td><td style="text-align:left">Diptyque 淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)</td><td>1</td><td>4,190</td><td>1</td><td>4,090</td></tr>
+<tr><td class="sk">00367374</td><td style="text-align:left">Aesop 詠香水 50ml(航空版)</td><td>1</td><td>3,686</td><td>1</td><td>3,680</td></tr>
+<tr><td class="sk">00231146</td><td style="text-align:left">Guerlain 嬌蘭 皇家蜂王乳平衡油精華 50ml(航空版)</td><td>1</td><td>2,509</td><td>2</td><td>4,799</td></tr>
+<tr><td class="sk">00220857</td><td style="text-align:left">CLARINS 克蘭詩 黃金雙萃精華 50ml(航空版)</td><td>2</td><td>4,674</td><td>1</td><td>2,337</td></tr>
+<tr><td class="sk">00437582</td><td style="text-align:left">cle de peau BEAUTE 肌膚之鑰 光采無瑕妝前凝霜 37ml 2入組(航空版)</td><td>1</td><td>2,232</td><td>2</td><td>4,489</td></tr>
+<tr><td class="sk">00300833</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml(航空版)</td><td>2</td><td>2,639</td><td>3</td><td>3,970</td></tr>
+<tr><td class="sk">00317342</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 6入組(航空版)</td><td>3</td><td>3,980</td><td>1</td><td>1,360</td></tr>
+<tr><td class="sk">00411658</td><td style="text-align:left">LANCOME 蘭蔻 超未來肌因冰珠亮眼粹 20ml(航空版)</td><td>1</td><td>1,689</td><td>2</td><td>3,340</td></tr>
+<tr><td class="sk">00480407</td><td style="text-align:left">YSL 夢幻冰藍氣墊粉餅 14g(航空版)</td><td>1</td><td>2,584</td><td>1</td><td>2,431</td></tr>
+<tr><td class="sk">00518315</td><td style="text-align:left">BIODANCE 面膜 1盒4入(多款任選 航空版)</td><td>9</td><td>4,448</td><td>1</td><td>499</td></tr>
+<tr><td class="sk">00285222</td><td style="text-align:left">LANCOME 蘭蔻 全新超輕盈UV水凝露 50ml(航空版)</td><td>2</td><td>3,298</td><td>1</td><td>1,567</td></tr>
+<tr><td class="sk">00221401</td><td style="text-align:left">L'Occitane 歐舒丹 草本洗髮乳/潤髮乳 500ml (淨涼/修護/強韌/平衡)(多款任選 航空版)</td><td>4</td><td>3,196</td><td>2</td><td>1,501</td></tr>
+<tr><td class="sk">00372695</td><td style="text-align:left">SK-II 光蘊輕透CC霜 30g SPF 50+ PA++++(公司貨)</td><td>2</td><td>3,055</td><td>1</td><td>1,577</td></tr>
+<tr><td class="sk">00520251</td><td style="text-align:left">BIODANCE 面膜 1盒4入 2入組(多款任選 航空版)</td><td>4</td><td>3,632</td><td>1</td><td>951</td></tr>
+<tr><td class="sk">00488692</td><td style="text-align:left">MALIN+GOETZ 淡香精 50ml (佛手柑/大麻草/草莓)(多款任選  航空版)</td><td>1</td><td>2,290</td><td>1</td><td>2,175</td></tr>
+<tr><td class="sk">00371223</td><td style="text-align:left">SUQQU 晶采柔艷頰彩 6.4g(多款任選 航空版)</td><td>2</td><td>2,633</td><td>1</td><td>1,350</td></tr>
+<tr><td class="sk">00517203</td><td style="text-align:left">AVEDA 肯夢 蘊活煥欣豐盈菁華 150ml (效期2027/11)(航空版)</td><td>1</td><td>1,350</td><td>2</td><td>2,551</td></tr>
+<tr><td class="sk">00466558</td><td style="text-align:left">SHISEIDO 資生堂 保濕潔膚皂 125ml(航空版)</td><td>3</td><td>1,797</td><td>3</td><td>1,722</td></tr>
+<tr><td class="sk">00347973</td><td style="text-align:left">CLARINS 克蘭詩 全效緊緻眼霜 7ml 三入組(航空版)</td><td>1</td><td>840</td><td>3</td><td>2,452</td></tr>
+<tr><td class="sk">00256931</td><td style="text-align:left">LA MER 海洋拉娜 修護唇霜 9g(航空版)</td><td>1</td><td>1,480</td><td>1</td><td>1,480</td></tr>
+<tr><td class="sk">00239059</td><td style="text-align:left">COSME DECORTE 黛珂 UV COMFORT 極效光無痕素顏霜 30ml(多款任選 航空版)</td><td>2</td><td>1,165</td><td>3</td><td>1,791</td></tr>
+<tr><td class="sk">00451879</td><td style="text-align:left">SHISEIDO 資生堂  激抗痕亮采緊緻乳 100ml (輕盈版/豐潤版)(多款任選 航空版)</td><td>1</td><td>1,309</td><td>1</td><td>1,350</td></tr>
+<tr><td class="sk">00371919</td><td style="text-align:left">ACQUA DI PARMA 帕爾瑪之水 藍色地中海系列 桃金孃加州桂 30ml 中性淡香水(航空版)</td><td>1</td><td>1,310</td><td>1</td><td>1,310</td></tr>
+<tr><td class="sk">00302072</td><td style="text-align:left">Elizabeth Arden  21天霜 75ml 2入組(航空版)</td><td>2</td><td>1,700</td><td>1</td><td>850</td></tr>
+<tr><td class="sk">00284605</td><td style="text-align:left">Elizabeth Arden 綠茶香水身體乳 500ml(航空版)</td><td>2</td><td>798</td><td>4</td><td>1,296</td></tr>
+<tr><td class="sk">00507087</td><td style="text-align:left">Aesop 賦活芳香護手霜 75ml 中文字(航空版)</td><td>1</td><td>511</td><td>3</td><td>1,468</td></tr>
+<tr><td class="sk">00217760</td><td style="text-align:left">GIORGIO ARMANI 亞曼尼 高級訂製淡香水花園 7.5ml(多款任選 航空版)</td><td>2</td><td>1,278</td><td>1</td><td>639</td></tr>
+<tr><td class="sk">00480419</td><td style="text-align:left">BYREDO 無人之境淡香精 12ml(航空版)</td><td>1</td><td>821</td><td>1</td><td>818</td></tr>
+<tr><td class="sk">00295980</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 粉持久天生美肌乖乖乳 15ml 4入組(航空版)</td><td>2</td><td>1,020</td><td>1</td><td>411</td></tr>
 </table></div>
 </details>
 <p style="font-size:13px;color:var(--slate);margin-top:6px">依兩波業績合計排序；多款任選的品項只列款式名前的主品名。</p>
@@ -345,66 +346,68 @@ footer li{margin:2px 0}
 <tr class="sep"><td>第二波｜跨境豐收</td><td>272</td><td>7,350</td><td>975</td><td>175</td><td class="red">13.3%</td><td class="red">17.9%</td><td class="red">2.4%</td><td class="red">55.2</td></tr>
 <tr><td>第二波｜其他專櫃美妝</td><td>880</td><td>8,858</td><td>1,047</td><td>171</td><td>11.8%</td><td>16.3%</td><td>1.9%</td><td>34.1</td></tr>
 </table></div>
-<ol class="pts">
-  <li><b>流量和加車明顯增加：</b>跨境瀏覽從 5,127 次增加到 7,350 次（+43%），加車從 606 次增加到 975 次（+61%）。加車率從 11.8% 提高到 13.3%，比同業的 11.8% 高。第二波發給加車、瀏覽未購的名單，這些人回來後比較會加車。</li>
-  <li><b>加車後的購買率下降：</b>從 25.7% 降到 17.9%。同業也從 19.4% 降到 16.3%，所以有一部分是整體市場（推測和會員日、雙 11 前觀望有關），但跨境的領先從 6.3 個百分點縮小到 1.6 個百分點。</li>
-  <li><b>收益效率拉開：</b>每次瀏覽的收益跨境 55.2 元，同業 34.1 元，差距從第一波的 1.2 倍擴大到 1.6 倍，主要來自高單價品。跨境占專櫃美妝瀏覽的 45%、收益的 57%（第一波 44%、48%）。</li>
-</ol>
 <h3>兩波重複品項的轉換（第二波 APM）</h3>
 <p style="font-size:14.5px">第 5 段的 46 個重複品項，占第二波跨境瀏覽和收益各 55%。加車後購買率 18.2%，和其他品項的 17.0% 差不多，差別在個別品項：</p>
-<ol class="pts">
-  <li><b>轉換好：</b>Elizabeth Arden 21 天霜 3 入組（00207791，瀏覽 240／加車 48／購買 12，車後 25%）、百優＋山茶花優惠組合（00302080，35／7／5）、雅漾活泉水 4 入組（00213095，214／36／7）、百優 4 入組（00344045，446／73／13，車後 18%）。</li>
-  <li><b>轉換差：</b>資生堂山茶花加贈組（00450517，770／63／2，瀏覽第一但車後只有 3%）、百優 2 入組（00232440，563／75／10，車後 13%）、黛珂素顏霜（00239059，86／16／0）、歐舒丹洗潤髮乳（00221401，10／10／0）。</li>
-</ol>
+<div class="tw"><table class="num">
+<tr><th>分類</th><th>SKU</th><th style="text-align:left">品項</th><th>瀏覽</th><th>加車</th><th>購買</th><th>車後購買率</th></tr>
+<tr><td rowspan="4" style="vertical-align:middle;color:var(--ink)"><b>轉換好</b></td><td class="sk">00207791</td><td style="text-align:left">Elizabeth Arden 21 天霜 75ml 3 入組</td><td>240</td><td>48</td><td>12</td><td>25%</td></tr>
+<tr><td class="sk">00344045</td><td style="text-align:left">資生堂 百優精純乳霜 75ml 4 入組</td><td>446</td><td>73</td><td>13</td><td>18%</td></tr>
+<tr><td class="sk">00213095</td><td style="text-align:left">雅漾 舒護活泉水 300ml 4 入組</td><td>214</td><td>36</td><td>7</td><td>19%</td></tr>
+<tr><td class="sk">00302080</td><td style="text-align:left">資生堂 百優＋紅妍山茶花 優惠組合</td><td>35</td><td>7</td><td>5</td><td>71%</td></tr>
+<tr class="sep"><td rowspan="4" style="vertical-align:middle;color:var(--ink)"><b>轉換差</b></td><td class="sk">00450517</td><td style="text-align:left">資生堂 紅妍山茶花精華 75ml 加贈組</td><td>770</td><td>63</td><td>2</td><td>3%</td></tr>
+<tr><td class="sk">00232440</td><td style="text-align:left">資生堂 百優精純乳霜 75ml 2 入組</td><td>563</td><td>75</td><td>10</td><td>13%</td></tr>
+<tr><td class="sk">00239059</td><td style="text-align:left">黛珂 UV 極效光無痕素顏霜 30ml</td><td>86</td><td>16</td><td>0</td><td>0%</td></tr>
+<tr><td class="sk">00221401</td><td style="text-align:left">歐舒丹 草本洗髮乳／潤髮乳 500ml</td><td>10</td><td>10</td><td>0</td><td>0%</td></tr>
+</table></div>
 <details class="more"><summary>看 46 個重複品項的 APM 明細</summary>
 <div class="tw"><table class="num">
 <tr><th>SKU</th><th style="text-align:left">品項</th><th>瀏覽</th><th>加車</th><th>購買</th><th>車後購買率</th></tr>
-<tr><td>00450517</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 加贈10ml*2入(航空版)</td><td>770</td><td>63</td><td>2</td><td>3%</td></tr>
-<tr><td>00232440</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 2入組(航空版)</td><td>563</td><td>75</td><td>10</td><td>13%</td></tr>
-<tr><td>00344045</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 4入組(航空版)</td><td>446</td><td>73</td><td>13</td><td>18%</td></tr>
-<tr><td>00446375</td><td style="text-align:left">Elizabeth Arden 艾地苯高效橙燦精華2.0 50ml 2入組(航空版)</td><td>260</td><td>16</td><td>3</td><td>19%</td></tr>
-<tr><td>00228772</td><td style="text-align:left">CHANEL 香奈兒 超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td><td>245</td><td>41</td><td>5</td><td>12%</td></tr>
-<tr><td>00207791</td><td style="text-align:left">Elizabeth Arden 21天霜 75ml 3入組(航空版)</td><td>240</td><td>48</td><td>12</td><td>25%</td></tr>
-<tr><td>00213095</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 四入組(航空版)</td><td>214</td><td>36</td><td>7</td><td>19%</td></tr>
-<tr><td>00299974</td><td style="text-align:left">LA ROCHE-POSAY 理膚寶水 B5+全面修復霜100ml 2入組 #無盒版(航空版)</td><td>141</td><td>21</td><td>2</td><td>10%</td></tr>
-<tr><td>00208334</td><td style="text-align:left">YSL 超模光感精華水氣墊 12g(多款任選 航空版)</td><td>136</td><td>11</td><td>2</td><td>18%</td></tr>
-<tr><td>00210612</td><td style="text-align:left">Kiehl's 契爾氏 激光極淨白淡斑精華 115ml(航空版)</td><td>132</td><td>14</td><td>6</td><td>43%</td></tr>
-<tr><td>00443759</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻霜(豐潤版) 50ml 拉提神霜(航空版)</td><td>127</td><td>17</td><td>1</td><td>6%</td></tr>
-<tr><td>00300833</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml(航空版)</td><td>127</td><td>9</td><td>3</td><td>33%</td></tr>
-<tr><td>00518315</td><td style="text-align:left">BIODANCE 面膜 1盒4入(多款任選 航空版)</td><td>119</td><td>9</td><td>1</td><td>11%</td></tr>
-<tr><td>00450043</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 特潤超導全方位修護露 100ml 加贈7ml*4入 小棕瓶特惠組(航空版)</td><td>86</td><td>5</td><td>1</td><td>20%</td></tr>
-<tr><td>00239059</td><td style="text-align:left">COSME DECORTE 黛珂 UV COMFORT 極效光無痕素顏霜 30ml(多款任選 航空版)</td><td>86</td><td>16</td><td>0</td><td>0%</td></tr>
-<tr><td>00427608</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 2入組 小紅瓶(航空版)</td><td>80</td><td>16</td><td>2</td><td>12%</td></tr>
-<tr><td>00437582</td><td style="text-align:left">cle de peau BEAUTE 肌膚之鑰 光采無瑕妝前凝霜 37ml 2入組(航空版)</td><td>73</td><td>5</td><td>2</td><td>40%</td></tr>
-<tr><td>00443770</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻ACE眼霜 15ml(航空版)</td><td>52</td><td>9</td><td>1</td><td>11%</td></tr>
-<tr><td>00371919</td><td style="text-align:left">ACQUA DI PARMA 帕爾瑪之水 藍色地中海系列 桃金孃加州桂 30ml 中性淡香水(航空版)</td><td>52</td><td>3</td><td>1</td><td>33%</td></tr>
-<tr><td>00389967</td><td style="text-align:left">Diptyque 淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td><td>45</td><td>7</td><td>1</td><td>14%</td></tr>
-<tr><td>00347973</td><td style="text-align:left">CLARINS 克蘭詩 全效緊緻眼霜 7ml 三入組(航空版)</td><td>45</td><td>17</td><td>3</td><td>18%</td></tr>
-<tr><td>00488692</td><td style="text-align:left">MALIN+GOETZ 淡香精 50ml (佛手柑/大麻草/草莓)(多款任選  航空版)</td><td>42</td><td>3</td><td>1</td><td>33%</td></tr>
-<tr><td>00220857</td><td style="text-align:left">CLARINS 克蘭詩 黃金雙萃精華 50ml(航空版)</td><td>40</td><td>7</td><td>1</td><td>14%</td></tr>
-<tr><td>00451879</td><td style="text-align:left">SHISEIDO 資生堂  激抗痕亮采緊緻乳 100ml (輕盈版/豐潤版)(多款任選 航空版)</td><td>40</td><td>4</td><td>1</td><td>25%</td></tr>
-<tr><td>00411658</td><td style="text-align:left">LANCOME 蘭蔻 超未來肌因冰珠亮眼粹 20ml(航空版)</td><td>39</td><td>8</td><td>2</td><td>25%</td></tr>
-<tr><td>00517203</td><td style="text-align:left">AVEDA 肯夢 蘊活煥欣豐盈菁華 150ml (效期2027/11)(航空版)</td><td>39</td><td>5</td><td>2</td><td>40%</td></tr>
-<tr><td>00302080</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td><td>35</td><td>7</td><td>5</td><td>71%</td></tr>
-<tr><td>00295980</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 粉持久天生美肌乖乖乳 15ml 4入組(航空版)</td><td>32</td><td>7</td><td>1</td><td>14%</td></tr>
-<tr><td>00261006</td><td style="text-align:left">Diptyque 淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)</td><td>30</td><td>5</td><td>1</td><td>20%</td></tr>
-<tr><td>00480407</td><td style="text-align:left">YSL 夢幻冰藍氣墊粉餅 14g(航空版)</td><td>30</td><td>1</td><td>1</td><td>100%</td></tr>
-<tr><td>00217760</td><td style="text-align:left">GIORGIO ARMANI 亞曼尼 高級訂製淡香水花園 7.5ml(多款任選 航空版)</td><td>30</td><td>9</td><td>1</td><td>11%</td></tr>
-<tr><td>00456922</td><td style="text-align:left">SK-II 光蘊恆璨淨斑精華 75ml(航空版)</td><td>26</td><td>5</td><td>1</td><td>20%</td></tr>
-<tr><td>00231146</td><td style="text-align:left">Guerlain 嬌蘭 皇家蜂王乳平衡油精華 50ml(航空版)</td><td>23</td><td>4</td><td>2</td><td>50%</td></tr>
-<tr><td>00367374</td><td style="text-align:left">Aesop 詠香水 50ml(航空版)</td><td>22</td><td>4</td><td>1</td><td>25%</td></tr>
-<tr><td>00466558</td><td style="text-align:left">SHISEIDO 資生堂 保濕潔膚皂 125ml(航空版)</td><td>22</td><td>7</td><td>3</td><td>43%</td></tr>
-<tr><td>00317342</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 6入組(航空版)</td><td>21</td><td>6</td><td>1</td><td>17%</td></tr>
-<tr><td>00507087</td><td style="text-align:left">Aesop 賦活芳香護手霜 75ml 中文字(航空版)</td><td>21</td><td>7</td><td>3</td><td>43%</td></tr>
-<tr><td>00302072</td><td style="text-align:left">Elizabeth Arden  21天霜 75ml 2入組(航空版)</td><td>20</td><td>3</td><td>1</td><td>33%</td></tr>
-<tr><td>00520251</td><td style="text-align:left">BIODANCE 面膜 1盒4入 2入組(多款任選 航空版)</td><td>17</td><td>10</td><td>1</td><td>10%</td></tr>
-<tr><td>00284605</td><td style="text-align:left">Elizabeth Arden 綠茶香水身體乳 500ml(航空版)</td><td>17</td><td>6</td><td>4</td><td>67%</td></tr>
-<tr><td>00256931</td><td style="text-align:left">LA MER 海洋拉娜 修護唇霜 9g(航空版)</td><td>16</td><td>2</td><td>1</td><td>50%</td></tr>
-<tr><td>00372695</td><td style="text-align:left">SK-II 光蘊輕透CC霜 30g SPF 50+ PA++++(公司貨)</td><td>12</td><td>3</td><td>1</td><td>33%</td></tr>
-<tr><td>00221401</td><td style="text-align:left">L'Occitane 歐舒丹 草本洗髮乳/潤髮乳 500ml (淨涼/修護/強韌/平衡)(多款任選 航空版)</td><td>10</td><td>10</td><td>0</td><td>0%</td></tr>
-<tr><td>00371223</td><td style="text-align:left">SUQQU 晶采柔艷頰彩 6.4g(多款任選 航空版)</td><td>9</td><td>1</td><td>1</td><td>100%</td></tr>
-<tr><td>00480419</td><td style="text-align:left">BYREDO 無人之境淡香精 12ml(航空版)</td><td>7</td><td>1</td><td>1</td><td>100%</td></tr>
-<tr><td>00285222</td><td style="text-align:left">LANCOME 蘭蔻 全新超輕盈UV水凝露 50ml(航空版)</td><td>4</td><td>0</td><td>1</td><td>—</td></tr>
+<tr><td class="sk">00450517</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 加贈10ml*2入(航空版)</td><td>770</td><td>63</td><td>2</td><td>3%</td></tr>
+<tr><td class="sk">00232440</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 2入組(航空版)</td><td>563</td><td>75</td><td>10</td><td>13%</td></tr>
+<tr><td class="sk">00344045</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml 4入組(航空版)</td><td>446</td><td>73</td><td>13</td><td>18%</td></tr>
+<tr><td class="sk">00446375</td><td style="text-align:left">Elizabeth Arden 艾地苯高效橙燦精華2.0 50ml 2入組(航空版)</td><td>260</td><td>16</td><td>3</td><td>19%</td></tr>
+<tr><td class="sk">00228772</td><td style="text-align:left">CHANEL 香奈兒 超炫耀持色唇萃 4.5ml+3.5ml(多款任選 航空版)</td><td>245</td><td>41</td><td>5</td><td>12%</td></tr>
+<tr><td class="sk">00207791</td><td style="text-align:left">Elizabeth Arden 21天霜 75ml 3入組(航空版)</td><td>240</td><td>48</td><td>12</td><td>25%</td></tr>
+<tr><td class="sk">00213095</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 四入組(航空版)</td><td>214</td><td>36</td><td>7</td><td>19%</td></tr>
+<tr><td class="sk">00299974</td><td style="text-align:left">LA ROCHE-POSAY 理膚寶水 B5+全面修復霜100ml 2入組 #無盒版(航空版)</td><td>141</td><td>21</td><td>2</td><td>10%</td></tr>
+<tr><td class="sk">00208334</td><td style="text-align:left">YSL 超模光感精華水氣墊 12g(多款任選 航空版)</td><td>136</td><td>11</td><td>2</td><td>18%</td></tr>
+<tr><td class="sk">00210612</td><td style="text-align:left">Kiehl's 契爾氏 激光極淨白淡斑精華 115ml(航空版)</td><td>132</td><td>14</td><td>6</td><td>43%</td></tr>
+<tr><td class="sk">00443759</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻霜(豐潤版) 50ml 拉提神霜(航空版)</td><td>127</td><td>17</td><td>1</td><td>6%</td></tr>
+<tr><td class="sk">00300833</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml(航空版)</td><td>127</td><td>9</td><td>3</td><td>33%</td></tr>
+<tr><td class="sk">00518315</td><td style="text-align:left">BIODANCE 面膜 1盒4入(多款任選 航空版)</td><td>119</td><td>9</td><td>1</td><td>11%</td></tr>
+<tr><td class="sk">00450043</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 特潤超導全方位修護露 100ml 加贈7ml*4入 小棕瓶特惠組(航空版)</td><td>86</td><td>5</td><td>1</td><td>20%</td></tr>
+<tr><td class="sk">00239059</td><td style="text-align:left">COSME DECORTE 黛珂 UV COMFORT 極效光無痕素顏霜 30ml(多款任選 航空版)</td><td>86</td><td>16</td><td>0</td><td>0%</td></tr>
+<tr><td class="sk">00427608</td><td style="text-align:left">SHISEIDO 資生堂 紅妍山茶花修護精華 75ml 2入組 小紅瓶(航空版)</td><td>80</td><td>16</td><td>2</td><td>12%</td></tr>
+<tr><td class="sk">00437582</td><td style="text-align:left">cle de peau BEAUTE 肌膚之鑰 光采無瑕妝前凝霜 37ml 2入組(航空版)</td><td>73</td><td>5</td><td>2</td><td>40%</td></tr>
+<tr><td class="sk">00443770</td><td style="text-align:left">SHISEIDO 資生堂 激抗痕亮采緊緻ACE眼霜 15ml(航空版)</td><td>52</td><td>9</td><td>1</td><td>11%</td></tr>
+<tr><td class="sk">00371919</td><td style="text-align:left">ACQUA DI PARMA 帕爾瑪之水 藍色地中海系列 桃金孃加州桂 30ml 中性淡香水(航空版)</td><td>52</td><td>3</td><td>1</td><td>33%</td></tr>
+<tr><td class="sk">00389967</td><td style="text-align:left">Diptyque 淡香精 75ml (爵夢/肌膚之華/譚道)(多款任選 航空版)</td><td>45</td><td>7</td><td>1</td><td>14%</td></tr>
+<tr><td class="sk">00347973</td><td style="text-align:left">CLARINS 克蘭詩 全效緊緻眼霜 7ml 三入組(航空版)</td><td>45</td><td>17</td><td>3</td><td>18%</td></tr>
+<tr><td class="sk">00488692</td><td style="text-align:left">MALIN+GOETZ 淡香精 50ml (佛手柑/大麻草/草莓)(多款任選  航空版)</td><td>42</td><td>3</td><td>1</td><td>33%</td></tr>
+<tr><td class="sk">00220857</td><td style="text-align:left">CLARINS 克蘭詩 黃金雙萃精華 50ml(航空版)</td><td>40</td><td>7</td><td>1</td><td>14%</td></tr>
+<tr><td class="sk">00451879</td><td style="text-align:left">SHISEIDO 資生堂  激抗痕亮采緊緻乳 100ml (輕盈版/豐潤版)(多款任選 航空版)</td><td>40</td><td>4</td><td>1</td><td>25%</td></tr>
+<tr><td class="sk">00411658</td><td style="text-align:left">LANCOME 蘭蔻 超未來肌因冰珠亮眼粹 20ml(航空版)</td><td>39</td><td>8</td><td>2</td><td>25%</td></tr>
+<tr><td class="sk">00517203</td><td style="text-align:left">AVEDA 肯夢 蘊活煥欣豐盈菁華 150ml (效期2027/11)(航空版)</td><td>39</td><td>5</td><td>2</td><td>40%</td></tr>
+<tr><td class="sk">00302080</td><td style="text-align:left">SHISEIDO 資生堂 百優精純乳霜 75ml+紅妍山茶花修護精華 75ml 優惠組合(航空版)</td><td>35</td><td>7</td><td>5</td><td>71%</td></tr>
+<tr><td class="sk">00295980</td><td style="text-align:left">ESTEE LAUDER 雅詩蘭黛 粉持久天生美肌乖乖乳 15ml 4入組(航空版)</td><td>32</td><td>7</td><td>1</td><td>14%</td></tr>
+<tr><td class="sk">00261006</td><td style="text-align:left">Diptyque 淡香精 75ml (玫瑰之水/青蕨/杜桑/希臘無花果/坦博)(多款任選 航空版)</td><td>30</td><td>5</td><td>1</td><td>20%</td></tr>
+<tr><td class="sk">00480407</td><td style="text-align:left">YSL 夢幻冰藍氣墊粉餅 14g(航空版)</td><td>30</td><td>1</td><td>1</td><td>100%</td></tr>
+<tr><td class="sk">00217760</td><td style="text-align:left">GIORGIO ARMANI 亞曼尼 高級訂製淡香水花園 7.5ml(多款任選 航空版)</td><td>30</td><td>9</td><td>1</td><td>11%</td></tr>
+<tr><td class="sk">00456922</td><td style="text-align:left">SK-II 光蘊恆璨淨斑精華 75ml(航空版)</td><td>26</td><td>5</td><td>1</td><td>20%</td></tr>
+<tr><td class="sk">00231146</td><td style="text-align:left">Guerlain 嬌蘭 皇家蜂王乳平衡油精華 50ml(航空版)</td><td>23</td><td>4</td><td>2</td><td>50%</td></tr>
+<tr><td class="sk">00367374</td><td style="text-align:left">Aesop 詠香水 50ml(航空版)</td><td>22</td><td>4</td><td>1</td><td>25%</td></tr>
+<tr><td class="sk">00466558</td><td style="text-align:left">SHISEIDO 資生堂 保濕潔膚皂 125ml(航空版)</td><td>22</td><td>7</td><td>3</td><td>43%</td></tr>
+<tr><td class="sk">00317342</td><td style="text-align:left">Avene 雅漾 舒護活泉水 300ml 6入組(航空版)</td><td>21</td><td>6</td><td>1</td><td>17%</td></tr>
+<tr><td class="sk">00507087</td><td style="text-align:left">Aesop 賦活芳香護手霜 75ml 中文字(航空版)</td><td>21</td><td>7</td><td>3</td><td>43%</td></tr>
+<tr><td class="sk">00302072</td><td style="text-align:left">Elizabeth Arden  21天霜 75ml 2入組(航空版)</td><td>20</td><td>3</td><td>1</td><td>33%</td></tr>
+<tr><td class="sk">00520251</td><td style="text-align:left">BIODANCE 面膜 1盒4入 2入組(多款任選 航空版)</td><td>17</td><td>10</td><td>1</td><td>10%</td></tr>
+<tr><td class="sk">00284605</td><td style="text-align:left">Elizabeth Arden 綠茶香水身體乳 500ml(航空版)</td><td>17</td><td>6</td><td>4</td><td>67%</td></tr>
+<tr><td class="sk">00256931</td><td style="text-align:left">LA MER 海洋拉娜 修護唇霜 9g(航空版)</td><td>16</td><td>2</td><td>1</td><td>50%</td></tr>
+<tr><td class="sk">00372695</td><td style="text-align:left">SK-II 光蘊輕透CC霜 30g SPF 50+ PA++++(公司貨)</td><td>12</td><td>3</td><td>1</td><td>33%</td></tr>
+<tr><td class="sk">00221401</td><td style="text-align:left">L'Occitane 歐舒丹 草本洗髮乳/潤髮乳 500ml (淨涼/修護/強韌/平衡)(多款任選 航空版)</td><td>10</td><td>10</td><td>0</td><td>0%</td></tr>
+<tr><td class="sk">00371223</td><td style="text-align:left">SUQQU 晶采柔艷頰彩 6.4g(多款任選 航空版)</td><td>9</td><td>1</td><td>1</td><td>100%</td></tr>
+<tr><td class="sk">00480419</td><td style="text-align:left">BYREDO 無人之境淡香精 12ml(航空版)</td><td>7</td><td>1</td><td>1</td><td>100%</td></tr>
+<tr><td class="sk">00285222</td><td style="text-align:left">LANCOME 蘭蔻 全新超輕盈UV水凝露 50ml(航空版)</td><td>4</td><td>0</td><td>1</td><td>—</td></tr>
 </table></div>
 </details>
 <details class="more"><summary>第二波四種商品分群（跨境全部 364 SKU）</summary>
