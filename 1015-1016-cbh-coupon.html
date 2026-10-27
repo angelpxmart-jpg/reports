@@ -33,7 +33,8 @@ h3{font-size:16px;margin:20px 0 8px}
 .card.hl .split>div+div{border-color:rgba(255,255,255,.3)}
 .split .wv{display:block;font-size:12px;color:var(--slate)}
 .card.hl .split .wv{color:#dfe3f7}
-.split b{display:block;font-size:28px;line-height:1.2}
+.split b{display:block;font-size:24px;line-height:1.2;white-space:nowrap}
+.split b small{font-size:13px;font-weight:500;margin-left:2px}
 .split .up{margin-top:2px}
 .card .sub{font-size:13px;color:var(--ink2)}
 .up{display:inline-block;background:var(--ok-soft);color:var(--ok);border-radius:999px;padding:0 8px;font-size:12px;font-weight:700}
@@ -64,6 +65,24 @@ svg text{font-family:inherit}
 .two table{min-width:0;font-size:13.5px}
 .two th,.two td{padding:8px 10px}
 .two th:first-child{width:auto}
+.hgrid{display:grid;gap:0}
+.hgrid .tr{display:grid;grid-template-columns:minmax(150px,1.1fr) 1fr 1fr;gap:16px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--line2)}
+.hgrid .tr.th{font-size:13px;color:var(--slate);padding:4px 8px}
+.hgrid .tr.hot{background:var(--blue-light);border-radius:8px}
+.hgrid .tr.tt{border-bottom:none;font-weight:700}
+.hgrid .tl b{display:block;font-size:15px}
+.hgrid .tl span{font-size:13px;color:var(--ink2)}
+.hgrid .tl small{display:block;font-size:12px;color:var(--red)}
+.hb{display:flex;align-items:center;gap:8px;min-height:22px}
+.hb span{display:block;height:20px;border-radius:3px}
+.hb span.l{background:var(--blue-4)}
+.hb span.d{background:var(--blue)}
+.hb span.neg{width:4px;background:var(--slate)}
+.hb em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+ol.pts{padding-left:20px;font-size:14.5px;margin:14px 0 6px}
+ol.pts li{margin:4px 0}
+details.more{margin-top:10px}
+details.more summary{cursor:pointer;color:var(--blue-mid);font-size:14px;margin-bottom:8px}
 ol.ins{padding-left:0;list-style:none;counter-reset:n;margin:0}
 ol.ins li{counter-increment:n;position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--line2)}
 ol.ins li:before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:12px;color:var(--blue);font-weight:700;font-size:18px}
@@ -76,7 +95,7 @@ ol.ins li b.t{display:block;font-size:16px}
 .badge.w2{background:var(--blue);color:#fff}
 footer{margin-top:40px;font-size:12.5px;color:var(--slate);border-top:1px solid var(--line);padding-top:14px}
 footer li{margin:2px 0}
-@media (max-width:760px){.wrap{padding:16px}.split b{font-size:22px}.cards{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.card .v{font-size:26px}header h1{font-size:21px}}
+@media (max-width:760px){.hgrid .tr{grid-template-columns:96px 1fr 1fr;gap:8px}.wrap{padding:16px}.split b{font-size:20px}.cards{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.card .v{font-size:26px}header h1{font-size:21px}}
 </style>
 </head>
 <body>
@@ -89,10 +108,10 @@ footer li{margin:2px 0}
 </header>
 
 <div class="cards">
-  <div class="card hl"><div class="lb">兩天跨境業績（萬元）</div><div class="split"><div><span class="wv">第一波</span><b>27.38</b></div><div><span class="wv">第二波</span><b>42.70</b></div></div><div class="sub">兩波合計 70.07 萬元</div></div>
-  <div class="card"><div class="lb">比非活動日基準（萬元）</div><div class="split"><div><span class="wv">第一波</span><b>+5.6</b><span class="up">+26%</span></div><div><span class="wv">第二波</span><b>+20.9</b><span class="up">+96%</span></div></div><div class="sub">基準 2 天 21.79 萬元</div></div>
-  <div class="card"><div class="lb">原價滿 1,500 元的訂單（張）</div><div class="split"><div><span class="wv">第一波</span><b>77</b><span class="up">+41%</span></div><div><span class="wv">第二波</span><b>109</b><span class="up">+100%</span></div></div><div class="sub">基準 2 天約 55 張</div></div>
-  <div class="card"><div class="lb">跨境券使用（次）</div><div class="split"><div><span class="wv">第一波</span><b>73</b></div><div><span class="wv">第二波</span><b>169</b></div></div><div class="sub">折 7,300｜16,900 元，第二波次數待確認</div></div>
+  <div class="card hl"><div class="lb">兩天跨境業績</div><div class="split"><div><span class="wv">第一波</span><b>27.38<small>萬元</small></b></div><div><span class="wv">第二波</span><b>42.70<small>萬元</small></b></div></div><div class="sub">兩波合計 70.07 萬元</div></div>
+  <div class="card"><div class="lb">比非活動日基準</div><div class="split"><div><span class="wv">第一波</span><b>+5.6<small>萬元</small></b><span class="up">+26%</span></div><div><span class="wv">第二波</span><b>+20.9<small>萬元</small></b><span class="up">+96%</span></div></div><div class="sub">基準 2 天 21.79 萬元</div></div>
+  <div class="card"><div class="lb">原價滿 1,500 元的訂單</div><div class="split"><div><span class="wv">第一波</span><b>77<small>張</small></b><span class="up">+41%</span></div><div><span class="wv">第二波</span><b>109<small>張</small></b><span class="up">+100%</span></div></div><div class="sub">基準 2 天約 55 張</div></div>
+  <div class="card"><div class="lb">跨境券使用</div><div class="split"><div><span class="wv">第一波</span><b>73<small>次</small></b></div><div><span class="wv">第二波</span><b>169<small>次</small></b></div></div><div class="sub">折 7,300｜16,900 元<br>第二波次數待確認</div></div>
 </div>
 
 <h2>活動設定</h2>
@@ -231,13 +250,30 @@ footer li{margin:2px 0}
 </ul>
 <div class="callout warn"><b>品牌、通路占比只當參考：</b>原始輪廓分析也列了這群會員的品牌與通路占比（例如第一波資生堂 13.5%、善美的 11.8%，通路電商 62.5%、超市 31.9%）。這些數字包含超市、量販和非跨境品牌，看起來是這群會員在其他期間或其他通路的消費，範圍沒有說明，所以沒有拿來和第 5 段的活動購買比較。</div>
 
-<h2>7. 時段：推播後有沒有反應</h2>
+<h2>7. 時段：第二波推播後下午多賣 4.9 萬元，第一波推播後沒有反應</h2>
+<div class="chart">
+  <div class="legend"><span><i style="background:var(--blue-4)"></i>10/15 第一波</span><span><i style="background:var(--blue)"></i>10/22 第二波</span><span style="color:var(--slate)">比非活動週四平均（10/1、10/8）多賣的跨境業績，單位萬元</span></div>
+  <div class="hgrid">
+  <div class="tr th"><div></div><div>第一波</div><div>第二波</div></div>
+<div class="tr"><div class="tl"><b>0–11 點</b><span>推播前</span></div><div class="hb"><span style="width:54%" class="l"></span><em>+2.7 萬元</em></div><div class="hb"><span style="width:40%" class="d"></span><em>+2.0 萬元</em></div></div>
+<div class="tr" class="hot"><div class="tl"><b>12–17 點</b><span>推播後下午</span><small>SMS 12:00｜APP Push 14:00（第二波 PxGo 15:00）</small></div><div class="hb"><span class="neg"></span><em>-0.4 萬元</em></div><div class="hb"><span style="width:98%" class="d"></span><em>+4.9 萬元</em></div></div>
+<div class="tr"><div class="tl"><b>18–23 點</b><span>晚間</span></div><div class="hb"><span style="width:50%" class="l"></span><em>+2.5 萬元</em></div><div class="hb"><span style="width:78%" class="d"></span><em>+3.9 萬元</em></div></div>
+  <div class="tr tt"><div class="tl"><b>全天</b></div><div class="hb"><em>+4.8 萬元</em></div><div class="hb"><em>+10.9 萬元</em></div></div>
+  </div>
+</div>
+<ol class="pts">
+  <li><b>推播後下午：</b>第二波 12–17 點 8.6 萬元，比平常週四 3.7 萬元多 4.9 萬元，占全天增量的 45%；第一波同時段 3.2 萬元，沒有增加。</li>
+  <li><b>推播前就有增量：</b>兩波在 0–11 點各多 2–3 萬元，這段還沒發推播，不是推播帶來的。推測是券上線後站內客人直接使用，或週四美妝日的流量。</li>
+  <li><b>晚間是平常的高峰：</b>非活動週四 18–23 點就有 7.2 萬元，兩波再多 2.5–3.9 萬元。第二波 20 點單小時 4.4 萬元最高。</li>
+</ol>
+<p style="font-size:13px;color:var(--slate)">第二波同一天也是會員日，下午的增量有多少來自推播，要等第二波 UTM 數字確認。</p>
+<details class="more"><summary>看 24 小時明細折線</summary>
 <div class="chart">
   <div class="legend"><span><i style="background:#9e9e9e"></i>非活動週四平均（10/1、10/8）</span><span><i style="background:var(--blue-4)"></i>10/15 第一波</span><span><i style="background:var(--blue)"></i>10/22 第二波</span><span style="color:var(--slate)">直線＝發送時間：SMS 12:00、PxPay 14:00、PxGo 14:00（第一波）／15:00（第二波）</span></div>
   <svg id="hourly" viewBox="0 0 1000 280" width="100%" role="img" aria-label="跨境週四每小時業績比較"></svg>
   <div class="tip" id="tip2" hidden></div>
 </div>
-<p style="font-size:14px;color:var(--ink2)">12–17 點的跨境業績：非活動週四 3.7 萬元、10/15 3.2 萬元、10/22 8.6 萬元。第一波推播之後下午沒有明顯反應，增量集中在晚上 21–23 點。第二波 13–16 點每小時都有 1.4–2.5 萬元，20 點單小時 4.4 萬元。推測第二波的名單和文案比較能讓人當下就買（會員日也在同一天，要等 UTM 數字確認）。</p>
+</details>
 
 <h2>8. 商品轉換率漏斗（APM）</h2>
 <h3>第一波（10/15–10/16）</h3>
