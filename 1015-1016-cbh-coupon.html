@@ -27,6 +27,14 @@ h3{font-size:16px;margin:20px 0 8px}
 .card.hl .lb,.card.hl .sub{color:#dfe3f7}
 .card .v{font-size:32px;font-weight:700;line-height:1.2;margin:4px 0}
 .card .v small{font-size:15px;font-weight:500;margin-left:2px}
+.split{display:grid;grid-template-columns:1fr 1fr;margin:6px 0 4px}
+.split>div{padding-right:8px}
+.split>div+div{border-left:1px solid var(--line);padding-left:12px}
+.card.hl .split>div+div{border-color:rgba(255,255,255,.3)}
+.split .wv{display:block;font-size:12px;color:var(--slate)}
+.card.hl .split .wv{color:#dfe3f7}
+.split b{display:block;font-size:28px;line-height:1.2}
+.split .up{margin-top:2px}
 .card .sub{font-size:13px;color:var(--ink2)}
 .up{display:inline-block;background:var(--ok-soft);color:var(--ok);border-radius:999px;padding:0 8px;font-size:12px;font-weight:700}
 .card.hl .up{background:#fff}
@@ -65,7 +73,7 @@ ol.ins li b.t{display:block;font-size:16px}
 .badge.w2{background:var(--blue);color:#fff}
 footer{margin-top:40px;font-size:12.5px;color:var(--slate);border-top:1px solid var(--line);padding-top:14px}
 footer li{margin:2px 0}
-@media (max-width:760px){.wrap{padding:16px}.cards{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.card .v{font-size:26px}header h1{font-size:21px}}
+@media (max-width:760px){.wrap{padding:16px}.split b{font-size:22px}.cards{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.card .v{font-size:26px}header h1{font-size:21px}}
 </style>
 </head>
 <body>
@@ -78,10 +86,10 @@ footer li{margin:2px 0}
 </header>
 
 <div class="cards">
-  <div class="card hl"><div class="lb">第二波兩天跨境業績</div><div class="v">42.70<small>萬元</small></div><div class="sub">10/22 24.09 萬元＋10/23 18.61 萬元<br>第一波 27.38 萬元</div></div>
-  <div class="card"><div class="lb">比非活動日基準</div><div class="v">+20.9<small>萬元</small></div><div class="sub"><span class="up">+96%</span> 第一波 +5.6 萬元（+26%）<br>基準 2 天 21.79 萬元</div></div>
-  <div class="card"><div class="lb">原價滿 1,500 元的訂單</div><div class="v">109<small>張</small></div><div class="sub"><span class="up">+100%</span> 第一波 77 張（+41%）<br>基準 2 天約 55 張</div></div>
-  <div class="card"><div class="lb">跨境券使用（券檔）</div><div class="v">169<small>次</small></div><div class="sub">折 16,900 元，次數待確認<br>第一波 73 次、7,300 元</div></div>
+  <div class="card hl"><div class="lb">兩天跨境業績（萬元）</div><div class="split"><div><span class="wv">第一波</span><b>27.38</b></div><div><span class="wv">第二波</span><b>42.70</b></div></div><div class="sub">兩波合計 70.07 萬元</div></div>
+  <div class="card"><div class="lb">比非活動日基準（萬元）</div><div class="split"><div><span class="wv">第一波</span><b>+5.6</b><span class="up">+26%</span></div><div><span class="wv">第二波</span><b>+20.9</b><span class="up">+96%</span></div></div><div class="sub">基準 2 天 21.79 萬元</div></div>
+  <div class="card"><div class="lb">原價滿 1,500 元的訂單（張）</div><div class="split"><div><span class="wv">第一波</span><b>77</b><span class="up">+41%</span></div><div><span class="wv">第二波</span><b>109</b><span class="up">+100%</span></div></div><div class="sub">基準 2 天約 55 張</div></div>
+  <div class="card"><div class="lb">跨境券使用（次）</div><div class="split"><div><span class="wv">第一波</span><b>73</b></div><div><span class="wv">第二波</span><b>169</b></div></div><div class="sub">折 7,300｜16,900 元，第二波次數待確認</div></div>
 </div>
 
 <h2>活動設定</h2>
