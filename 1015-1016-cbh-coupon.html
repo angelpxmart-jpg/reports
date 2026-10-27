@@ -57,6 +57,9 @@ ol.ins{padding-left:0;list-style:none;counter-reset:n;margin:0}
 ol.ins li{counter-increment:n;position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--line2)}
 ol.ins li:before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:12px;color:var(--blue);font-weight:700;font-size:18px}
 ol.ins li b.t{display:block;font-size:16px}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;align-items:center;font-size:14px}
+.bars .b{height:14px;background:var(--blue-mid);border-radius:3px}
+.bars .b.mx{background:var(--blue)}
 .badge{display:inline-block;border-radius:999px;padding:0 8px;font-size:12px;background:#f5f5f5;color:var(--slate)}
 .badge.w1{background:var(--blue-light);color:var(--blue-mid)}
 .badge.w2{background:var(--blue);color:#fff}
@@ -71,7 +74,7 @@ footer li{margin:2px 0}
 <header>
   <div class="tag">跨境豐收 JBP｜雙 11 SMS＋APP Push 第一波、第二波</div>
   <h1>滿 1,500 折 100 兩波成效分析（10/15–16、10/22–23）</h1>
-  <div class="meta">資料截至 2026-10-26｜更新 2026-10-27（第一版 10/19 只含第一波）｜用途：兩波檢討、決定 11/5 是否發送</div>
+  <div class="meta">資料截至 2026-10-26｜更新 2026-10-27（第一版 10/19 只含第一波）｜含 277 位購買會員輪廓｜用途：兩波檢討、決定 11/5 是否發送</div>
 </header>
 
 <div class="cards">
@@ -188,7 +191,36 @@ footer li{margin:2px 0}
 </table></div>
 <p style="font-size:14px;color:var(--ink2)">第一波品項前三：百優 2 入組 8 組、20,335 元；SK-II 光蘊恆璨淨斑精華 2 瓶、11,338 元；蘭蔻永生玫瑰肽金眼霜 4 個、9,576 元。第二波百優改由 4 入組帶頭（14 組，2 入組也有 12 組），推文案點名資生堂之後，客人往大包裝買。</p>
 
-<h2>6. 時段：推播後有沒有反應</h2>
+<h2>6. 購買會員輪廓（277 位不重複會員）</h2>
+<div class="tw"><table>
+<tr><th>項目</th><th>第一波</th><th>第二波</th><th>兩波合計</th></tr>
+<tr><td>購買會員</td><td>123 人</td><td>154 人</td><td>277 人</td></tr>
+<tr><td>兩波都有買</td><td colspan="3" style="text-align:center"><b>0 人</b>（兩波買家完全不重疊）</td></tr>
+<tr><td>每人訂單數</td><td>1.02 張</td><td>1.05 張</td><td>—</td></tr>
+<tr><td>女性／男性</td><td>81.3%／16.3%</td><td>84.4%／13.0%</td><td>83.0%／14.4%</td></tr>
+<tr><td>平均年齡</td><td>45.0 歲</td><td>46.7 歲</td><td>45.9 歲</td></tr>
+<tr><td>主要縣市（前三）</td><td>新北、台北、台中</td><td>台中、新北、高雄</td><td>六都為主</td></tr>
+<tr><td>全支付開通率</td><td>76.4%</td><td>75.3%</td><td>75.8%</td></tr>
+<tr><td>LINE 官方帳號綁定率</td><td>20.3%</td><td>19.5%</td><td>19.9%</td></tr>
+</table></div>
+<h3>年齡分布（兩波合計）</h3>
+<div class="bars">
+  <span>20–29 歲</span><div class="b" style="width:35%"></div><span>9.4%</span>
+  <span>30–39 歲</span><div class="b" style="width:83%"></div><span>22.1%</span>
+  <span>40–49 歲</span><div class="b" style="width:89%"></div><span>23.6%</span>
+  <span>50–59 歲</span><div class="b mx" style="width:100%"></div><span>26.6%</span>
+  <span>60–69 歲</span><div class="b" style="width:47%"></div><span>12.4%</span>
+</div>
+<p style="font-size:13px;color:var(--slate);margin-top:6px">占比以有填年齡的會員計算；未滿 20 歲、70 歲以上合計約 5.9%。</p>
+<ul style="font-size:14px;color:var(--ink2);padding-left:20px">
+  <li><b>兩波買到的是兩批不同的人：</b>第二波 154 人沒有一個是第一波的買家，所以第二波的增量不是第一波客人回購，而是新觸及到的買家。這和第二波 SMS 改發「加車／瀏覽未購」名單的方向一致（實際有多少人來自 SMS，要等 UTM 數字）。</li>
+  <li><b>客群是 30–59 歲、以女性為主：</b>女性占 83%，30–59 歲占 72%，40 歲以上占 63%，平均 46 歲。第二波平均年齡稍高（46.7 歲），也對應到第二波高單價品牌（SK-II、LA MER、赫蓮娜）成長。</li>
+  <li><b>全支付是比 LINE 更有效的觸及管道：</b>全支付開通率 76%，LINE 官方帳號綁定只有 20%。PxPay APP Push 能觸及大部分買家，LINE OA 能觸及的比例有限。</li>
+  <li><b>地區：</b>第二波台中、高雄的占比上升，第一波則以雙北為主。</li>
+</ul>
+<div class="callout warn"><b>品牌、通路占比只當參考：</b>原始輪廓分析也列了這群會員的品牌與通路占比（例如第一波資生堂 13.5%、善美的 11.8%，通路電商 62.5%、超市 31.9%）。這些數字包含超市、量販和非跨境品牌，看起來是這群會員在其他期間或其他通路的消費，範圍沒有說明，所以沒有拿來和第 5 段的活動購買比較。</div>
+
+<h2>7. 時段：推播後有沒有反應</h2>
 <div class="chart">
   <div class="legend"><span><i style="background:#9e9e9e"></i>非活動週四平均（10/1、10/8）</span><span><i style="background:var(--blue-4)"></i>10/15 第一波</span><span><i style="background:var(--blue)"></i>10/22 第二波</span><span style="color:var(--slate)">直線＝發送時間：SMS 12:00、PxPay 14:00、PxGo 14:00（第一波）／15:00（第二波）</span></div>
   <svg id="hourly" viewBox="0 0 1000 280" width="100%" role="img" aria-label="跨境週四每小時業績比較"></svg>
@@ -196,7 +228,7 @@ footer li{margin:2px 0}
 </div>
 <p style="font-size:14px;color:var(--ink2)">12–17 點的跨境業績：非活動週四 3.7 萬元、10/15 3.2 萬元、10/22 8.6 萬元。第一波推播之後下午沒有明顯反應，增量集中在晚上 21–23 點。第二波 13–16 點每小時都有 1.4–2.5 萬元，20 點單小時 4.4 萬元。推測第二波的名單和文案比較能讓人當下就買（會員日也在同一天，要等 UTM 數字確認）。</p>
 
-<h2>7. 商品轉換率漏斗（APM）</h2>
+<h2>8. 商品轉換率漏斗（APM）</h2>
 <h3>第一波（10/15–10/16）</h3>
 <div class="tw"><table>
 <tr><th>專櫃美妝（10/15–10/16）</th><th>SKU 數</th><th>瀏覽</th><th>加車</th><th>購買</th><th>加車率</th><th>車後購買率</th><th>成交率</th><th>每次瀏覽收益（元）</th></tr>
@@ -207,16 +239,17 @@ footer li{margin:2px 0}
 <h3>第二波（10/22–10/23）</h3>
 <div class="pending"><b>待補：</b>APM「購物行為轉換率 by 商品」10/22–10/23。主要看跨境車後購買率是否高於第一波的 25.7%，以及加車未購名單回來以後，加車率有沒有變化。</div>
 
-<h2>8. Insight</h2>
+<h2>9. Insight</h2>
 <ol class="ins">
   <li><b class="t">第二波明顯比第一波強，而且週五撐得住</b>第二波兩天比基準多 20.9 萬元（+96%），扣掉會員日影響後保守估計也有 12–15 萬元，約是第一波 5.6 萬元的 2–3 倍。第一波週五只回到平常水準；第二波週五 18.6 萬元，跟同樣有全站滿 1500 折 100 的週末比，仍多 44%。</li>
   <li><b class="t">換受眾、換文案的方向是對的（待 UTM 確認）</b>第二波從沉睡舊客改發加車／瀏覽未購，文案改成「限時 2 天、結帳直接折」，並點名資生堂、SK-II、蘭蔻。推播後 13–16 點就有反應，點名的品牌也正是成長最多的品牌。但會員日同一天，要等第二波 SMS／APP Push 的 UTM 數字才能確認。</li>
   <li><b class="t">增量來自高單價，不是多買幾件</b>第二波平均原價 2,871 元（平常 2,122 元），3,000 元以上的訂單占 33%（平常 21%），每張件數持平。資生堂百優 4 入組 14 組、6.5 萬元，SK-II、LA MER、赫蓮娜都是平常的 4–11 倍。</li>
   <li><b class="t">10/22 折扣率 8.4%，超過 8% 上限</b>用跨境券的訂單有 91% 同時疊其他券，會員日券讓折扣 ≥ 300 元的訂單增加到 31 張。11/5 已經進入鋪底期間（滿 2,000 贈 1,000 點），疊上去的折扣率會更高。</li>
   <li><b class="t">第二波用券次數要跟後台對</b>券檔 169 次、16,900 元，比跨境符合門檻的訂單（109 張）多約 60 次。這會影響 14 萬折價贈點怎麼核銷，請款時要一起核對。</li>
+  <li><b class="t">兩波買家零重疊，277 人可以當雙 11 再行銷名單</b>兩波各自觸及一批買家（123 人、154 人），每人約買 1 張。這群人以 30–59 歲女性為主、76% 開通全支付。雙 11 可以對這 277 人推資生堂大包裝、ACE 眼霜等延伸品，管道以 PxPay 優先（名單能否匯出投放待確認）。</li>
 </ol>
 
-<h2>9. 11/5 是否發送：決策參考</h2>
+<h2>10. 11/5 是否發送：決策參考</h2>
 <div class="tw"><table class="txt">
 <tr><th>選項</th><th>做法</th><th>好處</th><th>風險</th></tr>
 <tr><td><b>A 照第二波發</b></td><td>同受眾邏輯（加車／瀏覽未購），滿 1,500 折 100，可併用</td><td>第二波已證明有效；資生堂、SK-II 正在熱</td><td>疊上鋪底滿 2,000 贈 1,000 點（約 5%），用券訂單折扣率可能超過 10%</td></tr>
@@ -232,6 +265,7 @@ footer li{margin:2px 0}
   <li>原價滿 1,500 元：跨境品項的單價 × 數量加總，排除數量 0 的取消列。</li>
   <li>非活動日基準改用 10/1–10/26 的 17 天（第一版用 10/1–10/18 的 13 天，日均 10.58 萬元），所以第一波增量從 6.2 萬元更新成 5.6 萬元、投報從 8.5 倍更新成 7.7 倍。</li>
   <li>增量和投報都是和基準日比出來的推估，沒有排除其他因素。10/22 的「限時特降價」是兩張家電小B 大單用的，和跨境無關。</li>
+  <li>會員輪廓：Angel 提供的「跨境豐收 277 位會員受眾輪廓分析」（2026-10-27），人數、性別、年齡、縣市、全支付與 LINE 綁定率照原文；原文「30–59 歲女性超過 80%」更正為女性 83%、30–59 歲 72%。</li>
   <li>第一波 SMS／APP Push：自媒體版位商品曝光提報_2026年new（campaign 1015_10-2_THRoute、1015_10-1_THRoute），點擊、訂單、收益為 D+1。第一波 APM：「購物行為轉換率 by 商品」10/15–10/16（2026-10-19 下載）。</li>
 </ul>
 </footer>
