@@ -54,6 +54,9 @@ tr.tot td{background:var(--blue-light);color:var(--blue);font-weight:700}
 tr.sep td{border-top:2px solid var(--blue-4)}
 table.txt th,table.txt td{text-align:left}
 table.txt td:first-child{white-space:nowrap}
+table.eq{table-layout:fixed}
+table.eq th,table.eq td{white-space:normal;word-break:break-word;text-align:center}
+table.eq th:first-child,table.eq td:first-child{text-align:left}
 table.num td:first-child{font-variant-numeric:tabular-nums;color:var(--slate)}
 td.red{color:var(--red);font-weight:700}
 td.mute{color:var(--slate)}
@@ -172,7 +175,7 @@ footer li{margin:2px 0}
 <div class="callout warn"><b>第二波用券次數待確認：</b>券檔記錄 PMC0026640 在 10/22 用 89 次、10/23 用 79 次、10/24 用 1 次。但跨境商品原價滿 1,500 元的訂單只有 64 張、45 張，照理最多只能用這麼多次（第一波就對得上：10/15 48 張、45 次；10/16 29 張、28 次）。取消單、多品項重複計算都已經排除，差額原因要請後台確認。上面的增量分析用的是訂單資料，不受影響；投報用的是券檔金額，如果實際次數比較少，投報會更高。</div>
 
 <h2 id="s3">3. 疊券與折扣率</h2>
-<div class="tw"><table>
+<div class="tw"><table class="eq"><colgroup><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>
 <tr><th>項目</th><th>10/15（四）</th><th>10/16（五）</th><th>10/22（四）</th><th>10/23（五）</th></tr>
 <tr><td>用跨境券的訂單（推估）</td><td>47</td><td>28</td><td>64</td><td>43</td></tr>
 <tr><td>同時疊其他券</td><td>42（89%）</td><td>3（11%）</td><td>58（91%）</td><td>37（86%）</td></tr>
