@@ -134,7 +134,7 @@ footer li{margin:2px 0}
 <tr><td>優惠／券別</td><td>跨境品項滿 1,500 折 100｜PMC0026120 行銷現折</td><td>同左｜PMC0026640 行銷現折</td></tr>
 <tr><td>SMS 受眾</td><td>跨境美妝已購、180 天未購（沉睡舊客）7,240 人</td><td>近三個月加車美妝未購 5,354＋瀏覽美妝未購 4,646，共 10,000 人</td></tr>
 <tr><td>APP Push 受眾</td><td>美妝受眾：PxPay 100 萬＋PxGo 32 萬</td><td>美妝受眾（PxPay、PxGo）</td></tr>
-<tr><td>發送時間</td><td>SMS 12:00｜PxPay、PxGo 14:00</td><td>SMS 12:00｜PxPay 14:00｜PxGo 15:00</td></tr>
+<tr><td>發送時間</td><td>SMS 12:00｜PxPay、PxGo 14:00</td><td>SMS 12:00｜PxPay 14:00｜PxGo 19:00</td></tr>
 <tr><td>SMS 文案</td><td>【全電商】好久不見👋你的專屬折價券已送達🔔專櫃醫美保養滿1500折100，限時兩天🔥立即領→</td><td>【全電商】專櫃醫美保養限時2天！全館滿1500折100，結帳直接折，只到10/23🔥→</td></tr>
 <tr><td>APP Push 文案</td><td>【全電商】好久不見👋專屬回饋／專櫃醫美保養全館滿額折100🔥點我領→</td><td>【全電商】專櫃保養限時折100💙只有兩天／資生堂、SK-II、蘭蔻✨專櫃醫美保養限時滿1500折100，結帳自動折，雙11前先入手</td></tr>
 <tr><td>同期全站活動（干擾）</td><td>10/15 週四美妝日（滿 2,000 享 95 折）</td><td>10/22 週四美妝日＋會員日（滿 999 折 200，10/20–10/22）<br>10/23 起全站「購物車滿 1500 折抵 100 元」每天大量使用</td></tr>
@@ -152,7 +152,7 @@ footer li{margin:2px 0}
 </table></div>
 <p style="font-size:13px;color:var(--slate);margin-top:8px">收益是 UTM 追蹤到的 D+1 業績，只占第一波兩天跨境業績的 10%、增量的約 47%。SMS 名單 7,240 人只發出 4,065 則（56%，名單有效數），成本 2,520 元、ROAS 3.3。</p>
 <h3>第二波（10/22 發送）</h3>
-<div class="pending"><b>待補：</b>SMS（10,000 人，12:00）、PxPay（14:00）、PxGo（15:00）的發送數、點擊、UTM 訂單與收益，來源同第一波（自媒體版位商品曝光提報「SMS簡訊」「APP Push 推播」分頁）。補上後可以判斷「加車／瀏覽未購」名單是不是比沉睡舊客好。</div>
+<div class="pending"><b>待補：</b>SMS（10,000 人，12:00）、PxPay（14:00）、PxGo（19:00）的發送數、點擊、UTM 訂單與收益，來源同第一波（自媒體版位商品曝光提報「SMS簡訊」「APP Push 推播」分頁）。補上後可以判斷「加車／瀏覽未購」名單是不是比沉睡舊客好。</div>
 
 <h2 id="s2">2. 銷售成效</h2>
 <div class="chart">
@@ -335,7 +335,7 @@ footer li{margin:2px 0}
 
 <h2 id="s7">7. 時段：第二波推播後下午多賣 4.9 萬元，第一波推播後沒有反應</h2>
 <div class="chart">
-  <div class="legend"><span><i style="background:#9e9e9e"></i>非活動週四平均（10/1、10/8）</span><span><i style="background:var(--blue-4)"></i>10/15 第一波</span><span><i style="background:var(--blue)"></i>10/22 第二波</span><span style="color:var(--slate)">直線＝發送時間：SMS 12:00、PxPay 14:00、PxGo 14:00（第一波）／15:00（第二波）</span></div>
+  <div class="legend"><span><i style="background:#9e9e9e"></i>非活動週四平均（10/1、10/8）</span><span><i style="background:var(--blue-4)"></i>10/15 第一波</span><span><i style="background:var(--blue)"></i>10/22 第二波</span><span style="color:var(--slate)">直線＝發送時間：SMS 12:00、PxPay 14:00、PxGo 14:00（第一波）／19:00（第二波）</span></div>
   <svg id="hourly" viewBox="0 0 1000 280" width="100%" role="img" aria-label="跨境週四每小時業績比較"></svg>
   <div class="tip" id="tip2" hidden></div>
 </div>
@@ -516,7 +516,7 @@ footer li{margin:2px 0}
     e2('line',{x1:L2,x2:W2-R2,y1:y2(v),y2:y2(v),stroke:v?'#eee':'#bdbdbd','stroke-width':1});
     var t=e2('text',{x:L2-8,y:y2(v)+4,'text-anchor':'end','font-size':12,fill:'#757575'});t.textContent=v?(v/10000)+'萬':'0';
   });
-  [[12,'SMS'],[14,'PxPay'],[15,'PxGo(二)']].forEach(function(m){
+  [[12,'SMS'],[14,'PxPay'],[19,'PxGo(二)']].forEach(function(m){
     e2('line',{x1:x2(m[0])-step/2,x2:x2(m[0])-step/2,y1:T2,y2:H2-B2,stroke:'#e40011','stroke-width':1,'stroke-dasharray':'3 3'});
     var t=e2('text',{x:x2(m[0])-step/2+3,y:T2+10,'font-size':11,fill:'#e40011'});t.textContent=m[1];
   });
