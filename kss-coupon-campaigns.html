@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--blue:#13227f;--blue-mid:#3d4fa0;--blue-light:#eef0fa;--blue-4:#c5cae9;--red:#e40011;--red-soft:#fff0f0;--ink:#1a1a1a;--ink2:#444;--slate:#757575;--line:#e0e0e0;--line2:#eee;--surface:#f7f8fc;--ok:#2e7d32;--ok-soft:#e8f5e9;--warn:#e65100;--warn-soft:#fff3e0;--info:#1565c0;--info-soft:#e3f2fd}
+:root{--new:#e65100;--old:#c5cae9;--box:#13227f;--tr:#00897b;--blue:#13227f;--blue-mid:#3d4fa0;--blue-light:#eef0fa;--blue-4:#c5cae9;--red:#e40011;--red-soft:#fff0f0;--ink:#1a1a1a;--ink2:#444;--slate:#757575;--line:#e0e0e0;--line2:#eee;--surface:#f7f8fc;--ok:#2e7d32;--ok-soft:#e8f5e9;--warn:#e65100;--warn-soft:#fff3e0;--info:#1565c0;--info-soft:#e3f2fd}
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:var(--ink);font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:15px;line-height:1.6}
 .wrap{max-width:1080px;margin:0 auto;padding:24px 32px 48px}
@@ -148,6 +148,9 @@ th.hl{background:var(--blue-mid)!important;color:#fff}
 .lg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .panels.p2{grid-template-columns:1fr 1fr}
 @media (max-width:760px){.panels,.panels.p2{grid-template-columns:1fr}.hr.wide{grid-template-columns:76px 1fr auto}}
+.hr .tk b.new{background:var(--new)}.hr .tk b.old{background:var(--old)}.hr .tk b.box{background:var(--box)}.hr .tk b.tr{background:var(--tr)}
+.ct{display:inline-block;border-radius:999px;padding:0 10px;font-size:13px;font-weight:700;color:#fff;line-height:22px}
+.ct.new{background:var(--new)}.ct.old{background:var(--old);color:var(--blue)}.ct.box{background:var(--box)}.ct.tr{background:var(--tr)}
 </style>
 </head>
 <body>
@@ -190,16 +193,16 @@ th.hl{background:var(--blue-mid)!important;color:#fff}
 </ul>
 
 <h2 id="s2">二、新舊客</h2>
-<div class="viz"><p class="vt">10 月用券會員中的全電商新客占比最高（14.2%）</p><div class="lg" style="margin-bottom:6px"><span><i style="background:var(--blue)"></i>全電商新客</span><span><i style="background:var(--blue-4)"></i>舊客</span></div><div class="hr"><span class="k">8 月</span><span class="tk"><b class="d" style="width:10.9%"></b><b style="width:89.1%"></b></span><span class="v">新客 10.9%</span></div><div class="hr"><span class="k">9 月</span><span class="tk"><b class="d" style="width:10.7%"></b><b style="width:89.3%"></b></span><span class="v">新客 10.7%</span></div><div class="hr"><span class="k">10 月</span><span class="tk"><b class="d" style="width:14.2%"></b><b style="width:85.8%"></b></span><span class="v">新客 14.2%</span></div></div>
+<div class="viz"><p class="vt">10 月用券會員中的全電商新客占比最高（14.2%）</p><div class="lg" style="margin-bottom:6px"><span><i style="background:var(--new)"></i>全電商新客</span><span><i style="background:var(--old)"></i>舊客</span></div><div class="hr"><span class="k">8 月</span><span class="tk"><b class="new" style="width:10.9%"></b><b class="old" style="width:89.1%"></b></span><span class="v">新客 10.9%</span></div><div class="hr"><span class="k">9 月</span><span class="tk"><b class="new" style="width:10.7%"></b><b class="old" style="width:89.3%"></b></span><span class="v">新客 10.7%</span></div><div class="hr"><span class="k">10 月</span><span class="tk"><b class="new" style="width:14.2%"></b><b class="old" style="width:85.8%"></b></span><span class="v">新客 14.2%</span></div></div>
 <div class="tw"><table>
 <thead><tr><th>月份</th><th></th><th>會員數</th><th>用券訂單</th><th>折抵金額</th><th>用券訂單業績</th><th>客單價</th></tr></thead>
 <tbody>
-<tr><td>8 月</td><td>新客</td><td>111 人（10.9%）</td><td>111 張</td><td>13,640 元</td><td>149,670 元</td><td>1,348 元</td></tr>
-<tr><td></td><td>舊客</td><td>906 人</td><td>980 張</td><td>126,368 元</td><td>1,357,023 元</td><td>1,385 元</td></tr>
-<tr class="sep"><td>9 月</td><td>新客</td><td>126 人（10.7%）</td><td>126 張</td><td>10,080 元</td><td>150,858 元</td><td>1,197 元</td></tr>
-<tr><td></td><td>舊客</td><td>1,057 人</td><td>1,200 張</td><td>96,000 元</td><td>1,670,350 元</td><td>1,392 元</td></tr>
-<tr class="sep"><td>10 月</td><td>新客</td><td>157 人（14.2%）</td><td>157 張</td><td>22,920 元</td><td>189,360 元</td><td>1,206 元</td></tr>
-<tr><td></td><td>舊客</td><td>951 人</td><td>1,056 張</td><td>184,680 元</td><td>1,614,670 元</td><td>1,529 元</td></tr>
+<tr><td>8 月</td><td><span class="ct new">新客</span></td><td>111 人（10.9%）</td><td>111 張</td><td>13,640 元</td><td>149,670 元</td><td>1,348 元</td></tr>
+<tr><td></td><td><span class="ct old">舊客</span></td><td>906 人</td><td>980 張</td><td>126,368 元</td><td>1,357,023 元</td><td>1,385 元</td></tr>
+<tr class="sep"><td>9 月</td><td><span class="ct new">新客</span></td><td>126 人（10.7%）</td><td>126 張</td><td>10,080 元</td><td>150,858 元</td><td>1,197 元</td></tr>
+<tr><td></td><td><span class="ct old">舊客</span></td><td>1,057 人</td><td>1,200 張</td><td>96,000 元</td><td>1,670,350 元</td><td>1,392 元</td></tr>
+<tr class="sep"><td>10 月</td><td><span class="ct new">新客</span></td><td>157 人（14.2%）</td><td>157 張</td><td>22,920 元</td><td>189,360 元</td><td>1,206 元</td></tr>
+<tr><td></td><td><span class="ct old">舊客</span></td><td>951 人</td><td>1,056 張</td><td>184,680 元</td><td>1,614,670 元</td><td>1,529 元</td></tr>
 </tbody></table></div>
 <ul class="notes">
 <li>新客＝這張用券單是會員在<b>全電商</b>的第一張訂單，不是「第一次買金盛世」</li>
@@ -207,16 +210,16 @@ th.hl{background:var(--blue-mid)!important;color:#fff}
 </ul>
 
 <h2 id="s3">三、箱購 vs 轉單</h2>
-<div class="viz"><p class="vt">轉單帶進新客的比例，三個月都比箱購高</p><p class="vs">用券訂單中全電商新客單的占比</p><div class="lg" style="margin-bottom:6px"><span><i style="background:var(--blue-4)"></i>箱購</span><span><i style="background:var(--blue)"></i>轉單</span></div><div class="hr wide"><span class="k">8 月 箱購</span><span class="tk"><b class="" style="width:46.0%"></b></span><span class="v ">9.2%</span></div><div class="hr wide"><span class="k">8 月 轉單</span><span class="tk"><b class="d" style="width:92.0%"></b></span><span class="v ">18.4%</span></div><div class="hr wide gap"><span class="k">9 月 箱購</span><span class="tk"><b class="" style="width:44.0%"></b></span><span class="v ">8.8%</span></div><div class="hr wide"><span class="k">9 月 轉單</span><span class="tk"><b class="d" style="width:67.5%"></b></span><span class="v ">13.5%</span></div><div class="hr wide gap"><span class="k">10 月 箱購</span><span class="tk"><b class="" style="width:62.0%"></b></span><span class="v ">12.4%</span></div><div class="hr wide"><span class="k">10 月 轉單</span><span class="tk"><b class="d" style="width:81.0%"></b></span><span class="v ">16.2%</span></div></div>
+<div class="viz"><p class="vt">轉單帶進新客的比例，三個月都比箱購高</p><p class="vs">用券訂單中全電商新客單的占比</p><div class="lg" style="margin-bottom:6px"><span><i style="background:var(--box)"></i>箱購</span><span><i style="background:var(--tr)"></i>轉單</span></div><div class="hr wide"><span class="k">8 月 箱購</span><span class="tk"><b class="box" style="width:46.0%"></b></span><span class="v ">9.2%</span></div><div class="hr wide"><span class="k">8 月 轉單</span><span class="tk"><b class="tr" style="width:92.0%"></b></span><span class="v ">18.4%</span></div><div class="hr wide gap"><span class="k">9 月 箱購</span><span class="tk"><b class="box" style="width:44.0%"></b></span><span class="v ">8.8%</span></div><div class="hr wide"><span class="k">9 月 轉單</span><span class="tk"><b class="tr" style="width:67.5%"></b></span><span class="v ">13.5%</span></div><div class="hr wide gap"><span class="k">10 月 箱購</span><span class="tk"><b class="box" style="width:62.0%"></b></span><span class="v ">12.4%</span></div><div class="hr wide"><span class="k">10 月 轉單</span><span class="tk"><b class="tr" style="width:81.0%"></b></span><span class="v ">16.2%</span></div></div>
 <div class="tw"><table>
 <thead><tr><th>月份</th><th>通路</th><th>用券訂單</th><th>新客單（占比）</th><th>折抵金額</th><th>訂單金額</th><th>客單價</th></tr></thead>
 <tbody>
-<tr><td>8 月</td><td>箱購</td><td>977 張（89.6%）</td><td>90 張（9.2%）</td><td>126,368 元</td><td>1,356,467 元</td><td>1,388 元</td></tr>
-<tr><td></td><td>轉單</td><td>114 張（10.4%）</td><td>21 張（18.4%）</td><td>13,640 元</td><td>150,226 元</td><td>1,318 元</td></tr>
-<tr class="sep"><td>9 月</td><td>箱購</td><td>1,133 張（85.4%）</td><td>100 張（8.8%）</td><td>90,640 元</td><td>1,586,227 元</td><td>1,400 元</td></tr>
-<tr><td></td><td>轉單</td><td>193 張（14.6%）</td><td>26 張（13.5%）</td><td>15,440 元</td><td>234,981 元</td><td>1,218 元</td></tr>
-<tr class="sep"><td>10 月</td><td>箱購</td><td>1,040 張（85.7%）</td><td>129 張（12.4%）</td><td>179,520 元</td><td>1,554,475 元</td><td>1,495 元</td></tr>
-<tr><td></td><td>轉單</td><td>173 張（14.3%）</td><td>28 張（16.2%）</td><td>28,080 元</td><td>249,555 元</td><td>1,443 元</td></tr>
+<tr><td>8 月</td><td><span class="ct box">箱購</span></td><td>977 張（89.6%）</td><td>90 張（9.2%）</td><td>126,368 元</td><td>1,356,467 元</td><td>1,388 元</td></tr>
+<tr><td></td><td><span class="ct tr">轉單</span></td><td>114 張（10.4%）</td><td>21 張（18.4%）</td><td>13,640 元</td><td>150,226 元</td><td>1,318 元</td></tr>
+<tr class="sep"><td>9 月</td><td><span class="ct box">箱購</span></td><td>1,133 張（85.4%）</td><td>100 張（8.8%）</td><td>90,640 元</td><td>1,586,227 元</td><td>1,400 元</td></tr>
+<tr><td></td><td><span class="ct tr">轉單</span></td><td>193 張（14.6%）</td><td>26 張（13.5%）</td><td>15,440 元</td><td>234,981 元</td><td>1,218 元</td></tr>
+<tr class="sep"><td>10 月</td><td><span class="ct box">箱購</span></td><td>1,040 張（85.7%）</td><td>129 張（12.4%）</td><td>179,520 元</td><td>1,554,475 元</td><td>1,495 元</td></tr>
+<tr><td></td><td><span class="ct tr">轉單</span></td><td>173 張（14.3%）</td><td>28 張（16.2%）</td><td>28,080 元</td><td>249,555 元</td><td>1,443 元</td></tr>
 </tbody></table></div>
 
 <h3>會員層級</h3>
