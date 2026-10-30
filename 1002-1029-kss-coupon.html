@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>金盛世滿999折120 用券會員分析</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#13227f;--blue-mid:#3d4fa0;--blue-light:#eef0fa;--blue-4:#c5cae9;--red:#e40011;--red-soft:#fff0f0;--ink:#1a1a1a;--ink2:#444;--slate:#757575;--line:#e0e0e0;--line2:#eee;--surface:#f7f8fc;--ok:#2e7d32;--ok-soft:#e8f5e9;--warn:#e65100;--warn-soft:#fff3e0;--info:#1565c0;--info-soft:#e3f2fd}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:'Noto Sans TC',-apple-system,'PingFang TC','Microsoft JhengHei',sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 32px 48px}
+header{background:var(--blue);color:#fff;border-radius:10px;padding:24px 28px;position:relative;overflow:hidden;margin-bottom:24px}
+header:after{content:"";position:absolute;right:0;top:0;bottom:0;width:8px;background:var(--red)}
+header .tag{font-size:13px;opacity:.85;letter-spacing:.5px}
+header h1{margin:4px 0 6px;font-size:26px;line-height:1.3}
+header .meta{font-size:13px;opacity:.85}
+h2{font-size:20px;margin:36px 0 12px;padding-left:12px;border-left:4px solid var(--blue)}
+.snav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;background:#fff;padding:10px 0;margin:20px 0 0;border-bottom:1px solid var(--line);scrollbar-width:none}
+.snav::-webkit-scrollbar{display:none}
+.snav a{flex:none;font-size:13px;color:var(--blue);background:var(--blue-light);border-radius:999px;padding:4px 12px;text-decoration:none}
+.snav a.on{background:var(--blue);color:#fff}
+h2{scroll-margin-top:64px}
+h3{font-size:16px;margin:20px 0 8px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:#fff}
+.card.hl{background:var(--blue);color:#fff;border-color:var(--blue)}
+.card .lb{font-size:13px;color:var(--slate)}
+.card.hl .lb,.card.hl .sub{color:#dfe3f7}
+.card .v{font-size:32px;font-weight:700;line-height:1.2;margin:4px 0}
+.card .v small{font-size:15px;font-weight:500;margin-left:2px}
+.split{display:grid;grid-template-columns:1fr 1fr;margin:6px 0 4px}
+.split>div{padding-right:8px}
+.split>div+div{border-left:1px solid var(--line);padding-left:12px}
+.card.hl .split>div+div{border-color:rgba(255,255,255,.3)}
+.split .wv{display:block;font-size:12px;color:var(--slate)}
+.card.hl .split .wv{color:#dfe3f7}
+.split b{display:block;font-size:24px;line-height:1.2;white-space:nowrap}
+.split b small{font-size:13px;font-weight:500;margin-left:2px}
+.split .up{margin-top:2px}
+.card .sub{font-size:13px;color:var(--ink2)}
+.up{display:inline-block;background:var(--ok-soft);color:var(--ok);border-radius:999px;padding:0 8px;font-size:12px;font-weight:700}
+.card.hl .up{background:#fff}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th{background:var(--blue);color:#fff;font-weight:500;padding:10px 12px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line2);font-variant-numeric:tabular-nums}
+tr:nth-child(even) td{background:var(--surface)}
+tr.tot td{background:var(--blue-light);color:var(--blue);font-weight:700}
+tr.sep td{border-top:2px solid var(--blue-4)}
+table.txt th,table.txt td{text-align:left}
+table.txt td:first-child{white-space:nowrap}
+table.eq{table-layout:fixed}
+table.eq th,table.eq td{white-space:normal;word-break:break-word;text-align:center}
+table.eq th:first-child,table.eq td:first-child{text-align:left}
+td.sk{text-align:left;color:var(--slate);font-variant-numeric:tabular-nums}
+table.num th:nth-child(2){text-align:left}
+table.num td:first-child{font-variant-numeric:tabular-nums;color:var(--slate)}
+td.red{color:var(--red);font-weight:700}
+td.mute{color:var(--slate)}
+.callout{border-radius:8px;padding:14px 18px;margin:14px 0;border-left:4px solid var(--blue);background:var(--blue-light)}
+.callout.warn{border-color:var(--warn);background:var(--warn-soft)}
+.callout.ok{border-color:var(--ok);background:var(--ok-soft)}
+.callout b{color:var(--ink)}
+.pending{border:1px dashed var(--blue-4);border-radius:10px;padding:14px 18px;color:var(--slate);font-size:14px;background:#fff;margin:10px 0}
+.chart{border:1px solid var(--line);border-radius:10px;padding:16px;position:relative}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--ink2);margin-bottom:6px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+svg text{font-family:inherit}
+.tip{position:absolute;pointer-events:none;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,.12);padding:8px 10px;font-size:13px;white-space:nowrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two table{min-width:0;font-size:13.5px}
+.two th,.two td{padding:8px 10px}
+.two th:first-child{width:auto}
+.hgrid{display:grid;gap:0}
+.hgrid .tr{display:grid;grid-template-columns:minmax(150px,1.1fr) 1fr 1fr;gap:16px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--line2)}
+.hgrid .tr.th{font-size:13px;color:var(--slate);padding:4px 8px}
+.hgrid .tr.hot{background:var(--blue-light);border-radius:8px}
+.hgrid .tr.tt{border-bottom:none;font-weight:700}
+.hgrid .tl b{display:block;font-size:15px}
+.hgrid .tl span{font-size:13px;color:var(--ink2)}
+.hgrid .tl small{display:block;font-size:12px;color:var(--red)}
+.hb{display:flex;align-items:center;gap:8px;min-height:22px}
+.hb span{display:block;height:20px;border-radius:3px}
+.hb span.l{background:var(--blue-4)}
+.hb span.d{background:var(--blue)}
+.hb span.neg{width:4px;background:var(--slate)}
+.hb em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+ol.pts{padding-left:20px;font-size:14.5px;margin:14px 0 6px}
+ol.pts li{margin:4px 0}
+details.more{margin-top:10px}
+details.more summary{cursor:pointer;color:var(--blue-mid);font-size:14px;margin-bottom:8px}
+ol.ins{padding-left:0;list-style:none;counter-reset:n;margin:0}
+ol.ins li{counter-increment:n;position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--line2)}
+ol.ins li:before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:12px;color:var(--blue);font-weight:700;font-size:18px}
+ol.ins li b.t{display:block;font-size:16px}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;align-items:center;font-size:14px}
+.bars .b{height:14px;background:var(--blue-mid);border-radius:3px}
+.bars .b.mx{background:var(--blue)}
+.badge{display:inline-block;border-radius:999px;padding:0 8px;font-size:12px;background:#f5f5f5;color:var(--slate)}
+.badge.w1{background:var(--blue-light);color:var(--blue-mid)}
+.badge.w2{background:var(--blue);color:#fff}
+footer{margin-top:40px;font-size:12.5px;color:var(--slate);border-top:1px solid var(--line);padding-top:14px}
+footer li{margin:2px 0}
+@media (max-width:760px){.hgrid .tr{grid-template-columns:96px 1fr 1fr;gap:8px}.wrap{padding:16px}.split b{font-size:20px}.cards{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.card .v{font-size:26px}header h1{font-size:21px}}
+.cards{grid-template-columns:repeat(4,1fr)}
+.dist td.bar{width:38%}
+.dist .b{height:14px;background:var(--blue-mid);border-radius:3px}
+.dist .b.c{background:var(--blue-4)}
+.src td{white-space:normal;word-break:break-word}
+.src td:nth-child(2){font-family:ui-monospace,Menlo,monospace;font-size:13px}
+ul.notes{padding-left:20px;font-size:14px;color:var(--ink2);margin:10px 0}
+ul.notes li{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">金盛世 JBP｜折價券用券會員分析</div>
+  <h1>金盛世滿999折120 用券會員：新舊客與購買頻率</h1>
+  <div class="meta">券期間 2026/10/2–10/29（兩張同名券合計）｜購買頻率看用券前 6 個月 4/1–10/1｜資料取數 2026/10/30</div>
+</header>
+
+<div class="cards">
+  <div class="card hl"><div class="lb">用券會員</div><div class="v">1,108<small>人</small></div><div class="sub">兩張券都用過的只算一次</div></div>
+  <div class="card"><div class="lb">全電商新客</div><div class="v">157<small>人</small></div><div class="sub">占 14.2%；舊客 951 人</div></div>
+  <div class="card"><div class="lb">用券訂單</div><div class="v">1,213<small>張</small></div><div class="sub">折抵 1,730 次（可累折）</div></div>
+  <div class="card"><div class="lb">折抵金額</div><div class="v">20.8<small>萬元</small></div><div class="sub">207,600 元</div></div>
+</div>
+
+<h2 id="s1">一、券使用總覽</h2>
+<div class="tw"><table>
+<thead><tr><th>券代碼</th><th>可用期間</th><th>折抵金額</th><th>用券訂單</th><th>折抵次數（÷120）</th><th>會員數</th></tr></thead>
+<tbody>
+<tr><td>PMC0018602</td><td>10/2–10/6</td><td>17,160 元</td><td>143 張</td><td>143 次</td><td>138 人</td></tr>
+<tr><td>PMC0025963</td><td>10/6–10/29</td><td>190,440 元</td><td>1,070 張</td><td>1,587 次</td><td>976 人</td></tr>
+<tr class="tot"><td>合計</td><td>10/2–10/29</td><td>207,600 元</td><td>1,213 張</td><td>1,730 次</td><td>1,108 人</td></tr>
+</tbody></table></div>
+<ul class="notes">
+<li>PMC0018602 實際用到 10/6 16:02，PMC0025963 從 10/6 18:01 開始用，兩張沒有重疊</li>
+<li>PMC0025963 可累折（每滿 999 再折 120），所以折抵次數比訂單數多；PMC0018602 每單只折一次</li>
+<li>合計會員數為去重後人數（兩張都用過的會員有 6 位）</li>
+</ul>
+
+<h2 id="s2">二、新舊客</h2>
+<div class="tw"><table>
+<thead><tr><th></th><th>會員數</th><th>占比</th><th>用券訂單</th><th>折抵金額</th><th>用券訂單業績</th><th>客單價</th></tr></thead>
+<tbody>
+<tr><td>新客</td><td>157 人</td><td>14.2%</td><td>157 張</td><td>22,920 元</td><td>189,360 元</td><td>1,206 元</td></tr>
+<tr><td>舊客</td><td>951 人</td><td>85.8%</td><td>1,056 張</td><td>184,680 元</td><td>1,614,670 元</td><td>1,529 元</td></tr>
+<tr class="tot"><td>合計</td><td>1,108 人</td><td>100%</td><td>1,213 張</td><td>207,600 元</td><td>1,804,030 元</td><td>1,487 元</td></tr>
+</tbody></table></div>
+<ul class="notes">
+<li>新客＝這張用券單是會員在<b>全電商</b>的第一張訂單，不是「第一次買金盛世」</li>
+<li>新客在券期間（10/2–10/29）全站平均下單 1.15 張：138 人只買 1 次、15 人 2 次、3 人 3 次、1 人 4 次</li>
+</ul>
+
+<h2 id="s3">三、舊客購買頻率（用券前 6 個月，4/1–10/1）</h2>
+<div class="tw"><table class="dist">
+<thead><tr><th>前 6 個月全站下單</th><th>人數</th><th>占比</th><th>分布</th></tr></thead>
+<tbody><tr><td>0 單</td><td>309 人</td><td>32.5%</td><td class="bar"><div class="b " style="width:93.7%"></div></td></tr><tr><td>1–2 單</td><td>330 人</td><td>34.7%</td><td class="bar"><div class="b " style="width:100.0%"></div></td></tr><tr><td>3–5 單</td><td>134 人</td><td>14.1%</td><td class="bar"><div class="b " style="width:40.6%"></div></td></tr><tr><td>6–11 單</td><td>91 人</td><td>9.6%</td><td class="bar"><div class="b " style="width:27.7%"></div></td></tr><tr><td>12 單以上</td><td>87 人</td><td>9.1%</td><td class="bar"><div class="b " style="width:26.2%"></div></td></tr>
+<tr class="tot"><td>合計</td><td>951 人</td><td>100%</td><td></td></tr>
+</tbody></table></div>
+<ul class="notes">
+<li>中位數 1 單。少數重度帳號會把平均拉高，所以看分布</li>
+<li>前 6 個月 0 單的 309 人中，216 人今年 1–9 月都沒下單（去年以前的舊客回流）</li>
+<li>4–9 月每個月都有下單的舊客 82 人</li>
+</ul>
+
+<h3>對照：10 月全站下單會員（只比前 6 個月有下單的人）</h3>
+<div class="tw"><table class="eq">
+<thead><tr><th>前 6 個月全站下單</th><th>用券舊客（642 人）</th><th>10/2–10/29 全站有下單會員（23,840 人）</th></tr></thead>
+<tbody><tr><td>1–2 單</td><td>51.4%</td><td>46.9%</td></tr><tr><td>3–5 單</td><td>20.9%</td><td>26.8%</td></tr><tr><td>6–11 單</td><td>14.2%</td><td>17.2%</td></tr><tr><td>12 單以上</td><td>13.6%</td><td>9.0%</td></tr>
+<tr class="tot"><td>中位數</td><td>2 單</td><td>3 單</td></tr>
+</tbody></table></div>
+<ul class="notes">
+<li>兩組都只取前 6 個月有下單的會員；母單資料從 2026/1 起，無法判斷對照組誰是全電商新客，所以 0 單的人不放進比較</li>
+</ul>
+
+<footer>資料取數：2026/10/30｜BI（SSRS）bi.pxec.com.tw</footer>
+</div>
+</body>
+</html>
