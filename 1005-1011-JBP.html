@@ -54,6 +54,7 @@ li{margin:3px 0}
 a{color:var(--blue-mid)}
 .limit{color:#8a5a00}
 .pri{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:12px}
+details{margin:6px 0 10px}details summary{cursor:pointer;color:var(--blue-mid);font-size:13px}
 .intro{margin:12px 0 0;font-size:14px;color:#333}
 .legend{margin-top:8px;font-size:12.5px;color:#555}
 .chip{display:inline-block;font-size:11px;font-weight:500;padding:0 6px;border-radius:4px;margin-right:2px;vertical-align:1px;line-height:18px}
@@ -124,16 +125,20 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:24px}
 <section class="card">
   <h2><span class="tag">一</span>展將預估 vs 實際執行</h2>
   <div class="tbl"><table>
-    <tr><th>波次</th><th>類別｜渠道</th><th class="num"><span class="chip cue">預估</span> 預算</th><th class="num"><span class="chip plat">平台</span> 已花（執行率）</th><th class="num"><span class="chip cue">預估</span> 預估曝光</th><th class="num"><span class="chip plat">平台</span> 實際曝光</th><th class="num"><span class="chip cue">預估</span> 預估點擊</th><th class="num"><span class="chip plat">平台</span> 實際點擊</th><th class="num"><span class="chip cue">預估</span> 預估 CPC</th><th class="num"><span class="chip plat">平台</span> 實際 CPC</th></tr>
-    <tr><td>第一波 品牌週</td><td>PP｜DGC</td><td class="num">$30,000</td><td class="num">$23,243（77%）</td><td class="num">1,200,000</td><td class="num">483,320</td><td class="num">6,000</td><td class="num">3,553</td><td class="num">$5</td><td class="num">$6.5</td></tr><tr><td>第一波 品牌週</td><td>PP｜PMax</td><td class="num">$59,286</td><td class="num">$46,268（78%）</td><td class="num">247,025</td><td class="num">78,844</td><td class="num">7,411</td><td class="num">2,008</td><td class="num">$8</td><td class="num bad">$23.0</td></tr><tr><td>第二波 雙11</td><td>PP｜DGC</td><td class="num">$30,000</td><td class="num">$18,262（61%）</td><td class="num">1,200,000</td><td class="num">665,679</td><td class="num">6,000</td><td class="num">3,771</td><td class="num">$5</td><td class="num">$4.8</td></tr><tr><td>第二波 雙11</td><td>保健｜DGC</td><td class="num">$90,000</td><td class="num">$44,495（49%）</td><td class="num">3,600,000</td><td class="num">1,252,803</td><td class="num">18,000</td><td class="num">7,671</td><td class="num">$5</td><td class="num">$5.8</td></tr><tr><td>第二波 雙11</td><td>PP｜PMax</td><td class="num">$66,428</td><td class="num">$31,668（48%）</td><td class="num">276,783</td><td class="num">19,397</td><td class="num">8,304</td><td class="num">1,180</td><td class="num">$8</td><td class="num bad">$26.8</td></tr><tr><td>第二波 雙11</td><td>保健｜PMax</td><td class="num">$188,572</td><td class="num">$72,291（38%）</td><td class="num">785,717</td><td class="num">76,391</td><td class="num">23,572</td><td class="num">2,709</td><td class="num">$8</td><td class="num bad">$26.7</td></tr>
-    <tr class="total"><td>合計</td><td></td><td class="num">$464,286</td><td class="num">$236,228（51%）</td><td class="num">7,309,525</td><td class="num">2,576,434</td><td class="num">69,287</td><td class="num">20,892</td><td class="num">—</td><td class="num">$11.3</td></tr>
+    <tr><th>渠道</th><th class="num">預算</th><th class="num">已花（執行率）</th><th class="num">每次點擊成本：預估 → 實際</th><th class="num">點擊數：照預估應有 → 實際</th></tr>
+    <tr><td>DGC</td><td class="num">$150,000</td><td class="num">$86,000（57%）</td><td class="num">$5 → <span class="">$5.7</span></td><td class="num">17,200 → 14,995（87%）</td></tr>
+    <tr><td>PMax</td><td class="num">$314,286</td><td class="num">$150,227（48%）</td><td class="num">$8 → <span class="bad">$25.5</span></td><td class="num">18,778 → 5,897（31%）</td></tr>
+    <tr class="total"><td>合計</td><td class="num">$464,286</td><td class="num">$236,228（51%）</td><td class="num">— → $11.3</td><td class="num">35,978 → 20,892（58%）</td></tr>
   </table></div>
   <ul>
-    <li>第二波可用 $394,418（委刊 $375,000＋第一波結餘 $19,418），至 11/1 花 $166,716（42%），走期已過 10/20 天。</li>
-    <li>剩餘 $227,702，到 11/11 需日均 $22,770；第二波前 7 天日均 $18,798，近 2 天日均約 $11,982。</li>
-    <li>DGC 實際 CPC 接近預估；PMax 實際 CPC 是預估 3 倍以上，點擊只有依花費比例預估的約 3 成。</li>
+    <li>DGC 點擊成本接近預估；PMax 每次點擊貴 3.2 倍，同樣的錢只買到預估 31% 的點擊。</li>
+    <li>第二波還剩 $227,702，到 11/11 需每天花 $22,770；近 2 天每天約 $11,982。</li>
   </ul>
-  <div class="note"><p>委刊單注意事項第 1 條：點擊率為媒體過去平均值，不為保證數字；CPC 計價的曝光數僅供預估參考。展將預估 ROAS 每項皆為 4–5。</p></div>
+  <details><summary>展開看明細（依波次 × 類別）</summary><div class="tbl"><table>
+    <tr><th>波次</th><th>類別</th><th>渠道</th><th class="num">預算</th><th class="num">已花（執行率）</th><th class="num">每次點擊成本</th><th class="num">點擊數：照預估應有 → 實際</th></tr>
+    <tr><td>第一波 品牌週</td><td>PP</td><td>DGC</td><td class="num">$30,000</td><td class="num">$23,243（77%）</td><td class="num">$5 → $6.5</td><td class="num">4,649 → 3,553</td></tr><tr><td>第一波 品牌週</td><td>PP</td><td>PMax</td><td class="num">$59,286</td><td class="num">$46,268（78%）</td><td class="num">$8 → $23.0</td><td class="num">5,784 → 2,008</td></tr><tr><td>第二波 雙11</td><td>PP</td><td>DGC</td><td class="num">$30,000</td><td class="num">$18,262（61%）</td><td class="num">$5 → $4.8</td><td class="num">3,652 → 3,771</td></tr><tr><td>第二波 雙11</td><td>保健</td><td>DGC</td><td class="num">$90,000</td><td class="num">$44,495（49%）</td><td class="num">$5 → $5.8</td><td class="num">8,899 → 7,671</td></tr><tr><td>第二波 雙11</td><td>PP</td><td>PMax</td><td class="num">$66,428</td><td class="num">$31,668（48%）</td><td class="num">$8 → $26.8</td><td class="num">3,958 → 1,180</td></tr><tr><td>第二波 雙11</td><td>保健</td><td>PMax</td><td class="num">$188,572</td><td class="num">$72,291（38%）</td><td class="num">$8 → $26.7</td><td class="num">9,036 → 2,709</td></tr>
+  </table></div></details>
+  <div class="note"><p>照預估應有的點擊數＝已花金額 ÷ 展將預估每次點擊成本（DGC $5、PMax $8）。第二波可用預算含第一波結餘 $19,418。委刊單按點擊計價，注意事項第 1 條寫明點擊率、曝光數皆為預估、不保證，故不列曝光。展將預估 ROAS 每項皆為 4–5。</p></div>
 </section>
 
 <section class="card">
